@@ -10,3 +10,8 @@ Shikha Asrani (sa3864)
 Soamya Agrawal (sa3881)
 
 Vani Jain (vj2245)
+
+Instructions to run
+
+1. git clone https://github.com/SoamyaAgrawal17/SAVS
+2. 
