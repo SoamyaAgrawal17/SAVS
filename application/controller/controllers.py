@@ -1,13 +1,18 @@
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, jsonify, Response, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+from application.service import EventService
 import logging
 import json
 
 from application.service import EventService, ClubService
 
-app = Flask(__name__)
-
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://xemmxmxrzwwqml:7a22441f69138467943cd7212dd0186ce219bc424589ebdf9eef8fbe08ea4af3@ec2-44-194-225-27.compute-1.amazonaws.com:5432/d76kto02mv7hb3'
+db = SQLAlchemy(app)
 
 @app.route('/events', methods=['GET'])
 def get_events():
