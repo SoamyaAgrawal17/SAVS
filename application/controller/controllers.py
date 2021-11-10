@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, Response
 import logging
 import json
 
-from app.service import EventService, ClubService
+from application.service import EventService, ClubService
 
 app = Flask(__name__)
 
