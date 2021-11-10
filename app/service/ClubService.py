@@ -10,6 +10,6 @@ def get_club(club_id):
 
 
 def edit_club(club_id):
-    # update event
+    # update club
     return "edited club"
 
