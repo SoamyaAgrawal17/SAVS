@@ -1,5 +1,5 @@
-from flask import Flask, request, jsonify, Response, render_template, request, redirect, url_for
-from Flask_SQLAlchemy import SQLAlchemy
+from flask import Flask, request, jsonify, Response, render_template, request
+from flask_sqlalchemy import SQLAlchemy
 from application.service import EventService
 import logging
 import json
