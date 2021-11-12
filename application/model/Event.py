@@ -1,8 +1,8 @@
 from application.controller.controllers import db
 
 
-class Events(db.Model):
-    __tablename__ = "events"
+class Event(db.Model):
+    __tablename__ = "event"
 
     _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)

@@ -1,8 +1,8 @@
 from application.controller.controllers import db
 
 
-class Students(db.Model):
-    __tablename__ = "students"
+class Student(db.Model):
+    __tablename__ = "student"
 
     _id = db.Column(db. Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
