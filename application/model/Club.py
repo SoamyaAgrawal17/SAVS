@@ -1,4 +1,6 @@
-from application.controller.controllers import db
+# from application.controller.controllers import db
+from app import db
+
 class Club(db.Model):
     __tablename__ = "club"
 

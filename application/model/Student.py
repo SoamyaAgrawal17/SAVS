@@ -1,5 +1,4 @@
-from application.controller.controllers import db
-
+from app import db
 
 class Student(db.Model):
     __tablename__ = "student"
@@ -15,3 +14,6 @@ class Student(db.Model):
         self.email_id = email_id
         self.college = college
         self.department = department
+
+    def query_students(self):
+        return self

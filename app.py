@@ -1,12 +1,12 @@
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, jsonify, Response, render_template, request
+import flask_sqlalchemy
 
-from application.controller.controllers import app
-from application.controller.controllers import db
-
-from application.model.Club import Club
-from application.model.Event import Event
-from application.model.Role import Role
-from application.model.StudentEvent import StudentEvent
-from application.model.Student import Student
+app = Flask(__name__)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ktmornyueendxp:bfa6586b37549edd37ce1096c7c1563ac48f3358448981ee04dd4ee0816f4083@ec2-44-193-182-0.compute-1.amazonaws.com:5432/d9uolnhsqlmh31'
+db = SQLAlchemy(app)
 
 if __name__ == '__main__':
+    from application.controller.controllers import *
     app.run(debug=True, host='127.0.0.1', port=5000)
