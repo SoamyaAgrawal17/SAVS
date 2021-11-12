@@ -3,7 +3,7 @@ class Club(db.Model):
     __tablename__ = "club"
 
 
-    _id = db.Column(db. Integer, primary_key=True, autoincrement=True)
+    _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
     head = db.Column(db.String(100), nullable=False)
     category = db.Column(db.String(100), nullable=False)
