@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, Response, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from application.service import EventService
+from application.model.Club import Club
 import logging
 import json
 
