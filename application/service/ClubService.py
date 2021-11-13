@@ -22,6 +22,10 @@ def edit_club(db, club_id, club_details):
     #     club[detail]=club_details[detail]
     # db.session.commit()
     print(club_id)
+    clubs = db.Table('clubs')
+    club = db.select([clubs]).where(clubs._id == club_id)
+    print(club)
+    # club = db.club.query.get(_id = club_id)
     print(club_details)    
     return "edited club"
 
