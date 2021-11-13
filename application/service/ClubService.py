@@ -16,7 +16,7 @@ def get_club(club_id):
 def edit_club(db, club, club_details):
     # update club
     # club = get_club(db,club_id)
-    for key,value in club_details:
+    for key,value in club_details.items():
         setattr(club,key,value)
         # if detail not in club:
             # return "error: incorrect details"
