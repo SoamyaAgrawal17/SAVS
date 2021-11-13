@@ -64,7 +64,7 @@ def add_clubs():
 
 @app.route('/clubs/<club_id>', methods=['GET'])
 def get_club_by_id(club_id):
-    event = ClubService.get_event(club_id)
+    event = ClubService.get_club(club_id)
     res = json.dumps(event, default=str)
     rsp = Response(res, status=200, content_type="application/JSON")
     return rsp
