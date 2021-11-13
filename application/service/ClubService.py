@@ -16,11 +16,13 @@ def get_club(club_id):
 def edit_club(db, club, club_details):
     # update club
     # club = get_club(db,club_id)
-    # for detail in club_details:
-    #     if detail not in club:
-    #         return "error: incorrect details"
-    #     club[detail]=club_details[detail]
-    # db.session.commit()
+    for key,value in club_details:
+        setattr(club,key,value)
+        # if detail not in club:
+            # return "error: incorrect details"
+
+        # club[detail]=club_details[detail]
+    db.session.commit()
     # print(club.name)
     # metadata = db.MetaData()
     # clubs = db.Table('club',metadata)
