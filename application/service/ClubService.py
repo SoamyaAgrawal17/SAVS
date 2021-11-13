@@ -1,4 +1,4 @@
-from application.model.Club import Club
+# from application.model.Club import Club
 # from application.controller.controllers import db
 # from application.model.Role import Role
 # from application.model.Student import Student
