@@ -11,7 +11,7 @@ log.setLevel(logging.ERROR)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://xemmxmxrzwwqml:7a22441f69138467943cd7212dd0186ce219bc424589ebdf9eef8fbe08ea4af3@ec2-44-194-225-27.compute-1.amazonaws.com:5432/d76kto02mv7hb3'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://uoaidyfadwrwpe:72aae551e395c9450d8611d0e0dc52856ca98b4e9b22b4cbada9b4bb894d653c@ec2-23-23-133-10.compute-1.amazonaws.com:5432/d1e9sornll6622'
 db = SQLAlchemy(app)
 
 @app.route('/events', methods=['GET'])
@@ -72,7 +72,7 @@ def get_club_by_id(club_id):
 
 @app.route('/clubs/<club_id>', methods=['PUT'])
 def edit_club(club_id):
-    event = ClubService.edit_event(club_id)
+    res = ClubService.edit_club(club_id)
     rsp = Response("OK", status=200, content_type="text/plain")
     return rsp
 
