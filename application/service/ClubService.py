@@ -21,7 +21,7 @@ def edit_club(db, club, club_details):
     #         return "error: incorrect details"
     #     club[detail]=club_details[detail]
     # db.session.commit()
-    print(club)
+    # print(club.name)
     # metadata = db.MetaData()
     # clubs = db.Table('club',metadata)
     # club = db.select([clubs]).where(clubs.columns._id == club_id)
@@ -34,7 +34,7 @@ def delete_club(club_id):
     # delete club
     # Club.query.filter_by(_id=club_id).delete()
     # db.session.commit()
-    return "club deleted"
+    return "club deleted"s
 
 def add_member(club_id,student_id):
     # student = Student.query.get(_id = student_id)
