@@ -34,7 +34,7 @@ def delete_club(club_id):
     # delete club
     # Club.query.filter_by(_id=club_id).delete()
     # db.session.commit()
-    return "club deleted"s
+    return "club deleted"
 
 def add_member(club_id,student_id):
     # student = Student.query.get(_id = student_id)
