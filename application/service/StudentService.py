@@ -17,9 +17,9 @@ def create_student_db(student_information):
     
 def get_student_db(student_id=None):
 
-    # students = db.session.query(Student).get()
+    students = db.session.query(Student).filter_by(name='soamya')
     
 
     # students = Student.query.all()
     # students = Student.quer
-    return ""
+    return students
