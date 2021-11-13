@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify, Response, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from application.service import EventService
-from application.model.Club import Club
 import logging
 import json
 
@@ -71,12 +70,12 @@ def get_club_by_id(club_id):
     return rsp
 
 
-@app.route('/clubs/<club_id>', methods=['PUT'])
-def edit_club(club_id):
-    inputs = request.args
-    res = ClubService.edit_club(db, club_id, inputs)
-    rsp = Response("OK", status=200, content_type="text/plain")
-    return rsp
+# @app.route('/clubs/<club_id>', methods=['PUT'])
+# def edit_club(club_id):
+#     inputs = request.args
+#     res = ClubService.edit_club(db, club_id, inputs)
+#     rsp = Response("OK", status=200, content_type="text/plain")
+#     return rsp
 
 
 @app.route('/clubs/<club_id>', methods=['DELETE'])
