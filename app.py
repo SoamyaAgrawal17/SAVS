@@ -17,7 +17,7 @@ if __name__ == '__main__':
 def edit_club(club_id):
     inputs = request.args
     # club = db.session.query(Club).filter_by(_id=club_id)
-    club = Club.query.get(1)
+    club = Club.query.get(club_id)
     # print(json.dumps(club, default=str))
     # club = Club.query.filter_by(_id=club_id).first()
     res = ClubService.edit_club(db, club, inputs)

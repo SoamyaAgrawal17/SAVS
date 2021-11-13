@@ -1,4 +1,5 @@
 from application.controller.controllers import db
+from sqlalchemy.orm import relationship
 
 
 class Role(db.Model):
@@ -8,6 +9,7 @@ class Role(db.Model):
                            nullable=False, primary_key=True)
     club_id = db.Column(db.Integer, db.ForeignKey('club._id', onupdate="CASCADE", ondelete="CASCADE"), nullable=False, primary_key=True)
     role = db.Column(db.String(20), nullable=False)
+    club = relationship("Club")
 
     def __init__(self, student_id, club_id, role):
         self.student_id = student_id

@@ -15,30 +15,19 @@ def get_club(club_id):
 
 def edit_club(db, club, club_details):
     # update club
-    # club = get_club(db,club_id)
     for key,value in club_details.items():
         setattr(club,key,value)
-        # if detail not in club:
-            # return "error: incorrect details"
-
-        # club[detail]=club_details[detail]
     db.session.commit()
-    # print(club.name)
-    # metadata = db.MetaData()
-    # clubs = db.Table('club',metadata)
-    # club = db.select([clubs]).where(clubs.columns._id == club_id)
-    # print(club)
-    # club = db.club.query.get(_id = club_id)
     print(club_details)    
     return "edited club"
 
-def delete_club(club_id):
+def delete_club(db, club):
     # delete club
-    # Club.query.filter_by(_id=club_id).delete()
-    # db.session.commit()
+    db.session.delete(club)
+    db.session.commit()
     return "club deleted"
 
-def add_member(club_id,student_id):
+def add_member(db,role):
     # student = Student.query.get(_id = student_id)
     # if student is None:
     #     return "error: student not found"
@@ -46,5 +35,6 @@ def add_member(club_id,student_id):
     # if club is None:
     #     return "error: club not found"
     # db.session.add(Role(student_id = student_id, club_id = club_id, role = "member"))
-    # db.session.commit()
+    db.session.add(role)
+    db.session.commit()
     return "member added"
