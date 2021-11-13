@@ -72,7 +72,8 @@ def get_club_by_id(club_id):
 
 @app.route('/clubs/<club_id>', methods=['PUT'])
 def edit_club(club_id):
-    res = ClubService.edit_club(club_id)
+    inputs = request.args
+    res = ClubService.edit_club(db, club_id, inputs)
     rsp = Response("OK", status=200, content_type="text/plain")
     return rsp
 

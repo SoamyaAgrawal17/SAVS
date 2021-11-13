@@ -1,4 +1,4 @@
-# from application.model.Club import Club
+from application.model.Club import Club
 # from application.controller.controllers import db
 # from application.model.Role import Role
 # from application.model.Student import Student
@@ -13,14 +13,16 @@ def get_club(club_id):
     return club
 
 
-def edit_club(club_id, club_details):
+def edit_club(db, club_id, club_details):
     # update club
     # club = get_club(db,club_id)
     # for detail in club_details:
     #     if detail not in club:
     #         return "error: incorrect details"
     #     club[detail]=club_details[detail]
-    # db.session.commit()    
+    # db.session.commit()
+    print(club_id)
+    print(club_details)    
     return "edited club"
 
 def delete_club(club_id):
