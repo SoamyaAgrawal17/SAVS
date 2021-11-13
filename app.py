@@ -15,6 +15,7 @@ if __name__ == '__main__':
 @app.route('/clubs/<club_id>', methods=['PUT'])
 def edit_club(club_id):
     inputs = request.args
-    res = ClubService.edit_club(db, club_id, inputs)
+    club = Club.query.filter_by(_id=club_id).first()
+    res = ClubService.edit_club(db, club, inputs)
     rsp = Response("OK", status=200, content_type="text/plain")
     return rsp
