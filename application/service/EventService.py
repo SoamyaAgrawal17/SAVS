@@ -1,6 +1,6 @@
 
 def get_events():
-    event_list = ["abc", "def"]
+    event_list = ["abcd", "defg"]
     return event_list
 
 
