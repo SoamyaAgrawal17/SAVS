@@ -16,7 +16,8 @@ if __name__ == '__main__':
 @app.route('/clubs/<club_id>', methods=['PUT'])
 def edit_club(club_id):
     inputs = request.args
-    club = db.session.query(Club).filter_by(_id=club_id)
+    # club = db.session.query(Club).filter_by(_id=club_id)
+    club = Club.query.get(1)
     # print(json.dumps(club, default=str))
     # club = Club.query.filter_by(_id=club_id).first()
     res = ClubService.edit_club(db, club, inputs)
