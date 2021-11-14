@@ -1,5 +1,5 @@
 from app import db
-from application.model import Student
+from application.model.Student import Student
 
 # Create new student entry
 def create_student_db(student_information):
@@ -15,11 +15,23 @@ def create_student_db(student_information):
 
     return "Student Entry Created"
     
-def get_student_db(student_id=None):
+# Get information of a student using their email_id
+def get_student_db(email_id=None):
 
-    students = db.session.query(Student).filter_by(name='soamya')
-    
+    query = db.session.query(Student).filter(Student.email_id.in_([email_id]))
+    results = query.all()
+    return results
 
-    # students = Student.query.all()
-    # students = Student.quer
-    return students
+
+def get_id(email_id):
+
+    student = db.session.query(Student).filter(Student.email_id.in_([email_id])).first()
+    student_id = student._id
+    return student_id
+
+# {
+#     "name": "TestStudent",
+#     "email_id": "test_student@columbia.edu",
+#     "college": "Fu Foundation",
+#     "department": "Computer Science"
+# }
