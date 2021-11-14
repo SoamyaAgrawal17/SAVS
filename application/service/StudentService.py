@@ -1,6 +1,6 @@
-from app import db
+# from app import db
 from application.model.Student import Student
-
+from application.utilities.database import db
 # Create new student entry
 def create_student_db(student_information):
 
@@ -28,6 +28,17 @@ def get_id(email_id):
     student = db.session.query(Student).filter(Student.email_id.in_([email_id])).first()
     student_id = student._id
     return student_id
+
+def add_member(club_id,student_email_id):
+    # student_id = get_id(student_email_id)
+    # if student_id is None:
+    #     return "error: student not found"
+    # # club = ClubService.get_club(db,club_id)
+    # # if club is None:
+    # #     return "error: club not found"
+    # db.session.add(Role(student_id = student_id, club_id = club_id, role = "member"))
+    # db.session.commit()
+    return "member added"
 
 # {
 #     "name": "TestStudent",

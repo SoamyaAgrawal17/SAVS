@@ -1,12 +1,24 @@
 from flask_sqlalchemy import SQLAlchemy
+from application.utilities.database import db
 from flask import Flask, request, jsonify, Response, render_template, request
 import flask_sqlalchemy, os
+from application.controller import ClubsController
+from application.service import ClubService 
+import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://xemmxmxrzwwqml:7a22441f69138467943cd7212dd0186ce219bc424589ebdf9eef8fbe08ea4af3@ec2-44-194-225-27.compute-1.amazonaws.com:5432/d76kto02mv7hb3'
-db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uoaidyfadwrwpe:72aae551e395c9450d8611d0e0dc52856ca98b4e9b22b4cbada9b4bb894d653c@ec2-23-23-133-10.compute-1.amazonaws.com:5432/d1e9sornll6622'
+
+
+blueprints = [
+    ClubsController.mod
+]
+
+for bp in blueprints:
+    app.register_blueprint(bp)
+
+db.init_app(app)
 
 if __name__ == '__main__':
-    from application.controller.controllers import *
     app.run(debug=True, host='127.0.0.1', port=5000)

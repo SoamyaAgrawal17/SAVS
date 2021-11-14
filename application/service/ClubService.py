@@ -1,4 +1,4 @@
-from app import db
+from application.utilities.database import db
 from application.model.Club import Club
 from application.model.Role import Role
 from application.service.StudentService import get_id as student_get_id

@@ -1,8 +1,24 @@
+
+# def get_events():
+#     event_list = ["abc", "def"]
+#     return event_list
+
+
+# def get_event(event_id):
+#     event = "abc"
+#     return event
+
+
+# def edit_event(event_id):
+#     # update event
+#     return "test"
+
 from os import stat
-from app import db
+# from app import db
 from application.model.Event import Event
 from application.model.StudentEvent import StudentEvent
 from application.service.StudentService import get_id as student_get_id
+from application.utilities.database import db
 from datetime import *
 
 

@@ -1,16 +1,16 @@
 from flask import Flask, request, jsonify, Response
+from flask import Blueprint
 import logging
 import json
 
 from application.service import EventService
 
-from controllers import app
-
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
+mod = Blueprint('students', __name__)
 
-@app.route('/events', methods=['GET'])
+@mod.route('/events', methods=['GET'])
 def get_events():
     events = EventService.get_events()
     res = json.dumps(events, default=str)
@@ -18,13 +18,13 @@ def get_events():
     return rsp
 
 
-@app.route('/events', methods=['POST'])
+@mod.route('/events', methods=['POST'])
 def add_events():
     rsp = Response("CREATED", status=201, content_type="text/plain")
     return rsp
 
 
-@app.route('/events/<event_id>', methods=['GET'])
+@mod.route('/events/<event_id>', methods=['GET'])
 def get_event_by_id(event_id):
     event = EventService.get_event(event_id)
     res = json.dumps(event, default=str)
@@ -32,14 +32,14 @@ def get_event_by_id(event_id):
     return rsp
 
 
-@app.route('/events/<event_id>', methods=['PUT'])
+@mod.route('/events/<event_id>', methods=['PUT'])
 def edit_event(event_id):
     event = EventService.edit_event(event_id)
     rsp = Response("OK", status=200, content_type="text/plain")
     return rsp
 
 
-@app.route('/events/<event_id>', methods=['DELETE'])
+@mod.route('/events/<event_id>', methods=['DELETE'])
 def delete_event(event_id):
     rsp = Response("OK", status=200, content_type="text/plain")
     return rsp

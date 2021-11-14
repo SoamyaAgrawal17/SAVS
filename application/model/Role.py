@@ -1,5 +1,4 @@
-# from application.controller.controllers import db
-from app import db
+from application.utilities.database import db
 
 class Role(db.Model):
     __tablename__ = "role"
