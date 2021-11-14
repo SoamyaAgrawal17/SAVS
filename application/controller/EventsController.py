@@ -8,7 +8,7 @@ from application.service import EventService
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
-mod = Blueprint('students', __name__)
+mod = Blueprint('events', __name__)
 
 @mod.route('/events', methods=['GET'])
 def get_events():

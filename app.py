@@ -2,8 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from application.utilities.database import db
 from flask import Flask, request, jsonify, Response, render_template, request
 import flask_sqlalchemy, os
-from application.controller import ClubsController
-from application.service import ClubService 
+from application.controller import ClubsController, EventsController, StudentsController
 import json
 
 app = Flask(__name__)
@@ -12,7 +11,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uoaidyfadwrwpe:72aae551e39
 
 
 blueprints = [
-    ClubsController.mod
+    ClubsController.mod,
+    StudentsController.mod,
+    EventsController.mod
 ]
 
 for bp in blueprints:
