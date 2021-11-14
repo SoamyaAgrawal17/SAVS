@@ -28,7 +28,7 @@ def get_events():
     # results = query.all()
     # return results
 
-    event_list = ["abc", "def"]
+    event_list = ["abcd", "defg"]
     return event_list
 
 
