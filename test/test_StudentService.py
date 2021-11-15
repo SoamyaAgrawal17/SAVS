@@ -1,6 +1,6 @@
 import unittest
 
-from application.service import ClubService, EventService, StudentService
+from application.service import StudentService, EventService
 from application.utilities.database import db
 from app import app
 
@@ -42,7 +42,7 @@ class Test_TestStudentService(unittest.TestCase):
                 "category": "Test Category 2",
                 "description": "Test Club Description 2"
             }
-            status, response = ClubService.create_club(club_information)
+            status, response = StudentService.create_club(club_information)
             self.assertEqual(status, 200)
             self.assertEqual(response, "Club Entry Created")
 
@@ -65,17 +65,17 @@ class Test_TestStudentService(unittest.TestCase):
 
             EventService.propose_event(event['event'], student_id)
             event_id = 1
-            event_details = EventService.get_event_details(event_id)
+            event_details = StudentService.get_event_details(event_id)
             old_registration_count = event_details['registered_count']
-            registration = EventService.register_event(event_id, student_id)
+            registration = StudentService.register_event(event_id, student_id)
             self.assertEqual(registration, "Student registered for the event")
 
-            registration = EventService.register_event(event_id, student_id)
-            event_details = EventService.get_event_details(event_id)
+            registration = StudentService.register_event(event_id, student_id)
+            event_details = StudentService.get_event_details(event_id)
             new_registration_count = event_details['registered_count']
             self.assertEqual(old_registration_count+1, new_registration_count)
             self.assertEqual(registration, "Student already registered for the event")
-            registered_events = EventService.get_registered_events(student_id)
+            registered_events = StudentService.get_registered_events(student_id)
             self.assertEqual(len(registered_events), 1)
             registered_event = registered_events[0]
             self.assertEqual(registered_event['event_id'], 1)
@@ -100,10 +100,10 @@ class Test_TestStudentService(unittest.TestCase):
                 "category": "Test Category 2",
                 "description": "Test Club Description 2"
             }
-            status, response = ClubService.create_club(club_information)
+            status, response = StudentService.create_club(club_information)
             self.assertEqual(response, "Club Entry Created")
             self.assertEqual(status, 200)
-            clubs = ClubService.get_roles(student_id)
+            clubs = StudentService.get_roles(student_id)
             self.assertEqual(len(clubs), 1)
             club = clubs[0]
             self.assertEqual(club['role'], "Club Head")

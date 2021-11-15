@@ -4,7 +4,7 @@ from application.model.Role import Role
 from application.model.StudentEvent import StudentEvent
 from application.service.StudentService import get_id as student_get_id
 from application.utilities.database import db
-from datetime import *
+
 
 
 def get_role_in_club(club_id, student_id):
@@ -30,57 +30,6 @@ def get_events(created_by=None):
 
     events = [event.as_dict() for event in event_list]
     return events
-
-
-def get_upcoming_events(student_email_id):
-    student_id = student_get_id(student_email_id)
-    student_events = db.session.query(StudentEvent).filter(StudentEvent.student_id.in_([student_id]))
-
-    upcoming_events = []
-
-    for student_event in student_events:
-        event_id = student_event.event_id
-        event = db.session.query(Event).filter(Event._id.in_([event_id])).first()
-        event_timestamp = event.start_timestamp
-        if event_timestamp > datetime.today():
-            upcoming_events.append(event.as_dict())
-    
-    return upcoming_events
-
-
-def get_event_details(event_id):
-    query = db.session.query(Event).filter_by(_id=event_id)
-    return query.first().as_dict()
-
-
-def check_if_already_registered(event_id, student_id):
-    query = db.session.query(StudentEvent).filter_by(student_id=student_id, event_id=event_id)
-    result = query.all()
-    return len(result) > 0
-
-
-def register_event(event_id, student_id):
-    status = "Registered"
-    if check_if_already_registered(event_id, student_id):
-        return "Student already registered for the event"
-    new_registration = StudentEvent(student_id=student_id, event_id=event_id, status=status)
-
-    event = db.session.query(Event).filter_by(_id=event_id).first()
-    event.registered_count += 1
-
-    db.session.add(new_registration)
-    db.session.commit()
-    return "Student registered for the event"
-
-
-def get_registered_events(student_id):
-
-    query = db.session.query(StudentEvent).filter_by(student_id=student_id)
-    events = query.all()
-    registered_events = []
-    for event in events:
-        registered_events.append(event.as_dict())
-    return registered_events
 
 
 def propose_event(event_information, student_id):
