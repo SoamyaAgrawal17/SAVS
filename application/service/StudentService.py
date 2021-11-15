@@ -62,12 +62,6 @@ def get_upcoming_events(student_email_id):
     return upcoming_events
 
 
-# View details of a particular event.
-def get_event_details(event_id):
-    query = db.session.query(Event).filter_by(_id=event_id)
-    return query.first().as_dict()
-
-
 # Register for an event
 def register_event(event_id, student_id):
     status = "Registered"

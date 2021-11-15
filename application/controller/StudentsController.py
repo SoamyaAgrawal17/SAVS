@@ -39,18 +39,6 @@ def get_upcoming_events():
     return rsp
 
 
-# View details of a particular event.
-@mod.route('/student/get_event/<event_id>', methods=['GET'])
-def get_event_by_id(event_id=None):
-    data = request.get_json()
-    email_id = data["emailId"]
-    student_id = StudentService.get_id(email_id)
-    event = StudentService.get_event_details(event_id)
-    res = json.dumps(event, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
-    return rsp
-
-
 # Register for an event
 @mod.route('/student/register_event/<event_id>', methods=['POST'])
 def register_event(event_id=None):
