@@ -13,3 +13,6 @@ class Role(db.Model):
         self.student_id = student_id
         self.club_id = club_id
         self.role = role
+
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}

@@ -14,3 +14,6 @@ class StudentEvent(db.Model):
         self.student_id = student_id
         self.event_id = event_id
         self.status = status
+
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}

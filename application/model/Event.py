@@ -32,3 +32,6 @@ class Event(db.Model):
         self.fee = fee
         self.status = status
         self.registered_count = registered_count
+    
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}

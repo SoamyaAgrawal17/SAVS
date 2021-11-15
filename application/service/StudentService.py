@@ -2,7 +2,6 @@
 from application.model.Student import Student
 from application.utilities.database import db
 
-
 # Create new student entry
 def create_student(student_information):
 
@@ -21,8 +20,8 @@ def create_student(student_information):
 # Get information of a student using their email_id
 def get_student(email_id=None):
     query = db.session.query(Student).filter(Student.email_id.in_([email_id]))
-    results = query.all()
-    return results
+    result = query.first()
+    return result.as_dict()
 
 
 def get_id(email_id):
