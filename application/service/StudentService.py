@@ -12,6 +12,8 @@ from datetime import *
 
 def get_id(email_id):
     student = db.session.query(Student).filter(Student.email_id.in_([email_id])).first()
+    if student is None:
+        return None
     student_id = student._id
     return student_id
 
