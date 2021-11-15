@@ -36,8 +36,8 @@ def edit_club(club_id, club_details):
     if 'name' in club_details.keys():
         if club_details['name'] == '':
             return "club cannot have empty name"
-    for key,value in club_details.items():
-        setattr(club,key,value)
+    for key, value in club_details.items():
+        setattr(club, key, value)
     db.session.commit() 
     return "edited club"
 
