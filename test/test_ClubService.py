@@ -38,6 +38,7 @@ class Test_TestClubService(unittest.TestCase):
             db.session.commit()
 
     def test_editClub(self):
+        # Test if a new club can be added
         with app.app_context():
             new_club_information = {
                 "name": "NewTestClub",
@@ -52,6 +53,7 @@ class Test_TestClubService(unittest.TestCase):
             self.assertEqual(result, "edited club")
 
     def test_deleteClub(self):
+        # Test if a club can be deleted
         with app.app_context():
             club_id = 1
             result = ClubService.delete_club(club_id)
@@ -60,6 +62,7 @@ class Test_TestClubService(unittest.TestCase):
             self.assertIsNone(club)
 
     def test_addClubMember(self):
+        # Test if a club member can be added
         with app.app_context():
             club_id = 1
             member_information = {

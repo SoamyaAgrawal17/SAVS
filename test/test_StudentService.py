@@ -26,6 +26,7 @@ class Test_TestStudentService(unittest.TestCase):
         self.x = None
 
     def test_register_event_and_registered_events(self):
+        # Test if a student can register for events
         with app.app_context():
             student_information = {
                 "name": "TestStudent",
@@ -89,6 +90,7 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(registered_event['status'], "Registered")
 
     def test_create_new_club_and_role_in_it(self):
+        # Test if a student can create a new club
         with app.app_context():
             student = {
                 "name": "TestStudent2",
