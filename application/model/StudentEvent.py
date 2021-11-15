@@ -1,5 +1,6 @@
 from application.utilities.database import db
 
+
 class StudentEvent(db.Model):
     __tablename__ = "student_event"
 

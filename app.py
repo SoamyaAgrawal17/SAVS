@@ -1,9 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
 from application.utilities.database import db
-from flask import Flask, request, jsonify, Response, render_template, request
-import flask_sqlalchemy, os
-from application.controller import ClubsController, EventsController, StudentsController
-import json
+from flask import Flask
+from application.controller import ClubsController, EventsController
+from application.controller import StudentsController
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

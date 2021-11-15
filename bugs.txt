@@ -1,0 +1,60 @@
+./app.py:8:80: E501 line too long (195 > 79 characters)
+./app.py:23:53: W292 no newline at end of file
+./test/test_event_service.py:16:20: W292 no newline at end of file
+./application/controller/EventsController.py:38:5: F841 local variable 'event' is assigned to but never used
+./application/controller/EventsController.py:46:15: W292 no newline at end of file
+./application/controller/ClubsController.py:48:15: W292 no newline at end of file
+./application/controller/StudentsController.py:66:80: E501 line too long (82 > 79 characters)
+./application/utilities/database.py:3:18: W292 no newline at end of file
+./application/model/Event.py:9:80: E501 line too long (118 > 79 characters)
+./application/model/Event.py:20:80: E501 line too long (119 > 79 characters)
+./application/model/Event.py:34:49: W292 no newline at end of file
+./application/model/Club.py:8:5: E303 too many blank lines (2)
+./application/model/Role.py:7:80: E501 line too long (108 > 79 characters)
+./application/model/Role.py:9:80: E501 line too long (136 > 79 characters)
+./application/model/Student.py:18:1: W293 blank line contains whitespace
+./application/model/Student.py:18:9: W292 no newline at end of file
+./application/model/StudentEvent.py:7:80: E501 line too long (109 > 79 characters)
+./application/model/StudentEvent.py:9:80: E501 line too long (105 > 79 characters)
+./application/service/EventService.py:16:1: F401 'os.stat' imported but unused
+./application/service/EventService.py:22:1: F403 'from datetime import *' used; unable to detect undefined names
+./application/service/EventService.py:27:80: E501 line too long (80 > 79 characters)
+./application/service/EventService.py:36:1: W293 blank line contains whitespace
+./application/service/EventService.py:41:1: E302 expected 2 blank lines, found 1
+./application/service/EventService.py:44:80: E501 line too long (101 > 79 characters)
+./application/service/EventService.py:50:80: E501 line too long (81 > 79 characters)
+./application/service/EventService.py:52:30: F405 'datetime' may be undefined, or defined from star imports: datetime
+./application/service/EventService.py:54:1: W293 blank line contains whitespace
+./application/service/EventService.py:59:1: E303 too many blank lines (3)
+./application/service/EventService.py:63:1: E302 expected 2 blank lines, found 1
+./application/service/EventService.py:63:28: E231 missing whitespace after ','
+./application/service/EventService.py:66:80: E501 line too long (92 > 79 characters)
+./application/service/EventService.py:75:1: E302 expected 2 blank lines, found 1
+./application/service/EventService.py:79:1: W293 blank line contains whitespace
+./application/service/EventService.py:83:1: E302 expected 2 blank lines, found 1
+./application/service/EventService.py:98:80: E501 line too long (116 > 79 characters)
+./application/service/EventService.py:99:25: E127 continuation line over-indented for visual indent
+./application/service/EventService.py:99:80: E501 line too long (104 > 79 characters)
+./application/service/EventService.py:100:25: E127 continuation line over-indented for visual indent
+./application/service/EventService.py:100:80: E501 line too long (82 > 79 characters)
+./application/service/EventService.py:101:25: E127 continuation line over-indented for visual indent
+./application/service/EventService.py:102:1: W293 blank line contains whitespace
+./application/service/EventService.py:120:4: W292 no newline at end of file
+./application/service/EventService.py:120:4: W292 no newline at end of file
+./application/service/EventService.py:120:4: W292 no newline at end of file
+./application/service/StudentService.py:29:80: E501 line too long (88 > 79 characters)
+./application/service/StudentService.py:41:80: E501 line too long (87 > 79 characters)
+./application/service/ClubService.py:6:1: E302 expected 2 blank lines, found 1
+./application/service/ClubService.py:18:22: E231 missing whitespace after ','
+./application/service/ClubService.py:20:12: E231 missing whitespace after ','
+./application/service/ClubService.py:21:21: E231 missing whitespace after ','
+./application/service/ClubService.py:21:25: E231 missing whitespace after ','
+./application/service/ClubService.py:22:24: W291 trailing whitespace
+./application/service/ClubService.py:26:1: E302 expected 2 blank lines, found 1
+./application/service/ClubService.py:33:80: E501 line too long (85 > 79 characters)
+./application/service/ClubService.py:34:1: W293 blank line contains whitespace
+./application/service/ClubService.py:47:1: E302 expected 2 blank lines, found 1
+./application/service/ClubService.py:50:1: W293 blank line contains whitespace
+./application/service/ClubService.py:53:1: E302 expected 2 blank lines, found 1
+./application/service/ClubService.py:58:1: E302 expected 2 blank lines, found 1
+./application/service/ClubService.py:64:26: W292 no newline at end of file

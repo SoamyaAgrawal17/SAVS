@@ -2,7 +2,6 @@ from application.utilities.database import db
 from application.model.Club import Club
 from application.model.Role import Role
 from application.service.StudentService import get_id as student_get_id
-# import StudentService
 
 def get_clubs():
     query = db.session.query(Club)
@@ -16,8 +15,11 @@ def get_club(club_id):
     return results
 
 
-def edit_club(club_id):
-    # update club
+def edit_club(club_id,club_details):
+    club = get_club(club_id)
+    for key,value in club_details.items():
+        setattr(club,key,value)
+    db.session.commit() 
     return "edited club"
 
 # Create new student entry
@@ -52,3 +54,11 @@ def get_club_id(club_name):
     club = db.session.query(Club).filter(Club.name.in_([club_name])).first()
     club_id = club._id
     return club_id
+
+def delete_club(club_id):
+    # delete club
+    # Club.query.filter_by(_id=club_id).delete()
+    club = get_club(club_id)
+    db.session.delete(club)
+    db.session.commit()
+    return "club deleted"

@@ -1,5 +1,6 @@
 from application.utilities.database import db
 
+
 class Role(db.Model):
     __tablename__ = "role"
 
@@ -12,5 +13,3 @@ class Role(db.Model):
         self.student_id = student_id
         self.club_id = club_id
         self.role = role
-
-

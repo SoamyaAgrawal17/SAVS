@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, Response
+from flask import Response
 from flask import Blueprint
 import logging
 import json
@@ -9,6 +9,7 @@ log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
 mod = Blueprint('events', __name__)
+
 
 @mod.route('/events', methods=['GET'])
 def get_events():
