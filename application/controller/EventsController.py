@@ -56,6 +56,6 @@ def edit_events(event_id):
 @mod.route('/events/<event_id>', methods=['GET'])
 def get_event_by_id(event_id):
     event = EventService.get_event(event_id)
-    res = json.dumps(event, default=str)
+    res = json.dumps(event.as_dict(), default=str)
     rsp = Response(res, status=200, content_type="application/JSON")
     return rsp
