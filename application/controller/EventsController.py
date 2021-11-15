@@ -59,9 +59,3 @@ def get_event_by_id(event_id):
     res = json.dumps(event, default=str)
     rsp = Response(res, status=200, content_type="application/JSON")
     return rsp
-
-
-@mod.route('/events/<event_id>', methods=['DELETE'])
-def delete_event(event_id):
-    rsp = Response("OK", status=200, content_type="text/plain")
-    return rsp

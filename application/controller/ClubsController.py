@@ -21,12 +21,6 @@ def get_clubs():
     return rsp
 
 
-@mod.route('/clubs', methods=['POST'])
-def add_clubs():
-    rsp = Response("CREATED", status=201, content_type="text/plain")
-    return rsp
-
-
 @mod.route('/clubs/<club_id>', methods=['GET'])
 def get_club_by_id(club_id):
     event = ClubService.get_club(club_id)
