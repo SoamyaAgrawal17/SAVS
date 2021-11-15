@@ -46,16 +46,16 @@ def get_event_by_id(event_id=None, student_id=None):
     return rsp
 
 
-# Create an event
-@mod.route('/create_event', methods=['POST'])
-def create_event():
-    event_information = request.get_json()
-    event_entry = EventService.create_event(event_information)
-    res = json.dumps(event_entry, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
-    return rsp
+# # Create an event
+# @mod.route('/create_event', methods=['POST'])
+# def create_event():
+#     event_information = request.get_json()
+#     event_entry = EventService.create_event(event_information)
+#     res = json.dumps(event_entry, default=str)
+#     rsp = Response(res, status=200, content_type="application/JSON")
+#     return rsp
 
-
+### Soamya
 # Register for an event
 @mod.route('/register_for_event/<event_id>/student/<student_id>', methods=['GET'])
 def register_event(event_id=None, student_id=None):
@@ -94,9 +94,9 @@ def get_all_clubs(student_id=None):
     return rsp
 
 
-@mod.route('/clubs', methods=['GET'])
-def get_clubs():
-    clubs = ClubService.get_clubs()
-    res = json.dumps(clubs, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
-    return rsp
+# @mod.route('/clubs', methods=['GET'])
+# def get_clubs():
+#     clubs = ClubService.get_clubs()
+#     res = json.dumps(clubs, default=str)
+#     rsp = Response(res, status=200, content_type="application/JSON")
+#     return rsp
