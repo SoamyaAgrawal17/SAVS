@@ -4,7 +4,7 @@ from application.utilities.database import db
 
 
 # Create new student entry
-def create_student_db(student_information):
+def create_student(student_information):
 
     name = student_information['name']
     email_id = student_information['email_id']
@@ -19,7 +19,7 @@ def create_student_db(student_information):
 
 
 # Get information of a student using their email_id
-def get_student_db(email_id=None):
+def get_student(email_id=None):
     query = db.session.query(Student).filter(Student.email_id.in_([email_id]))
     results = query.all()
     return results
