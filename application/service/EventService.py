@@ -60,8 +60,10 @@ def get_registered_events(student_id):
 
     query = db.session.query(StudentEvent).filter_by(student_id=student_id)
     events = query.all()
-    
-    return events
+    registered_events = []
+    for event in events:
+        registered_events.append(event.as_dict())
+    return registered_events
 
 # Create new student entry
 def create_event(event_information):

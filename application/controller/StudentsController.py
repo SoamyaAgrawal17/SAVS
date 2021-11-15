@@ -56,7 +56,7 @@ def create_event():
     return rsp
 
 
-# #Register for an event
+# Register for an event
 @mod.route('/register_for_event/<event_id>/student/<student_id>', methods=['GET'])
 def register_event(event_id=None, student_id=None):
     event = EventService.register_event(event_id, student_id)
@@ -65,7 +65,7 @@ def register_event(event_id=None, student_id=None):
     return rsp
 
 
-# #View my registered events
+# View my registered events
 @mod.route('/get_registered_events/student/<student_id>', methods=['GET'])
 def get_registered_events(student_id):
     event = EventService.get_registered_events(student_id)
@@ -74,7 +74,7 @@ def get_registered_events(student_id):
     return rsp
 
 
-# #Create a new club
+# Create a new club
 @mod.route('/clubs/student/<student_email_id>', methods=['POST'])
 def add_clubs(student_email_id=None):
 
@@ -85,7 +85,7 @@ def add_clubs(student_email_id=None):
     return rsp
 
 
-# #View all the clubs and my role in it
+# View all the clubs and my role in it
 @mod.route('/get_all_clubs/student/<student_id>', methods=['GET'])
 def get_all_clubs(student_id=None):
     clubs = ClubService.get_all_clubs(student_id)
