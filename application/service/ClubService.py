@@ -44,7 +44,7 @@ def create_club(club_information):
 
     return "Club Entry Created"
 
-def get_all_clubs(student_id):
+def get_roles(student_id):
     query = db.session.query(Role).filter_by(student_id=student_id)
     clubs_response = query.all()
     clubs = []

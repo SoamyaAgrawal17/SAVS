@@ -32,7 +32,7 @@ class Test_TestStudentService(unittest.TestCase):
                 "department": "Computer Science"
             }
 
-            student = StudentService.create_student(student_information)
+            StudentService.create_student(student_information)
             student_id = StudentService.get_student("test_student@columbia.edu")['_id']
             self.assertEqual(student_id, 1)
 
@@ -101,7 +101,7 @@ class Test_TestStudentService(unittest.TestCase):
             }
             response = ClubService.create_club(club_information)
             self.assertEqual(response, "Club Entry Created")
-            clubs = ClubService.get_all_clubs(student_id)
+            clubs = ClubService.get_roles(student_id)
             self.assertEqual(len(clubs), 1)
             club = clubs[0]
             self.assertEqual(club['role'], "Club Head")
