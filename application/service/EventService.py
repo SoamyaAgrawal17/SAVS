@@ -24,6 +24,7 @@ def get_event(event_id):
         Event._id.in_([event_id])).first()
     return event
 
+
 # Add an event to a club by member/head
 def propose_event(event_information, student_id):
     club_id = event_information['club_id']

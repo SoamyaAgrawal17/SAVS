@@ -11,7 +11,8 @@ from datetime import *
 
 
 def get_id(email_id):
-    student = db.session.query(Student).filter(Student.email_id.in_([email_id])).first()
+    student = db.session.query(Student).filter(
+        Student.email_id.in_([email_id])).first()
     if student is None:
         return None
     student_id = student._id
@@ -19,7 +20,8 @@ def get_id(email_id):
 
 
 def check_if_already_registered(event_id, student_id):
-    query = db.session.query(StudentEvent).filter_by(student_id=student_id, event_id=event_id)
+    query = db.session.query(StudentEvent).filter_by(
+        student_id=student_id, event_id=event_id)
     result = query.all()
     return len(result) > 0
 
@@ -48,13 +50,15 @@ def get_student(email_id=None):
 # View all upcoming events.
 def get_upcoming_events(student_email_id):
     student_id = get_id(student_email_id)
-    student_events = db.session.query(StudentEvent).filter(StudentEvent.student_id.in_([student_id]))
+    student_events = db.session.query(StudentEvent).filter(
+        StudentEvent.student_id.in_([student_id]))
 
     upcoming_events = []
 
     for student_event in student_events:
         event_id = student_event.event_id
-        event = db.session.query(Event).filter(Event._id.in_([event_id])).first()
+        event = db.session.query(Event).filter(Event._id.in_(
+            [event_id])).first()
         event_timestamp = event.start_timestamp
         if event_timestamp > datetime.today():
             upcoming_events.append(event.as_dict())
@@ -67,7 +71,8 @@ def register_event(event_id, student_id):
     status = "Registered"
     if check_if_already_registered(event_id, student_id):
         return "Student already registered for the event"
-    new_registration = StudentEvent(student_id=student_id, event_id=event_id, status=status)
+    new_registration = StudentEvent(student_id=student_id,
+                                    event_id=event_id, status=status)
 
     event = db.session.query(Event).filter_by(_id=event_id).first()
     event.registered_count += 1
@@ -98,7 +103,8 @@ def create_club(club_information):
     if club_exist(name):
         return 201, "Club with same name already exist"
 
-    new_club = Club(name=name, head=head, category=category, description=description)
+    new_club = Club(name=name, head=head, category=category,
+                    description=description)
 
     db.session.add(new_club)
     db.session.commit()

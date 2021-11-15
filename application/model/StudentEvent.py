@@ -22,4 +22,4 @@ class StudentEvent(db.Model):
         self.status = status
 
     def as_dict(self):
-       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}

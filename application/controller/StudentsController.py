@@ -85,4 +85,3 @@ def get_roles(student_id=None):
     res = json.dumps(clubs, default=str)
     rsp = Response(res, status=200, content_type="application/JSON")
     return rsp
-

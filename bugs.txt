@@ -1,28 +1,4 @@
-application/controller/ClubsController.py:43:80: E501 line too long (81 > 79 characters)
-application/controller/ClubsController.py:47:80: E501 line too long (81 > 79 characters)
-application/controller/ClubsController.py:51:80: E501 line too long (81 > 79 characters)
-application/controller/ClubsController.py:62:80: E501 line too long (81 > 79 characters)
-application/controller/ClubsController.py:65:80: E501 line too long (81 > 79 characters)
-application/controller/ClubsController.py:69:80: E501 line too long (81 > 79 characters)
-application/controller/ClubsController.py:81:80: E501 line too long (81 > 79 characters)
-application/controller/ClubsController.py:84:80: E501 line too long (81 > 79 characters)
-application/controller/ClubsController.py:87:80: E501 line too long (97 > 79 characters)
-application/controller/ClubsController.py:91:80: E501 line too long (81 > 79 characters)
-application/controller/StudentsController.py:84:1: W391 blank line at end of file
-application/model/Club.py:20:8: E111 indentation is not a multiple of four
-application/model/Role.py:23:8: E111 indentation is not a multiple of four
-application/model/Role.py:23:78: W292 no newline at end of file
-application/model/StudentEvent.py:25:8: E111 indentation is not a multiple of four
-application/service/EventService.py:6:1: F403 'from datetime import *' used; unable to detect undefined names
-application/service/EventService.py:43:30: F405 'datetime' may be undefined, or defined from star imports: datetime
-application/service/EventService.py:151:9: F841 local variable 'event' is assigned to but never used
+application/controller/StudentsController.py:70:5: F841 local variable 'email_id' is assigned to but never used
+application/service/EventService.py:78:9: F841 local variable 'event' is assigned to but never used
 application/service/StudentService.py:10:1: F403 'from datetime import *' used; unable to detect undefined names
-application/service/StudentService.py:14:80: E501 line too long (88 > 79 characters)
-application/service/StudentService.py:20:80: E501 line too long (94 > 79 characters)
-application/service/StudentService.py:49:80: E501 line too long (101 > 79 characters)
-application/service/StudentService.py:55:80: E501 line too long (81 > 79 characters)
-application/service/StudentService.py:57:30: F405 'datetime' may be undefined, or defined from star imports: datetime
-application/service/StudentService.py:74:80: E501 line too long (92 > 79 characters)
-application/service/StudentService.py:105:80: E501 line too long (85 > 79 characters)
-application/service/ClubService.py:41:24: W291 trailing whitespace
-application/service/ClubService.py:62:80: E501 line too long (84 > 79 characters)
+application/service/StudentService.py:63:30: F405 'datetime' may be undefined, or defined from star imports: datetime

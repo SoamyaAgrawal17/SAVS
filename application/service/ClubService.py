@@ -35,13 +35,12 @@ def get_club(club_id):
 def edit_club(club_id, club_details):
     # update club
     club = Club.query.get(club_id)
-    print(club)
     if 'name' in club_details.keys():
         if club_details['name'] == '':
             return "club cannot have empty name"
     for key, value in club_details.items():
         setattr(club, key, value)
-    db.session.commit() 
+    db.session.commit()
     return "edited club"
 
 
@@ -62,6 +61,7 @@ def add_member(club_id, student_id):
     club = Club.query.get(club_id)
     if club is None:
         return "error: club not found"
-    db.session.add(Role(student_id=student_id, club_id=club_id, role="Club Member"))
+    db.session.add(Role(student_id=student_id, club_id=club_id,
+                        role="Club Member"))
     db.session.commit()
     return "Club member added"
