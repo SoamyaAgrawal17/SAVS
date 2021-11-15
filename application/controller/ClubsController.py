@@ -1,16 +1,14 @@
+from flask import Blueprint
+from flask import request, Response
 import logging
 import json
-
 from application.service import ClubService
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
-from flask import Blueprint
-from flask import Flask, request, jsonify, Response
-
-
 mod = Blueprint('club_control', __name__)
+
 
 @mod.route('/clubs', methods=['GET'])
 def get_clubs():
