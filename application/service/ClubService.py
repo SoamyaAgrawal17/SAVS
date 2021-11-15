@@ -18,7 +18,10 @@ def club_exist(name):
 def get_clubs():
     query = db.session.query(Club)
     results = query.all()
-    return results
+    clubs = []
+    for res in results:
+        clubs.append(res.as_dict())
+    return clubs
 
 
 def get_club(club_id):

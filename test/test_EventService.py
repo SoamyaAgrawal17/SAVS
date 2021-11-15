@@ -8,7 +8,10 @@ app.config['TESTING'] = True
 
 class Test_TestEventService(unittest.TestCase):
     def setUp(self):
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@localhost:5432/testdb'
+        app.config['SQLALCHEMY_DATABASE_URI'] = \
+            'postgresql://ganjvezplkwnyf:' \
+            'c2ab9de3ce2ca931f13aa6e62667607ac5f19929425b7ef16a237fe61c664d97' \
+            '@ec2-34-198-189-252.compute-1.amazonaws.com:5432/dbjeqssrqgcj15'
         with app.app_context():
             db.init_app(app)
             from application.model import Club, Event, Role, Student
