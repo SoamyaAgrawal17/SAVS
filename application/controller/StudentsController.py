@@ -29,17 +29,22 @@ def get_student(email_id=None):
 
 
 # View all upcoming events.
-@mod.route('/student/<student_email_id>/get_upcoming_events', methods=['GET'])
-def get_upcoming_events(student_email_id=None):
-    events = StudentService.get_upcoming_events(student_email_id)
+@mod.route('/student/get_upcoming_events', methods=['GET'])
+def get_upcoming_events():
+    data = request.get_json()
+    email_id = data["emailId"]
+    events = StudentService.get_upcoming_events(email_id)
     res = json.dumps(events, default=str)
     rsp = Response(res, status=200, content_type="application/JSON")
     return rsp
 
 
 # View details of a particular event.
-@mod.route('/student/<student_id>/get_event/<event_id>', methods=['GET'])
-def get_event_by_id(event_id=None, student_id=None):
+@mod.route('/student/get_event/<event_id>', methods=['GET'])
+def get_event_by_id(event_id=None):
+    data = request.get_json()
+    email_id = data["emailId"]
+    student_id = StudentService.get_id(email_id)
     event = StudentService.get_event_details(event_id)
     res = json.dumps(event, default=str)
     rsp = Response(res, status=200, content_type="application/JSON")
@@ -47,8 +52,11 @@ def get_event_by_id(event_id=None, student_id=None):
 
 
 # Register for an event
-@mod.route('/student/<student_id>/register_event/<event_id>', methods=['GET'])
-def register_event(event_id=None, student_id=None):
+@mod.route('/student/register_event/<event_id>', methods=['POST'])
+def register_event(event_id=None):
+    data = request.get_json()
+    email_id = data["emailId"]
+    student_id = StudentService.get_id(email_id)
     event = StudentService.register_event(event_id, student_id)
     res = json.dumps(event, default=str)
     rsp = Response(res, status=200, content_type="application/JSON")
@@ -56,8 +64,11 @@ def register_event(event_id=None, student_id=None):
 
 
 # View registered events
-@mod.route('/student/<student_id>/get_registered_events', methods=['GET'])
-def get_registered_events(student_id):
+@mod.route('/student/get_registered_events', methods=['GET'])
+def get_registered_events():
+    data = request.get_json()
+    email_id = data["emailId"]
+    student_id = StudentService.get_id(email_id)
     event = StudentService.get_registered_events(student_id)
     res = json.dumps(event, default=str)
     rsp = Response(res, status=200, content_type="application/JSON")
@@ -65,9 +76,11 @@ def get_registered_events(student_id):
 
 
 # Create a new club
-@mod.route('/student/<student_email_id>/club', methods=['POST'])
-def create_club(student_email_id=None):
-    club_information = request.get_json()
+@mod.route('/student/club', methods=['POST'])
+def create_club():
+    data = request.get_json()
+    email_id = data["emailId"]
+    club_information = data["club"]
     status, club_entry = StudentService.create_club(club_information)
     res = json.dumps(club_entry, default=str)
     rsp = Response(res, status=status, content_type="application/JSON")
@@ -75,8 +88,11 @@ def create_club(student_email_id=None):
 
 
 # View all the clubs and my role in it
-@mod.route('/student/<student_id>/get_roles', methods=['GET'])
+@mod.route('/student/get_roles', methods=['GET'])
 def get_roles(student_id=None):
+    data = request.get_json()
+    email_id = data["emailId"]
+    student_id = StudentService.get_id(email_id)
     clubs = StudentService.get_roles(student_id)
     res = json.dumps(clubs, default=str)
     rsp = Response(res, status=200, content_type="application/JSON")
