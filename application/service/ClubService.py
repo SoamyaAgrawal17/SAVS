@@ -11,8 +11,8 @@ def get_clubs():
 
 def get_club(club_id):
     query = db.session.query(Club).filter(Club._id.in_([club_id]))
-    results = query.all()
-    return results
+    result = query.first()
+    return result.as_dict()
 
 
 def edit_club(club_id,club_details):

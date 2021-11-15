@@ -17,13 +17,12 @@ def get_events():
 
 
 def get_event(event_id):
-    
     event = db.session.query(Event).filter(Event._id.in_([event_id])).first()
     event_name = event.name
     return event_name
 
-def get_upcoming_events(student_email_id):
 
+def get_upcoming_events(student_email_id):
     student_id = student_get_id(student_email_id)
     student_events = db.session.query(StudentEvent).filter(StudentEvent.student_id.in_([student_id]))
 
@@ -39,13 +38,12 @@ def get_upcoming_events(student_email_id):
     return upcoming_events
 
 
-
 def edit_event(event_id):
     # update event
     return "test"
 
-def register_event(event_id,student_id):
 
+def register_event(event_id, student_id):
     status = "Registered"
     new_registration = StudentEvent(student_id=student_id, event_id=event_id, status=status)
 
@@ -56,6 +54,7 @@ def register_event(event_id,student_id):
     db.session.commit()
     return "Student registered for the event"
 
+
 def get_registered_events(student_id):
 
     query = db.session.query(StudentEvent).filter_by(student_id=student_id)
@@ -64,6 +63,7 @@ def get_registered_events(student_id):
     for event in events:
         registered_events.append(event.as_dict())
     return registered_events
+
 
 # Create new student entry
 def create_event(event_information):

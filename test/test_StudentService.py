@@ -10,8 +10,7 @@ from app import app
 app.config['TESTING'] = True
 
 
-
-class Test_TestEventService(unittest.TestCase):
+class Test_TestStudentService(unittest.TestCase):
     def setUp(self):
         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://qvlexpubbtkawz:c415dbfa33e578124d9b3774a0e460c980bfd656f679a175907a7c0b63581af5@ec2-54-174-172-218.compute-1.amazonaws.com:5432/d5n4m2th52nbcq'
         with app.app_context():
@@ -27,7 +26,7 @@ class Test_TestEventService(unittest.TestCase):
             db.session.commit()
         self.x = None
 
-    def test_create_student(self):
+    def test_create_event(self):
         with app.app_context():
             student_information = {
                 "name": "TestStudent",
@@ -43,12 +42,18 @@ class Test_TestEventService(unittest.TestCase):
             print(student1)
             self.assertEqual(True, True)
 
-    def test_sample(self):
+    def test_get_event(self):
         with app.app_context():
             events = StudentService.get_student("test_student@columbia.edu")
             res = json.dumps(events, default=str)
             print(res)
             self.assertEqual(True, True)
+
+    def test_get_upcoming_events(self):
+        with app.app_context():
+            student_id = StudentService.get_id("test_student@columbia.edu")
+            print(student_id)
+            self.assertEqual()
 
 
 if __name__ == '__main__':

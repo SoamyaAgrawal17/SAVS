@@ -2,9 +2,9 @@
 from application.model.Student import Student
 from application.utilities.database import db
 
+
 # Create new student entry
 def create_student(student_information):
-
     name = student_information['name']
     email_id = student_information['email_id']
     college = student_information['college']
