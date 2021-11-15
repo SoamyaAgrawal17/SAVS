@@ -1,20 +1,4 @@
-
-# def get_events():
-#     event_list = ["abc", "def"]
-#     return event_list
-
-
-# def get_event(event_id):
-#     event = "abc"
-#     return event
-
-
-# def edit_event(event_id):
-#     # update event
-#     return "test"
-
 from os import stat
-# from app import db
 from application.model.Event import Event
 from application.model.StudentEvent import StudentEvent
 from application.service.StudentService import get_id as student_get_id
@@ -50,7 +34,7 @@ def get_upcoming_events(student_email_id):
         event = db.session.query(Event).filter(Event._id.in_([event_id])).first()
         event_timestamp = event.start_timestamp
         if event_timestamp > datetime.today():
-            upcoming_events.append(event)
+            upcoming_events.append(event.as_dict())
     
     return upcoming_events
 
