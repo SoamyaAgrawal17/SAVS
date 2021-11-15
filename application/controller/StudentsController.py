@@ -65,13 +65,12 @@ def get_registered_events(student_id):
 
 
 # Create a new club
-@mod.route('/student/<student_email_id>/clubs', methods=['POST'])
+@mod.route('/student/<student_email_id>/club', methods=['POST'])
 def create_club(student_email_id=None):
-
     club_information = request.get_json()
-    club_entry = ClubService.create_club(club_information)
+    status, club_entry = ClubService.create_club(club_information)
     res = json.dumps(club_entry, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
+    rsp = Response(res, status=status, content_type="application/JSON")
     return rsp
 
 

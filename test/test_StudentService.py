@@ -42,7 +42,8 @@ class Test_TestStudentService(unittest.TestCase):
                 "category": "Test Category 2",
                 "description": "Test Club Description 2"
             }
-            response = ClubService.create_club(club_information)
+            status, response = ClubService.create_club(club_information)
+            self.assertEqual(status, 200)
             self.assertEqual(response, "Club Entry Created")
 
             event = {

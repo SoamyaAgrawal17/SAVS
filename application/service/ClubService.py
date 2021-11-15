@@ -3,6 +3,7 @@ from application.model.Club import Club
 from application.model.Role import Role
 from application.service.StudentService import get_id as student_get_id
 
+
 def get_clubs():
     query = db.session.query(Club)
     results = query.all()
@@ -21,6 +22,7 @@ def edit_club(club_id,club_details):
         setattr(club,key,value)
     db.session.commit() 
     return "edited club"
+
 
 # Create new student entry
 def create_club(club_information):
@@ -42,7 +44,8 @@ def create_club(club_information):
     db.session.add(new_role)
     db.session.commit()
 
-    return "Club Entry Created"
+    return 200, "Club Entry Created"
+
 
 def get_roles(student_id):
     query = db.session.query(Role).filter_by(student_id=student_id)
@@ -52,10 +55,12 @@ def get_roles(student_id):
         clubs.append(club.as_dict())
     return clubs
 
+
 def get_club_id(club_name):
     club = db.session.query(Club).filter(Club.name.in_([club_name])).first()
     club_id = club._id
     return club_id
+
 
 def delete_club(club_id):
     # delete club
