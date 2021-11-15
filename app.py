@@ -5,7 +5,7 @@ from application.controller import StudentsController
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ktmornyueendxp:bfa6586b37549edd37ce1096c7c1563ac48f3358448981ee04dd4ee0816f4083@ec2-44-193-182-0.compute-1.amazonaws.com:5432/d9uolnhsqlmh31'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://kzvwdrxlhzlukx:431c5a2e7ec9f2ae924ff6cd73ce36e3053de8b591b312c43b221c95a9d2f920@ec2-52-204-72-14.compute-1.amazonaws.com:5432/dd1houemgk2i24'
 
 
 blueprints = [

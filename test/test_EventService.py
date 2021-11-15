@@ -17,6 +17,7 @@ test_app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://kzvwdrxlhzlukx:431c5a
 
 class Test_TestEventService(unittest.TestCase):
     def setUp(self):
+        print("Running setup")
         self.x = None
         self.db = SQLAlchemy()
         self.db.init_app(test_app)
@@ -24,12 +25,16 @@ class Test_TestEventService(unittest.TestCase):
         self.db.session.commit()
 
     def tearDown(self):
+        print("Running tear down")
         self.x = None
 
     def test_sample(self):
-
+        print("Running test sample")
         self.assertEqual(True, True)
 
 
 if __name__ == '_main_':
+    print("main",sys="")
+    t = Test_TestEventService()
+    t.setUp()
     unittest.main()
