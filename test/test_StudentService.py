@@ -12,7 +12,6 @@ class Test_TestStudentService(unittest.TestCase):
         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://qvlexpubbtkawz:c415dbfa33e578124d9b3774a0e460c980bfd656f679a175907a7c0b63581af5@ec2-54-174-172-218.compute-1.amazonaws.com:5432/d5n4m2th52nbcq'
         with app.app_context():
             db.init_app(app)
-            from application.model import Club, Event, Role, Student, StudentEvent
             db.create_all()
             db.session.commit()
         self.x = None
