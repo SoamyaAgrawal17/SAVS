@@ -23,13 +23,10 @@ from datetime import *
 
 
 def get_events():
-
-    # query = db.session.query(Student).filter(Student.email_id.in_([email_id]))
-    # results = query.all()
-    # return results
-
-    event_list = ["abcd", "defg"]
-    return event_list
+    query = db.session.query(Event)
+    event_list = query.all()
+    events = [event.as_dict() for event in event_list]
+    return events
 
 
 def get_event(event_id):
@@ -118,3 +115,34 @@ def create_event(event_information):
 #   "fee": 10,
 #   "status": "Approved"
 # }
+
+
+def propose_event(event_information):
+    name = event_information['name']
+    category = event_information['category']
+    description = event_information['description']
+    club_id = event_information['club_id']
+    visibility = "Club Member"
+    start_timestamp = event_information['start_timestamp']
+    end_timestamp = event_information['end_timestamp']
+    location = event_information['location']
+    max_registration = event_information['max_registration']
+    fee = event_information['fee']
+    status = "Proposed"
+    registered_count = 0
+
+    new_event = Event(name=name, category=category, description=description, club_id=club_id, visibility=visibility,
+                      start_timestamp=start_timestamp, end_timestamp=end_timestamp, location=location,
+                      max_registration=max_registration, fee=fee, status=status,
+                      registered_count=registered_count)
+
+    db.session.add(new_event)
+    db.session.commit()
+
+    return "Proposed Event Entry Created"
+
+
+def edit_event(event_information, event_id):
+    event = db.session.query(Event).filter(Event._id.in_([event_id])).update(event_information)
+    db.session.commit()
+    return "Event Updated"

@@ -5,6 +5,7 @@ class Event(db.Model):
 
     _id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
+    category = db.Column(db.String(100), nullable=False)
     club_id = db.Column(db.Integer, db.ForeignKey('club._id', onupdate="CASCADE", ondelete="CASCADE"), nullable=False)
     visibility = db.Column(db.String(50), nullable=False)
     start_timestamp = db.Column(db.DateTime, nullable=False)
@@ -31,3 +32,6 @@ class Event(db.Model):
         self.fee = fee
         self.status = status
         self.registered_count = registered_count
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
