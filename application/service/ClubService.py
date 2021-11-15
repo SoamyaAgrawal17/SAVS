@@ -46,8 +46,10 @@ def create_club(club_information):
 
 def get_all_clubs(student_id):
     query = db.session.query(Role).filter_by(student_id=student_id)
-    clubs = query.all()
-    
+    clubs_response = query.all()
+    clubs = []
+    for club in clubs_response:
+        clubs.append(club.as_dict())
     return clubs
 
 def get_club_id(club_name):

@@ -1,10 +1,7 @@
 import unittest
 
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from application.service import EventService, StudentService
+from application.service import ClubService, EventService, StudentService
 from application.utilities.database import db
-import json
 from app import app
 
 app.config['TESTING'] = True
@@ -26,7 +23,7 @@ class Test_TestStudentService(unittest.TestCase):
             db.session.commit()
         self.x = None
 
-    def test_create_event(self):
+    def test_register_event_and_registered_events(self):
         with app.app_context():
             student_information = {
                 "name": "TestStudent",
@@ -36,24 +33,79 @@ class Test_TestStudentService(unittest.TestCase):
             }
 
             student = StudentService.create_student(student_information)
-            student1 = StudentService.get_student("test_student@columbia.edu")
-            res = json.dumps(student, default=str)
-            print(student)
-            print(student1)
-            self.assertEqual(True, True)
+            student_id = StudentService.get_student("test_student@columbia.edu")['_id']
+            self.assertEqual(student_id, 1)
 
-    def test_get_event(self):
-        with app.app_context():
-            events = StudentService.get_student("test_student@columbia.edu")
-            res = json.dumps(events, default=str)
-            print(res)
-            self.assertEqual(True, True)
+            club_information = {
+                "name": "Test Club 3",
+                "head": "test_student@columbia.edu",
+                "category": "Test Category 2",
+                "description": "Test Club Description 2"
+            }
+            response = ClubService.create_club(club_information)
+            self.assertEqual(response, "Club Entry Created")
 
-    def test_get_upcoming_events(self):
+            event = {
+            "emailId": "test_club_member@columbia.edu",
+            "event": {
+                "name": "Hackathon 2021 Columbia",
+                 "club_id": 1,
+                "start_timestamp": "2021-12-03 09:30:00",
+                "end_timestamp": "021-12-05 00:00:00",
+                "location": "New York City",
+                "max_registration": 125,
+                "description": "Winter Hackathon December 2021",
+                "fee": 10,
+                "category": "Academic",
+                "visibility": "all",
+                "status": "Created"
+                }
+            }
+
+            EventService.propose_event(event['event'], student_id)
+            event_id = 1
+            event_details = EventService.get_event_details(event_id)
+            old_registration_count = event_details['registered_count']
+            registration = EventService.register_event(event_id, student_id)
+            self.assertEqual(registration, "Student registered for the event")
+
+            registration = EventService.register_event(event_id, student_id)
+            event_details = EventService.get_event_details(event_id)
+            new_registration_count = event_details['registered_count']
+            self.assertEqual(old_registration_count+1, new_registration_count)
+            self.assertEqual(registration, "Student already registered for the event")
+            registered_events = EventService.get_registered_events(student_id)
+            self.assertEqual(len(registered_events), 1)
+            registered_event = registered_events[0]
+            self.assertEqual(registered_event['event_id'], 1)
+            self.assertEqual(registered_event['student_id'], 1)
+            self.assertEqual(registered_event['status'], "Registered")
+
+    def test_create_new_club_and_role_in_it(self):
         with app.app_context():
-            student_id = StudentService.get_id("test_student@columbia.edu")
-            print(student_id)
-            self.assertEqual()
+            student = {
+                "name": "TestStudent2",
+                "email_id": "test_student2@columbia.edu",
+                "college": "Fu Foundation",
+                "department": "Computer Science"
+            }
+            response = StudentService.create_student(student)
+            self.assertEqual(response, "Student Entry Created")
+            student_id = StudentService.get_student("test_student2@columbia.edu")['_id']
+            self.assertEqual(student_id, 1)
+            club_information = {
+                "name": "Test Club 3",
+                "head": "test_student2@columbia.edu",
+                "category": "Test Category 2",
+                "description": "Test Club Description 2"
+            }
+            response = ClubService.create_club(club_information)
+            self.assertEqual(response, "Club Entry Created")
+            clubs = ClubService.get_all_clubs(student_id)
+            self.assertEqual(len(clubs), 1)
+            club = clubs[0]
+            self.assertEqual(club['role'], "Club Head")
+            self.assertEqual(club['student_id'], student_id)
 
 
 if __name__ == '__main__':

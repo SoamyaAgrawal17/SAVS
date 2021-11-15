@@ -93,10 +93,3 @@ def get_all_clubs(student_id=None):
     rsp = Response(res, status=200, content_type="application/JSON")
     return rsp
 
-
-# @mod.route('/clubs', methods=['GET'])
-# def get_clubs():
-#     clubs = ClubService.get_clubs()
-#     res = json.dumps(clubs, default=str)
-#     rsp = Response(res, status=200, content_type="application/JSON")
-#     return rsp
