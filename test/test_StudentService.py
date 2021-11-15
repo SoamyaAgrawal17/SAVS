@@ -100,8 +100,9 @@ class Test_TestStudentService(unittest.TestCase):
                 "category": "Test Category 2",
                 "description": "Test Club Description 2"
             }
-            response = ClubService.create_club(club_information)
+            status, response = ClubService.create_club(club_information)
             self.assertEqual(response, "Club Entry Created")
+            self.assertEqual(status, 200)
             clubs = ClubService.get_roles(student_id)
             self.assertEqual(len(clubs), 1)
             club = clubs[0]
