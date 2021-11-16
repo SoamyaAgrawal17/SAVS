@@ -21,7 +21,7 @@ Instructions to run
 
 Documented API: 
 
-  Link: https://gracious-lalande-802898.netlify.app/
+  Link: https://app.swaggerhub.com/apis/savs2/SAVS/1.0.0
 
 System Tests Corresponding to API:
 
