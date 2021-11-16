@@ -10,6 +10,7 @@ from application.utilities.database import db
 from datetime import *
 
 
+# Get student id if email_id of student is provided
 def get_id(email_id):
     student = db.session.query(Student).filter(
         Student.email_id.in_([email_id])).first()
@@ -19,6 +20,8 @@ def get_id(email_id):
     return student_id
 
 
+# Check if a student is already registered for
+# a particular event
 def check_if_already_registered(event_id, student_id):
     query = db.session.query(StudentEvent).filter_by(
         student_id=student_id, event_id=event_id)
@@ -120,6 +123,8 @@ def create_club(club_information):
     return 200, "Club Entry Created"
 
 
+# Gets the role of student for the clubs
+# for which student is either a head or member of.
 def get_roles(student_id):
     query = db.session.query(Role).filter_by(student_id=student_id)
     clubs_response = query.all()
@@ -127,10 +132,3 @@ def get_roles(student_id):
     for club in clubs_response:
         clubs.append(club.as_dict())
     return clubs
-
-# {
-#     "name": "TestStudent",
-#     "email_id": "test_student@columbia.edu",
-#     "college": "Fu Foundation",
-#     "department": "Computer Science"
-# }

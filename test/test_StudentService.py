@@ -119,6 +119,7 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(club['student_id'], student_id)
 
     def test_get_all_upcoming_events(self):
+        # Test if all upcoming events are returned for a student
         with app.app_context():
             student_information = {
                 "name": "TestStudent",
