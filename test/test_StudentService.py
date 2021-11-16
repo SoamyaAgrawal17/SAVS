@@ -118,6 +118,57 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(club['role'], "Club Head")
             self.assertEqual(club['student_id'], student_id)
 
+    def test_get_all_upcoming_events(self):
+        with app.app_context():
+            student_information = {
+                "name": "TestStudent",
+                "email_id": "test_student@columbia.edu",
+                "college": "Fu Foundation",
+                "department": "Computer Science"
+            }
+
+            StudentService.create_student(student_information)
+            student_id = StudentService.get_student(
+                "test_student@columbia.edu")['_id']
+            self.assertEqual(student_id, 1)
+
+            club_information = {
+                "name": "Test Club 3",
+                "head": "test_student@columbia.edu",
+                "category": "Test Category 2",
+                "description": "Test Club Description 2"
+            }
+            status, response = StudentService.create_club(club_information)
+            self.assertEqual(status, 200)
+            self.assertEqual(response, "Club Entry Created")
+
+            event = {
+                "emailId": "test_club_member@columbia.edu",
+                "event": {
+                    "name": "Hackathon 2021 Columbia",
+                    "club_id": 1,
+                    "start_timestamp": "2021-12-03 09:30:00",
+                    "end_timestamp": "2021-12-05 00:00:00",
+                    "location": "New York City",
+                    "max_registration": 125,
+                    "description": "Winter Hackathon December 2021",
+                    "fee": 10,
+                    "category": "Academic",
+                    "visibility": "all",
+                    "status": "Created"
+                }
+            }
+
+            EventService.propose_event(event['event'], student_id)
+            event_id = 1
+            StudentService.register_event(event_id, student_id)
+            upcoming_events = StudentService. \
+                get_upcoming_events("test_student@columbia.edu")
+            self.assertEqual(len(upcoming_events), 1)
+            upcoming_event = upcoming_events[0]
+            self.assertEqual(upcoming_event['_id'], 1)
+            self.assertEqual(upcoming_event["name"], "Hackathon 2021 Columbia")
+
 
 if __name__ == '__main__':
     unittest.main()

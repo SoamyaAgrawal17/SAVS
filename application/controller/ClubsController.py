@@ -13,6 +13,7 @@ log.setLevel(logging.ERROR)
 mod = Blueprint('club_control', __name__)
 
 
+# Get a list of details of all clubs
 @mod.route('/clubs', methods=['GET'])
 def get_clubs():
     clubs = ClubService.get_clubs()
@@ -21,6 +22,7 @@ def get_clubs():
     return rsp
 
 
+# Get details of a club specified by id
 @mod.route('/clubs/<club_id>', methods=['GET'])
 def get_club_by_id(club_id):
     event = ClubService.get_club(club_id)
@@ -29,6 +31,7 @@ def get_club_by_id(club_id):
     return rsp
 
 
+# Edit a club
 @mod.route('/clubs/<club_id>', methods=['PUT'])
 def edit_club(club_id):
     data = request.get_json()
@@ -51,6 +54,7 @@ def edit_club(club_id):
     return rsp
 
 
+# Delete a club
 @mod.route('/clubs/<club_id>', methods=['DELETE'])
 def delete_club(club_id):
     data = request.get_json()
@@ -72,6 +76,7 @@ def delete_club(club_id):
     return rsp
 
 
+# Add a member to a club
 @mod.route('/member/<club_id>', methods=['PUT'])
 def add_member(club_id=None):
     data = request.get_json()

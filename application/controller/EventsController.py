@@ -12,6 +12,9 @@ log.setLevel(logging.ERROR)
 mod = Blueprint('events', __name__)
 
 
+# Get list of all events
+# If created_by is send as part of query params
+# Return list of events created_by the student (club member)
 @mod.route('/events', methods=['GET'])
 def get_events():
     created_by = request.args.get('created_by')
@@ -22,6 +25,7 @@ def get_events():
     return rsp
 
 
+# Add an event (by club member/head)
 @mod.route('/events', methods=['POST'])
 def propose_events():
     rsp = Response("INTERNAL ERROR", status=500, content_type="text/plain")
@@ -40,6 +44,7 @@ def propose_events():
     return rsp
 
 
+# Edit an event (by club member/head)
 @mod.route('/events/<event_id>', methods=['PUT'])
 def edit_events(event_id):
     data = request.get_json()
@@ -53,6 +58,7 @@ def edit_events(event_id):
     return rsp
 
 
+# Get details of an event with specified id
 @mod.route('/events/<event_id>', methods=['GET'])
 def get_event_by_id(event_id):
     event = EventService.get_event(event_id)

@@ -78,6 +78,26 @@ class Test_TestClubService(unittest.TestCase):
             role = Role.query.filter_by(student_id=student_id, club_id=club_id)
             self.assertEqual(role.first().role, "Club Member")
 
+    def test_getClubs(self):
+        # Test if a list of club is returned
+        with app.app_context():
+            student_information = {
+                "name": "TestStudent2",
+                "email_id": "test_student2@columbia.edu",
+                "college": "Fu Foundation",
+                "department": "Computer Science"
+            }
+            club_information = {
+                "name": "TestClub2",
+                "head": "test_student@columbia.edu",
+                "category": "TestCategory2",
+                "description": "TestDescription2"
+            }
+            StudentService.create_student(student_information)
+            StudentService.create_club(club_information)
+            clubs = ClubService.get_clubs()
+            self.assertEqual(len(clubs), 2)
+
     def tearDown(self):
         with app.app_context():
             db.drop_all()

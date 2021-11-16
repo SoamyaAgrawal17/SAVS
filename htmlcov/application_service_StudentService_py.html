@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for application/service/StudentService.py: 86%</title>
+    <title>Coverage for application/service/StudentService.py: 98%</title>
     <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
@@ -18,13 +18,13 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>application/service/StudentService.py</b> :
-            <span class="pc_cov">86%</span>
+            <span class="pc_cov">98%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             84 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">72 run</button>
-            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">12 missing</button>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">82 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">2 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
         </h2>
     </div>
@@ -103,21 +103,21 @@
     <p id="t49" class="pln"><span class="n"><a href="#t49">49</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t50" class="pln"><span class="n"><a href="#t50">50</a></span><span class="t"><span class="com"># View all upcoming events.</span>&nbsp;</span><span class="r"></span></p>
     <p id="t51" class="run"><span class="n"><a href="#t51">51</a></span><span class="t"><span class="key">def</span> <span class="nam">get_upcoming_events</span><span class="op">(</span><span class="nam">student_email_id</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t52" class="mis show_mis"><span class="n"><a href="#t52">52</a></span><span class="t">    <span class="nam">student_id</span> <span class="op">=</span> <span class="nam">get_id</span><span class="op">(</span><span class="nam">student_email_id</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t53" class="mis show_mis"><span class="n"><a href="#t53">53</a></span><span class="t">    <span class="nam">student_events</span> <span class="op">=</span> <span class="nam">db</span><span class="op">.</span><span class="nam">session</span><span class="op">.</span><span class="nam">query</span><span class="op">(</span><span class="nam">StudentEvent</span><span class="op">)</span><span class="op">.</span><span class="nam">filter</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t52" class="run"><span class="n"><a href="#t52">52</a></span><span class="t">    <span class="nam">student_id</span> <span class="op">=</span> <span class="nam">get_id</span><span class="op">(</span><span class="nam">student_email_id</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t53" class="run"><span class="n"><a href="#t53">53</a></span><span class="t">    <span class="nam">student_events</span> <span class="op">=</span> <span class="nam">db</span><span class="op">.</span><span class="nam">session</span><span class="op">.</span><span class="nam">query</span><span class="op">(</span><span class="nam">StudentEvent</span><span class="op">)</span><span class="op">.</span><span class="nam">filter</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p id="t54" class="pln"><span class="n"><a href="#t54">54</a></span><span class="t">        <span class="nam">StudentEvent</span><span class="op">.</span><span class="nam">student_id</span><span class="op">.</span><span class="nam">in_</span><span class="op">(</span><span class="op">[</span><span class="nam">student_id</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t55" class="pln"><span class="n"><a href="#t55">55</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t56" class="mis show_mis"><span class="n"><a href="#t56">56</a></span><span class="t">    <span class="nam">upcoming_events</span> <span class="op">=</span> <span class="op">[</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t56" class="run"><span class="n"><a href="#t56">56</a></span><span class="t">    <span class="nam">upcoming_events</span> <span class="op">=</span> <span class="op">[</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p id="t57" class="pln"><span class="n"><a href="#t57">57</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t58" class="mis show_mis"><span class="n"><a href="#t58">58</a></span><span class="t">    <span class="key">for</span> <span class="nam">student_event</span> <span class="key">in</span> <span class="nam">student_events</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t59" class="mis show_mis"><span class="n"><a href="#t59">59</a></span><span class="t">        <span class="nam">event_id</span> <span class="op">=</span> <span class="nam">student_event</span><span class="op">.</span><span class="nam">event_id</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t60" class="mis show_mis"><span class="n"><a href="#t60">60</a></span><span class="t">        <span class="nam">event</span> <span class="op">=</span> <span class="nam">db</span><span class="op">.</span><span class="nam">session</span><span class="op">.</span><span class="nam">query</span><span class="op">(</span><span class="nam">Event</span><span class="op">)</span><span class="op">.</span><span class="nam">filter</span><span class="op">(</span><span class="nam">Event</span><span class="op">.</span><span class="nam">_id</span><span class="op">.</span><span class="nam">in_</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t58" class="run"><span class="n"><a href="#t58">58</a></span><span class="t">    <span class="key">for</span> <span class="nam">student_event</span> <span class="key">in</span> <span class="nam">student_events</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t59" class="run"><span class="n"><a href="#t59">59</a></span><span class="t">        <span class="nam">event_id</span> <span class="op">=</span> <span class="nam">student_event</span><span class="op">.</span><span class="nam">event_id</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t60" class="run"><span class="n"><a href="#t60">60</a></span><span class="t">        <span class="nam">event</span> <span class="op">=</span> <span class="nam">db</span><span class="op">.</span><span class="nam">session</span><span class="op">.</span><span class="nam">query</span><span class="op">(</span><span class="nam">Event</span><span class="op">)</span><span class="op">.</span><span class="nam">filter</span><span class="op">(</span><span class="nam">Event</span><span class="op">.</span><span class="nam">_id</span><span class="op">.</span><span class="nam">in_</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p id="t61" class="pln"><span class="n"><a href="#t61">61</a></span><span class="t">            <span class="op">[</span><span class="nam">event_id</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">.</span><span class="nam">first</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t62" class="mis show_mis"><span class="n"><a href="#t62">62</a></span><span class="t">        <span class="nam">event_timestamp</span> <span class="op">=</span> <span class="nam">event</span><span class="op">.</span><span class="nam">start_timestamp</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t63" class="mis show_mis"><span class="n"><a href="#t63">63</a></span><span class="t">        <span class="key">if</span> <span class="nam">event_timestamp</span> <span class="op">></span> <span class="nam">datetime</span><span class="op">.</span><span class="nam">today</span><span class="op">(</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t64" class="mis show_mis"><span class="n"><a href="#t64">64</a></span><span class="t">            <span class="nam">upcoming_events</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="nam">event</span><span class="op">.</span><span class="nam">as_dict</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t62" class="run"><span class="n"><a href="#t62">62</a></span><span class="t">        <span class="nam">event_timestamp</span> <span class="op">=</span> <span class="nam">event</span><span class="op">.</span><span class="nam">start_timestamp</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t63" class="run"><span class="n"><a href="#t63">63</a></span><span class="t">        <span class="key">if</span> <span class="nam">event_timestamp</span> <span class="op">></span> <span class="nam">datetime</span><span class="op">.</span><span class="nam">today</span><span class="op">(</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t64" class="run"><span class="n"><a href="#t64">64</a></span><span class="t">            <span class="nam">upcoming_events</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="nam">event</span><span class="op">.</span><span class="nam">as_dict</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t65" class="pln"><span class="n"><a href="#t65">65</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t66" class="mis show_mis"><span class="n"><a href="#t66">66</a></span><span class="t">    <span class="key">return</span> <span class="nam">upcoming_events</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t66" class="run"><span class="n"><a href="#t66">66</a></span><span class="t">    <span class="key">return</span> <span class="nam">upcoming_events</span>&nbsp;</span><span class="r"></span></p>
     <p id="t67" class="pln"><span class="n"><a href="#t67">67</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t68" class="pln"><span class="n"><a href="#t68">68</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t69" class="pln"><span class="n"><a href="#t69">69</a></span><span class="t"><span class="com"># Register for an event</span>&nbsp;</span><span class="r"></span></p>
@@ -193,7 +193,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
-            created at 2021-11-15 16:29 -0500
+            created at 2021-11-15 20:10 -0500
         </p>
     </div>
 </div>
