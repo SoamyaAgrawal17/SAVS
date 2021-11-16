@@ -4,17 +4,20 @@ from application.model.Role import Role
 from application.model.Student import Student
 
 
+# get id for a club name
 def get_id(club_name):
     club = db.session.query(Club).filter(Club.name.in_([club_name])).first()
     club_id = club._id
     return club_id
 
 
+# check if a club with 'name' exists
 def club_exist(name):
     query = db.session.query(Club).filter_by(name=name).all()
     return len(query) > 0
 
 
+# get all registered clubs
 def get_clubs():
     query = db.session.query(Club)
     results = query.all()
@@ -24,6 +27,7 @@ def get_clubs():
     return clubs
 
 
+# get club details corresponding to club_id
 def get_club(club_id):
     query = db.session.query(Club).filter(Club._id.in_([club_id]))
     result = query.first()
@@ -32,6 +36,8 @@ def get_club(club_id):
     return result.as_dict()
 
 
+# edit club corresponding to club_id
+# and set new club_details
 def edit_club(club_id, club_details):
     # update club
     club = Club.query.get(club_id)
@@ -44,6 +50,7 @@ def edit_club(club_id, club_details):
     return "edited club"
 
 
+# delete club corresponding to club_id
 def delete_club(club_id):
     # delete club
     club = Club.query.filter_by(_id=club_id)
@@ -54,6 +61,8 @@ def delete_club(club_id):
     return "club deleted"
 
 
+# add member corresponding to student_id
+# to the club corresponding to club_id
 def add_member(club_id, student_id):
     student = Student.query.get(student_id)
     if student is None:

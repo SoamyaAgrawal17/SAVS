@@ -21,12 +21,14 @@ class Test_TestClubService(unittest.TestCase):
             db.session.commit()
             db.create_all()
             db.session.commit()
+            # setup a demo student as club head
             student_information = {
                 "name": "TestStudent",
                 "email_id": "test_student@columbia.edu",
                 "college": "Fu Foundation",
                 "department": "Computer Science"
             }
+            # setup a demo club
             club_information = {
                 "name": "TestClub",
                 "head": "test_student@columbia.edu",
