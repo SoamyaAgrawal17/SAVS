@@ -25,6 +25,7 @@ Documented API:
 System Tests Corresponding to API:
 
   Link: https://documenter.getpostman.com/view/14290543/UVC9gkKY
+  The API entry points are implemented in ClubsController, EventsController, StudentController
 
 Unit Tests: 
 Command to run unit test: coverage run -m unittest discover test
