@@ -1,0 +1,1363 @@
+{
+	"info": {
+		"_postman_id": "bbadba3d-b1a0-48c3-b05e-beea4bcca45e",
+		"name": "SAVS",
+		"description": "This is a complete test suite for testing all endpoints for SAVS app.\nTo run this collection -\n- click on the collection name to view the home page.\n- click on the Run button at top right corner\n- all the tests will be run one by one.\n\nNote: the tests need to be run in the specified order.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup a student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson).to.eql(\"Student Entry Created\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"TestStudent\",\n\"email_id\": \"test_student@columbia.edu\",\n\"college\": \"Fu Foundation\",\n\"department\": \"Computer Science\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student"
+					]
+				},
+				"description": "<i> Here we test that a student can sign up on the app\nThe student we sign up here is a sample student(Relevant for tests ahead)"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson.name).to.eql(\"TestStudent\");",
+							"  pm.expect(responseJson.email_id).to.eql(\"test_student@columbia.edu\");",
+							"  pm.expect(responseJson.college).to.eql(\"Fu Foundation\");",
+							"  pm.expect(responseJson.department).to.eql(\"Computer Science\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{hHost}}/student/test_student@columbia.edu",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student",
+						"test_student@columbia.edu"
+					]
+				},
+				"description": "<i> We test that the admin/club member/club head/student can view the details of the student."
+			},
+			"response": []
+		},
+		{
+			"name": "Signup a student for club member",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson).to.eql(\"Student Entry Created\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"TestClubMember\",\n\"email_id\": \"test_club_member@columbia.edu\",\n\"college\": \"Fu Foundation\",\n\"department\": \"Computer Science\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student"
+					]
+				},
+				"description": "<i> Here we sign up a student that acts as club member later in the tests."
+			},
+			"response": []
+		},
+		{
+			"name": "Signup a student for club head",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson).to.eql(\"Student Entry Created\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"TestClubHead\",\n\"email_id\": \"test_club_head@columbia.edu\",\n\"college\": \"Fu Foundation\",\n\"department\": \"Computer Science\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student"
+					]
+				},
+				"description": "<i> Here we sign up a student that acts as club head for TestClub1 later in the tests."
+			},
+			"response": []
+		},
+		{
+			"name": "Signup a student for club head 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson).to.eql(\"Student Entry Created\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"TestClubHead2\",\n\"email_id\": \"test_club_head_2@columbia.edu\",\n\"college\": \"Fu Foundation\",\n\"department\": \"Computer Science\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student"
+					]
+				},
+				"description": "<i> Here we sign up a student that acts as club head for TestClub2 later in the tests."
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new club",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson).to.eql(\"Club Entry Created\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_club_head@columbia.edu\",\n    \"club\":{\n        \"name\": \"Test Club 1\",\n        \"head\": \"test_club_head@columbia.edu\",\n        \"category\": \"Test Category 1\",\n        \"description\": \"Test Club Description 1\"\n    }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student/club",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student",
+						"club"
+					]
+				},
+				"description": "<i> Here we test creation of a new club Club1 by a student. Email id is used to check if the student exists and is eligible to create a club."
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new club 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson).to.eql(\"Club Entry Created\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_club_head_2@columbia.edu\",\n    \"club\":{\n        \"name\": \"Test Club 2\",\n        \"head\": \"test_club_head_2@columbia.edu\",\n        \"category\": \"Test Category 2\",\n        \"description\": \"Test Club Description 2\"\n    }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student/club",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student",
+						"club"
+					]
+				},
+				"description": "<i> Here we test creation of a new club Club2 by a student. Email id is used to check if the student exists and is eligible to create a club. This will be used in tests later."
+			},
+			"response": []
+		},
+		{
+			"name": "Add a member happy case",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  pm.response.to.have.body('Club member added');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_club_head@columbia.edu\",\n    \"student_email_id\":\"test_club_member@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/member/1",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"member",
+						"1"
+					]
+				},
+				"description": "<i> Here we test that the club head is able to add a member to their club . The email id in payload is used to verify that the person trying to add a member is head of the club infact."
+			},
+			"response": []
+		},
+		{
+			"name": "Propose Event 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.success;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseText = pm.response.text();",
+							"  pm.expect(responseText).to.eql(\"CREATED\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\": \"test_club_member@columbia.edu\",\n    \"event\": {\n        \"name\": \"TestEvent1\",\n        \"club_id\": 1,\n        \"start_timestamp\": \"2022-12-03 09:30:00\",\n        \"end_timestamp\": \"2022-12-05 00:00:00\",\n        \"location\": \"New York City\",\n        \"max_registration\": 125,\n        \"description\": \"Winter Hackathon December 2021\",\n        \"fee\": 10,\n        \"category\": \"Academic\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/events",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"events"
+					]
+				},
+				"description": "<i> Here we test that a club member is able to propose an event.The email id is payload is used to verify whether the person is actually member of the club."
+			},
+			"response": []
+		},
+		{
+			"name": "Propose Event 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.success;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseText = pm.response.text();",
+							"  pm.expect(responseText).to.eql(\"CREATED\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\": \"test_club_member@columbia.edu\",\n    \"event\": {\n        \"name\": \"TestEvent2\",\n        \"club_id\": 1,\n        \"start_timestamp\": \"2020-12-03 09:30:00\",\n        \"end_timestamp\": \"2020-12-05 00:00:00\",\n        \"location\": \"New York City\",\n        \"max_registration\": 125,\n        \"description\": \"Winter Hackathon December 2021\",\n        \"fee\": 10,\n        \"category\": \"Academic\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/events",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"events"
+					]
+				},
+				"description": "<i> Here we test that a club member is able to propose another event. This will be used for testing later."
+			},
+			"response": []
+		},
+		{
+			"name": "View proposed events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  const event1 = responseJson[0];",
+							"  const event2 = responseJson[1];",
+							"  pm.expect(event1._id).to.eql(1);",
+							"  pm.expect(event1.name).to.eql(\"TestEvent1\");",
+							"  pm.expect(event2._id).to.eql(2);",
+							"  pm.expect(event2.name).to.eql(\"TestEvent2\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{hHost}}/events?created_by=2",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"events"
+					],
+					"query": [
+						{
+							"key": "created_by",
+							"value": "2"
+						}
+					]
+				},
+				"description": "<i> Here the club member can view the events they have proposed so far. Query parameter filters the results for particular club member."
+			},
+			"response": []
+		},
+		{
+			"name": "Register for event1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson).to.eql(\"Student registered for the event\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_student@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student/register_event/1",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student",
+						"register_event",
+						"1"
+					]
+				},
+				"description": "<i> Here we test whether a student is able to register for event1."
+			},
+			"response": []
+		},
+		{
+			"name": "Register for event2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson).to.eql(\"Student registered for the event\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_student@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student/register_event/2",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student",
+						"register_event",
+						"2"
+					]
+				},
+				"description": "<i> Here we test whether the student is able to register for multiple events."
+			},
+			"response": []
+		},
+		{
+			"name": "View all upcoming events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  const event1 = responseJson[0];",
+							"  pm.expect(event1._id).to.eql(1);",
+							"  pm.expect(event1.name).to.eql(\"TestEvent1\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_student@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student/get_upcoming_events",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student",
+						"get_upcoming_events"
+					]
+				},
+				"description": "<i> Here the student can view the events they have registered to and are upcoming i.e. the past events will not show up here."
+			},
+			"response": []
+		},
+		{
+			"name": "View registered events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  const registeredEvent1 = responseJson[0];",
+							"  pm.expect(registeredEvent1.student_id).to.eql(1);",
+							"  pm.expect(registeredEvent1.event_id).to.eql(1);",
+							"  pm.expect(registeredEvent1.status).to.eql(\"Registered\");",
+							"  const registeredEvent2 = responseJson[1];",
+							"  pm.expect(registeredEvent2.student_id).to.eql(1);",
+							"  pm.expect(registeredEvent2.event_id).to.eql(2);",
+							"  pm.expect(registeredEvent2.status).to.eql(\"Registered\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_student@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student/get_registered_events",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student",
+						"get_registered_events"
+					]
+				},
+				"description": "<i> Here the student can view all the events they have registered to, irrespective of the status."
+			},
+			"response": []
+		},
+		{
+			"name": "See all the clubs and role in the club for club member",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  const registeredClub = responseJson[0];",
+							"  pm.expect(registeredClub.student_id).to.eql(2);",
+							"  pm.expect(registeredClub.club_id).to.eql(1);",
+							"  pm.expect(registeredClub.role).to.eql(\"Club Member\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_club_member@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student/get_roles",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student",
+						"get_roles"
+					]
+				},
+				"description": "<i> Here a student can check what their role is in various clubs. The example used here is of a club member."
+			},
+			"response": []
+		},
+		{
+			"name": "See all the clubs and role in the club for club head",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  const registeredClub = responseJson[0];",
+							"  pm.expect(registeredClub.student_id).to.eql(3);",
+							"  pm.expect(registeredClub.club_id).to.eql(1);",
+							"  pm.expect(registeredClub.role).to.eql(\"Club Head\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_club_head@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/student/get_roles",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"student",
+						"get_roles"
+					]
+				},
+				"description": "<i> Here a student can check what their role is in various clubs. The example used here is of a club head."
+			},
+			"response": []
+		},
+		{
+			"name": "Get all clubs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  const club1 = responseJson[0];",
+							"  const club2 = responseJson[1];",
+							"  pm.expect(club1._id).to.eql(1);",
+							"  pm.expect(club1.name).to.eql(\"Test Club 1\");",
+							"  pm.expect(club2._id).to.eql(2);",
+							"  pm.expect(club2.name).to.eql(\"Test Club 2\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_student@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/clubs",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"clubs"
+					]
+				},
+				"description": "<i> Here we test if a student can view all the clubs in the college."
+			},
+			"response": []
+		},
+		{
+			"name": "Edit club happy case",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  pm.response.to.have.body(\"edited club\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_club_head_2@columbia.edu\",\n    \"club\":{\n        \"description\":\"Test Club Description edit\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/clubs/2",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"clubs",
+						"2"
+					]
+				},
+				"description": "<i> Here we test if the club head can edit the club. The email id in payload is used to verify if the person is club head itself."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Club by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson.name).to.eql(\"Test Club 2\");",
+							"  pm.expect(responseJson.description).to.eql(\"Test Club Description edit\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_student@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/clubs/2",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"clubs",
+						"2"
+					]
+				},
+				"description": "<i> here we test if a student can view details for a particular club given the id. Notice the description for club2 has been modified in last test."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete club happy case",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  pm.response.to.have.body(\"club deleted\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"test_club_head_2@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/clubs/2",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"clubs",
+						"2"
+					]
+				},
+				"description": "<i> here we test whether a club head can delete the club. We verify that the person is in fact the head using the payload."
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.success;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseText = pm.response.text();",
+							"  pm.expect(responseText).to.eql(\"CREATED\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\": \"test_club_member@columbia.edu\",\n    \"event\": {\n        \"name\": \"TestEvent2\",\n        \"club_id\": 1,\n        \"start_timestamp\": \"2021-12-03 09:30:00\",\n        \"end_timestamp\": \"021-12-05 00:00:00\",\n        \"location\": \"New York City\",\n        \"max_registration\": 305,\n        \"description\": \"Test Change Description\",\n        \"fee\": 10,\n        \"category\": \"Academic\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/events/2",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"events",
+						"2"
+					]
+				},
+				"description": "<i> Here we test if the club member can edit an event for their club."
+			},
+			"response": []
+		},
+		{
+			"name": "View event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"     pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  const responseJson = pm.response.json();",
+							"  pm.expect(responseJson.name).to.eql(\"TestEvent2\");",
+							"  pm.expect(responseJson.category).to.eql(\"Academic\");",
+							"  pm.expect(responseJson.description).to.eql(\"Test Change Description\");",
+							"  pm.expect(responseJson.location).to.eql(\"New York City\");",
+							"  pm.expect(responseJson.registered_count).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{hHost}}/events/2",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"events",
+						"2"
+					]
+				},
+				"description": "<i> here we test if anyone can view the event details given the event id."
+			},
+			"response": []
+		},
+		{
+			"name": "Edit club Invalid request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  pm.response.to.have.body(\"Invalid Request\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"testemail3@columbia.edu\",\n    \"club\":{\n        \"description\":\"this is a test change\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/clubs/5",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"clubs",
+						"5"
+					]
+				},
+				"description": "<i> This is an error test for editing the club. If anyone other that club head tries to edit the the club, we throw error that it is an Invalid request."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete club Invalid Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  pm.response.to.have.body(\"Invalid Request\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"testemail4@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/clubs/6",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"clubs",
+						"6"
+					]
+				},
+				"description": "<i> This is an error test for deleting the club. If anyone other that club head tries to delete the the club, we throw error that it is an Invalid request."
+			},
+			"response": []
+		},
+		{
+			"name": "Add a member bad request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response must be valid and have a body\", function () {",
+							"     pm.response.to.be.ok;",
+							"     pm.response.to.be.withBody;",
+							"});",
+							"",
+							"pm.test(\"response is correct\", () => {",
+							"  pm.response.to.have.body('Invalid Request');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emailId\":\"testemail1@columbia.edu\",\n    \"student_email_id\":\"testemail1@columbia.edu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hHost}}/member/5",
+					"host": [
+						"{{hHost}}"
+					],
+					"path": [
+						"member",
+						"5"
+					]
+				},
+				"description": "<i> This is an error test for adding member to the club. If anyone other that club head tries to add member to the the club, we throw error that it is an Invalid request."
+			},
+			"response": []
+		}
+	]
+}
