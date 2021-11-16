@@ -17,7 +17,9 @@ Instructions to run
 2. pip3 install -r requirements.txt
 3. localhost:5000 app.py
 
-API Test Documentation
+
+Documented API
+
 Link: https://gracious-lalande-802898.netlify.app/
 
 
