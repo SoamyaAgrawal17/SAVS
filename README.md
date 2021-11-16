@@ -25,10 +25,10 @@ Documented API:
 
 System Tests Corresponding to API:
 
-  Link: https://documenter.getpostman.com/view/14290543/UVC9gkKY
-  We used Postman test suite to run the integration tests. The API entry points are implemented in ClubsController, EventsController, StudentController. 
-  Postman collection json: https://github.com/SoamyaAgrawal17/SAVS/blob/main/SAVS.postman_collection.json
-  Postman run result : https://github.com/SoamyaAgrawal17/SAVS/blob/main/SAVS.postman_test_run.json
+  Link: https://documenter.getpostman.com/view/14290543/UVC9gkKY <br>
+  We used Postman test suite to run the integration tests. The API entry points are implemented in ClubsController, EventsController, StudentController. <br>
+  Postman collection json: https://github.com/SoamyaAgrawal17/SAVS/blob/main/SAVS.postman_collection.json <br>
+  Postman run result : https://github.com/SoamyaAgrawal17/SAVS/blob/main/SAVS.postman_test_run.json <br>
 
 Unit Tests: 
 Command to run unit test: coverage run -m unittest discover test
