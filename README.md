@@ -12,6 +12,7 @@ Soamya Agrawal (sa3881)
 Vani Jain (vj2245)
 
 First Iteration Report: <br>
+  Link: https://github.com/SoamyaAgrawal17/SAVS/blob/main/documentation/Assignment%20T3_First%20Iteration.pdf <br>
 
 
 Documented API: <br>
@@ -51,8 +52,6 @@ To build, run and test on localhost or Heroku, follow the following steps:
 10.  To connect to your local database, replace app.config['SQLALCHEMY_DATABASE_URI'] in app.py with 'postgresql://<username>:<password>@localhost:5432/<db-name>'
 
 
-Manual Testing can be done by using the above Endpoint. <br>
-Unit Testing could be done by running the command coverage run -m unittest discover test or using push button to run all the unit tests. <br>
-
-References:
-1. https://medium.com/analytics-vidhya/heroku-deploy-your-flask-app-with-a-database-online-d19274a7a749
+- Manual Testing can be done by using the above Endpoint. <br>
+- Unit Testing could be done by running the command coverage run -m unittest discover test or using push button to run all the unit tests. <br>
+- For integration testing clear the database and run the collection SAVS on Postman(The collection json is shared and IA is added to the postman workspace).
