@@ -14,7 +14,8 @@ Vani Jain (vj2245)
 Instructions to run
 
 1. git clone https://github.com/SoamyaAgrawal17/SAVS
-
+2. pip3 install -r requirements.txt
+3. localhost:5000 app.py
 
 API Test Documentation
 Link:
@@ -25,3 +26,6 @@ Link:
 
 Integration Test Documentation
 Link: 
+
+
+References:
