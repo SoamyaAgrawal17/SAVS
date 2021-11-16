@@ -15,7 +15,8 @@ Instructions to run
 
 1. git clone https://github.com/SoamyaAgrawal17/SAVS
 2. pip3 install -r requirements.txt
-3. localhost:5000 app.py
+3. python3 app.py
+4. The application would run on localhost:5000/
 
 
 Documented API: 
