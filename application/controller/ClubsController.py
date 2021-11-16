@@ -36,6 +36,7 @@ def get_club_by_id(club_id):
 def edit_club(club_id):
     data = request.get_json()
     email_id = data["emailId"]
+    # when email is none the request is invalid
     if email_id is None:
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
@@ -46,6 +47,7 @@ def edit_club(club_id):
                         content_type="text/plain")
     query = Role.query.filter_by(club_id=club_id, student_id=student_id)
     result = query.first()
+    # not club head
     if result is None or result.role != "Club Head":
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
@@ -59,6 +61,7 @@ def edit_club(club_id):
 def delete_club(club_id):
     data = request.get_json()
     email_id = data["emailId"]
+    # when email is none the request is invalid
     if email_id is None:
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
@@ -68,6 +71,7 @@ def delete_club(club_id):
                         content_type="text/plain")
     query = Role.query.filter_by(club_id=club_id, student_id=student_id)
     result = query.first()
+    # not club head
     if result is None or result.role != "Club Head":
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
@@ -82,6 +86,7 @@ def add_member(club_id=None):
     data = request.get_json()
     email_id = data["emailId"]
     student_email_id = data["student_email_id"]
+    # when email is none the request is invalid
     if email_id is None:
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
@@ -95,6 +100,7 @@ def add_member(club_id=None):
                         status=200, content_type="text/plain")
     query = Role.query.filter_by(club_id=club_id, student_id=editor_student_id)
     result = query.first()
+    # not club head
     if result is None or result.role != "Club Head":
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
