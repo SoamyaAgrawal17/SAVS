@@ -18,17 +18,18 @@ Instructions to run
 3. localhost:5000 app.py
 
 
-Documented API
+Documented API:
 
   Link: https://gracious-lalande-802898.netlify.app/
 
-System Tests Corresponding to API
+System Tests Corresponding to API:
 
   Link: https://documenter.getpostman.com/view/14290543/UVC9gkKY
 
-Unit Test Documentation
-
-Link:
+Unit Tests: 
+Command to run unit test: 
+We have covered all the methods implemented in ClubService, EventService, and StudentService. 
+For Controller methods, we have used the above System Tests. Unit tests for Controllers is planned to be implemented as part of the next iteration. 
 
 
 References:
