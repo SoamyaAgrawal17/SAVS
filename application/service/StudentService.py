@@ -79,7 +79,6 @@ def register_event(event_id, student_id):
 
     event = db.session.query(Event).filter_by(_id=event_id).first()
     event.registered_count += 1
-
     db.session.add(new_registration)
     db.session.commit()
     return "Student registered for the event"
@@ -89,10 +88,16 @@ def register_event(event_id, student_id):
 def get_registered_events(student_id):
 
     query = db.session.query(StudentEvent).filter_by(student_id=student_id)
-    events = query.all()
+    student_events = query.all()
     registered_events = []
-    for event in events:
-        registered_events.append(event.as_dict())
+    for student_event_id in student_events:
+        event = db.session.query(Event).filter_by(_id=student_event_id.event_id).first()
+        json_response = {
+            "student_id": student_id,
+            "event": event.as_dict(),
+            "status": student_event_id.status
+        }
+        registered_events.append(json_response)
     return registered_events
 
 

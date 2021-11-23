@@ -85,8 +85,8 @@ class Test_TestStudentService(unittest.TestCase):
                 get_registered_events(student_id)
             self.assertEqual(len(registered_events), 1)
             registered_event = registered_events[0]
-            self.assertEqual(registered_event['event_id'], 1)
             self.assertEqual(registered_event['student_id'], 1)
+            self.assertEqual(registered_event['event']['_id'], 1)
             self.assertEqual(registered_event['status'], "Registered")
 
             # Withdraw from a registered event
@@ -94,7 +94,7 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(response, "Successfully withdrew from the event")
             registered_events = StudentService.get_registered_events(student_id)
             registered_event = registered_events[0]
-            self.assertEqual(registered_event['event_id'], 1)
+            self.assertEqual(registered_event['event']['_id'], 1)
             self.assertEqual(registered_event['student_id'], 1)
             self.assertEqual(registered_event['status'], "Withdrew")
 
