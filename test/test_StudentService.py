@@ -228,10 +228,6 @@ class Test_TestStudentService(unittest.TestCase):
             registration = StudentService.register_event(event_id, student_id3)
             self.assertEqual(registration, "The event is at maximum capacity")
 
-            # Withdraw from a registered event
-            response = StudentService.withdraw_event(event_id, student_id)
-            self.assertEqual(response, "Failure: Can't withdraw from past event")
-
     def test_create_new_club_and_role_in_it(self):
         # Test if a student can create a new club
         with app.app_context():
