@@ -12,42 +12,58 @@ log.setLevel(logging.ERROR)
 # Signup a student
 @mod.route('/student', methods=['POST'])
 def create_student():
-    student_information = request.get_json()
-    student_entry = StudentService.create_student(student_information)
-    res = json.dumps(student_entry, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
+    try:
+        student_information = request.get_json()
+        student_entry = StudentService.create_student(student_information)
+        res = json.dumps(student_entry, default=str)
+        rsp = Response(res, status=200, content_type="application/JSON")
+    except Exception as e:
+        print("/api/<resource>, e = ", e)
+        rsp = Response(e, status=500, content_type="text/plain")
     return rsp
 
 
 # Get student information
 @mod.route('/student/<email_id>', methods=['GET'])
 def get_student(email_id=None):
-    student_entry = StudentService.get_student(email_id)
-    res = json.dumps(student_entry, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
+    try:
+        student_entry = StudentService.get_student(email_id)
+        res = json.dumps(student_entry, default=str)
+        rsp = Response(res, status=200, content_type="application/JSON")
+    except Exception as e:
+        print("/api/<resource>, e = ", e)
+        rsp = Response(e, status=500, content_type="text/plain")
     return rsp
 
 
 # View all upcoming events.
 @mod.route('/student/get_upcoming_events', methods=['GET'])
 def get_upcoming_events():
-    data = request.get_json()
-    email_id = data["emailId"]
-    events = StudentService.get_upcoming_events(email_id)
-    res = json.dumps(events, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
+    try:
+        data = request.get_json()
+        email_id = data["emailId"]
+        events = StudentService.get_upcoming_events(email_id)
+        res = json.dumps(events, default=str)
+        rsp = Response(res, status=200, content_type="application/JSON")
+    except Exception as e:
+        print("/api/<resource>, e = ", e)
+        rsp = Response(e, status=500, content_type="text/plain")
     return rsp
 
 
 # Register for an event
 @mod.route('/student/register_event/<event_id>', methods=['POST'])
 def register_event(event_id=None):
-    data = request.get_json()
-    email_id = data["emailId"]
-    student_id = StudentService.get_id(email_id)
-    event = StudentService.register_event(event_id, student_id)
-    res = json.dumps(event, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
+    try:
+        data = request.get_json()
+        email_id = data["emailId"]
+        student_id = StudentService.get_id(email_id)
+        event = StudentService.register_event(event_id, student_id)
+        res = json.dumps(event, default=str)
+        rsp = Response(res, status=200, content_type="application/JSON")
+    except Exception as e:
+        print("/api/<resource>, e = ", e)
+        rsp = Response(e, status=500, content_type="text/plain")
     return rsp
 
 
