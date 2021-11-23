@@ -25,6 +25,17 @@ def get_events():
     return rsp
 
 
+# Get list of filtered events
+@mod.route('/filtered_events', methods=['GET'])
+def get_filtered_events():
+    data = request.get_json()
+    filters = data["filters"]
+    events = EventService.get_filtered_events(filters)
+    res = json.dumps(events, default=str)
+    rsp = Response(res, status=200, content_type="application/JSON")
+    return rsp
+
+
 # Add an event (by club member/head)
 @mod.route('/events', methods=['POST'])
 def propose_events():

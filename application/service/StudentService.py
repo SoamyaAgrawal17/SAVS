@@ -6,6 +6,7 @@ from application.model.Role import Role
 from application.model.Club import Club
 from application.service.ClubService import get_id as get_club_id
 from application.service.ClubService import club_exist
+from application.service.EventService import get_event
 from application.utilities.database import db
 from datetime import *
 
@@ -15,7 +16,7 @@ def get_id(email_id):
     student = db.session.query(Student).filter(
         Student.email_id.in_([email_id])).first()
     if student is None:
-        return None
+        return "Student does not exist"
     student_id = student._id
     return student_id
 
@@ -36,6 +37,9 @@ def create_student(student_information):
     college = student_information['college']
     department = student_information['department']
 
+    if get_student(email_id) is not None:
+        return "Student Already Exists"
+
     new_student = Student(name=name, email_id=email_id, college=college,
                           department=department)
     db.session.add(new_student)
@@ -47,6 +51,8 @@ def create_student(student_information):
 def get_student(email_id=None):
     query = db.session.query(Student).filter(Student.email_id.in_([email_id]))
     result = query.first()
+    if result is None:
+        return None
     return result.as_dict()
 
 
@@ -74,6 +80,23 @@ def register_event(event_id, student_id):
     status = "Registered"
     if check_if_already_registered(event_id, student_id):
         return "Student already registered for the event"
+
+    # Check if student is eligible to register based on club
+    event = get_event(event_id)
+
+    if event.registered_count == event.max_registration:
+        return "The event is at maximum capacity"
+
+    if event.get_time_status_() == "Past":
+        return "You cannot register for an event in the past"
+
+    if event.visibility == "Club member":
+        query = db.session.query(Role).filter_by(student_id=student_id, club_id=event.club_id)
+        clubs_response = query.all()
+        if len(clubs_response) == 0:
+            return "You need to be part of this club to register for this event."
+
+    # Register for event
     new_registration = StudentEvent(student_id=student_id,
                                     event_id=event_id, status=status)
 

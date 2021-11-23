@@ -1,7 +1,9 @@
+import datetime
 import unittest
 from application.service import EventService
 from application.utilities.database import db
 from app import app
+from datetime import *
 
 app.config['TESTING'] = True
 
@@ -80,6 +82,51 @@ class Test_TestEventService(unittest.TestCase):
             self.assertEqual(events[0].name, "Event1")
             self.assertEqual(events[0].location, "NYC")
             self.assertEqual(events[0].description, "Desc")
+
+    def test_get_filtered_events(self):
+
+        with app.app_context():
+            event_obj = {
+                "name": "ICPC Practice 2021",
+                "club_id": 1,
+                "start_timestamp": "2021-12-25 09:30:00",
+                "end_timestamp": "2021-12-26 09:30:00",
+                "location": "New York City",
+                "max_registration": 250,
+                "description": "Competitive Coding Practice",
+                "fee": 10,
+                "category": "Academic"
+            }
+
+            msg, code = EventService.propose_event(event_obj, 1)
+            self.assertEqual(msg, "CREATED")
+            self.assertEqual(code, 201)
+            events = EventService.get_events()
+            self.assertEqual(len(events), 3)
+
+            # Test if a list of events filtered by dates are returned
+            filters = {"date_range": {"start": "2021-12-22 09:30:00", "end": "2021-12-27 09:30:00"}}
+            events = EventService.get_filtered_events(filters)
+            self.assertEqual(len(events), 1)
+            self.assertEqual(events[0].name, "ICPC Practice 2021")
+            self.assertEqual(events[0].location, "New York City")
+            self.assertEqual(events[0].description, "Competitive Coding Practice")
+
+            # Test if a list of events filtered by fees are returned
+            filters = {"fees": {"min": 0, "max": 7}}
+            events = EventService.get_filtered_events(filters)
+            self.assertEqual(len(events), 2)
+            self.assertEqual(events[0].name, "Event1")
+            self.assertEqual(events[0].location, "NYC")
+            self.assertEqual(events[0].description, "Desc")
+
+            # Test if a list of events filtered by interests are returned
+            filters = {"interests": "Music"}
+            events = EventService.get_filtered_events(filters)
+            self.assertEqual(len(events), 1)
+            self.assertEqual(events[0].name, "Event2")
+            self.assertEqual(events[0].location, "CA")
+            self.assertEqual(events[0].description, "Musical Night")
 
     def test_add_event(self):
         # Test if an event can be added by Club Member

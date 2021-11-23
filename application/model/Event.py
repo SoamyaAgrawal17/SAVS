@@ -1,4 +1,5 @@
 from application.utilities.database import db
+from datetime import *
 
 
 class Event(db.Model):
@@ -43,3 +44,8 @@ class Event(db.Model):
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+    def get_time_status_(self):
+        if self.end_timestamp <= datetime.today():
+            return "Past"
+        return "Upcoming"
