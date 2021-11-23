@@ -89,6 +89,15 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(registered_event['student_id'], 1)
             self.assertEqual(registered_event['status'], "Registered")
 
+            # Withdraw from a registered event
+            response = StudentService.withdraw_event(event_id, student_id)
+            self.assertEqual(response, "Successfully withdrew from the event")
+            registered_events = StudentService.get_registered_events(student_id)
+            registered_event = registered_events[0]
+            self.assertEqual(registered_event['event_id'], 1)
+            self.assertEqual(registered_event['student_id'], 1)
+            self.assertEqual(registered_event['status'], "Withdrew")
+
     def test_create_new_club_and_role_in_it(self):
         # Test if a student can create a new club
         with app.app_context():
