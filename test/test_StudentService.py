@@ -69,24 +69,86 @@ class Test_TestStudentService(unittest.TestCase):
 
             EventService.propose_event(event['event'], student_id)
             event_id = 1
-            event_details = EventService.get_event(event_id).as_dict()
-            old_registration_count = event_details['registered_count']
             registration = StudentService.register_event(event_id, student_id)
             self.assertEqual(registration, "Student registered for the event")
 
+            # Register in an event
             registration = StudentService.register_event(event_id, student_id)
-            event_details = EventService.get_event(event_id).as_dict()
-            new_registration_count = event_details['registered_count']
-            self.assertEqual(old_registration_count + 1,
-                             new_registration_count)
             self.assertEqual(registration, "Student already "
                                            "registered for the event")
-            registered_events = StudentService.\
-                get_registered_events(student_id)
-            self.assertEqual(len(registered_events), 1)
+            registered_events = StudentService.get_registered_events(student_id)
             registered_event = registered_events[0]
-            self.assertEqual(registered_event['event_id'], 1)
             self.assertEqual(registered_event['student_id'], 1)
+            self.assertEqual(registered_event['event']['_id'], 1)
+            self.assertEqual(registered_event['event']['registered_count'], 1)
+            self.assertEqual(registered_event['status'], "Registered")
+
+            # Withdraw from a registered event
+            response = StudentService.withdraw_event(event_id, student_id)
+            self.assertEqual(response, "Successfully withdrew from the event")
+            registered_events = StudentService.get_registered_events(student_id)
+            registered_event = registered_events[0]
+            self.assertEqual(registered_event['event']['_id'], 1)
+            self.assertEqual(registered_event['event']['registered_count'], 0)
+            self.assertEqual(registered_event['student_id'], 1)
+            self.assertEqual(registered_event['status'], "Withdrew")
+
+            # Withdraw from an event not registered in
+            response = StudentService.withdraw_event(3, student_id)
+            self.assertEqual(response, "Failure: Can't withdraw from an event not registered in")
+
+    def test_register_past_events(self):
+        # Test if a student can register for events
+        with app.app_context():
+            student_information = {
+                "name": "TestStudent",
+                "email_id": "test_student@columbia.edu",
+                "college": "Fu Foundation",
+                "department": "Computer Science"
+            }
+
+            StudentService.create_student(student_information)
+            student_id = StudentService.get_student(
+                "test_student@columbia.edu")['_id']
+            self.assertEqual(student_id, 1)
+
+            club_information = {
+                "name": "Test Club 3",
+                "head": "test_student@columbia.edu",
+                "category": "Test Category 2",
+                "description": "Test Club Description 2"
+            }
+            status, response = StudentService.create_club(club_information)
+            self.assertEqual(status, 200)
+            self.assertEqual(response, "Club Entry Created")
+
+            event = {
+                "emailId": "test_club_member@columbia.edu",
+                "event": {
+                    "name": "Hackathon 2021 Columbia",
+                    "club_id": 1,
+                    "start_timestamp": "2020-12-03 09:30:00",
+                    "end_timestamp": "2020-12-05 00:00:00",
+                    "location": "New York City",
+                    "max_registration": 125,
+                    "description": "Winter Hackathon December 2021",
+                    "fee": 10,
+                    "category": "Academic",
+                    "visibility": "all",
+                    "status": "Created"
+                }
+            }
+
+            EventService.propose_event(event['event'], student_id)
+            event_id = 1
+            registration = StudentService.register_event(event_id, student_id)
+            self.assertEqual(registration, "Student registered for the event")
+
+            registered_events = StudentService.get_registered_events(student_id)
+            registered_event = registered_events[0]
+            self.assertEqual(registered_event['student_id'], 1)
+            self.assertEqual(registered_event['event']['_id'], 1)
+            self.assertEqual(registered_event['event']['registered_count'], 1)
             self.assertEqual(registered_event['status'], "Registered")
 
     def test_register_max_students(self):
@@ -165,6 +227,10 @@ class Test_TestStudentService(unittest.TestCase):
 
             registration = StudentService.register_event(event_id, student_id3)
             self.assertEqual(registration, "The event is at maximum capacity")
+
+            # Withdraw from a registered event
+            response = StudentService.withdraw_event(event_id, student_id)
+            self.assertEqual(response, "Failure: Can't withdraw from past event")
 
     def test_create_new_club_and_role_in_it(self):
         # Test if a student can create a new club

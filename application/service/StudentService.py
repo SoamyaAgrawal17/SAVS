@@ -10,7 +10,6 @@ from application.service.EventService import get_event
 from application.utilities.database import db
 from datetime import *
 
-
 # Get student id if email_id of student is provided
 def get_id(email_id):
     student = db.session.query(Student).filter(
@@ -102,7 +101,6 @@ def register_event(event_id, student_id):
 
     event = db.session.query(Event).filter_by(_id=event_id).first()
     event.registered_count += 1
-
     db.session.add(new_registration)
     db.session.commit()
     return "Student registered for the event"
@@ -111,12 +109,35 @@ def register_event(event_id, student_id):
 # View registered events
 def get_registered_events(student_id):
 
+
     query = db.session.query(StudentEvent).filter_by(student_id=student_id)
-    events = query.all()
+    student_events = query.all()
     registered_events = []
-    for event in events:
-        registered_events.append(event.as_dict())
+    for student_event_id in student_events:
+        event = db.session.query(Event).filter_by(_id=student_event_id.event_id).first()
+        json_response = {
+            "student_id": student_id,
+            "event": event.as_dict(),
+            "status": student_event_id.status
+        }
+        registered_events.append(json_response)
     return registered_events
+
+
+# Withdraw event
+def withdraw_event(student_id, event_id):
+    query = db.session.query(StudentEvent).filter_by(student_id=student_id, event_id=event_id)
+    student_event = query.first()
+    if student_event is None:
+        return "Failure: Can't withdraw from an event not registered in"
+    event_id = student_event.event_id
+    event = db.session.query(Event).filter_by(_id=event_id).first()
+
+    if event.get_time_status_() == "Past":
+        return "Failure: Can't withdraw from past event"
+    student_event.status = "Withdrew"
+    event.registered_count -= 1
+    return "Successfully withdrew from the event"
 
 
 # Create a new club

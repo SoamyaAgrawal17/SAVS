@@ -18,7 +18,7 @@ class Event(db.Model):
     max_registration = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(100), nullable=True)
     fee = db.Column(db.Integer, nullable=False)
-    status = db.Column(db.String(10), nullable=False)
+    status = db.Column(db.String(10), nullable=False)  # Approved, Rejected, Proposed
     registered_count = db.Column(db.Integer, nullable=False)
     created_by = db.Column(db.Integer,
                            db.ForeignKey('student._id', onupdate="CASCADE",

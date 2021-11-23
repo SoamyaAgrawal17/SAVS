@@ -54,34 +54,83 @@ def register_event(event_id=None):
 # View registered events
 @mod.route('/student/get_registered_events', methods=['GET'])
 def get_registered_events():
-    data = request.get_json()
-    email_id = data["emailId"]
-    student_id = StudentService.get_id(email_id)
-    event = StudentService.get_registered_events(student_id)
-    res = json.dumps(event, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
+    try:
+        data = request.get_json()
+        email_id = data["emailId"]
+        student_id = StudentService.get_id(email_id)
+        have_permission, rsp = validate_permission(student_id)
+        if not have_permission:
+            return rsp
+        event = StudentService.get_registered_events(student_id)
+        res = json.dumps(event, default=str)
+        rsp = Response(res, status=200, content_type="application/JSON")
+    except Exception as e:
+        print("/api/<resource>, e = ", e)
+        rsp = Response(e, status=500, content_type="text/plain")
+    return rsp
+
+
+# Withdraw event
+@mod.route('/student/withdraw_event', methods=['POST'])
+def withdraw_event():
+    try:
+        data = request.get_json()
+        email_id = data["emailId"]
+        event_id = data["eventId"]
+        student_id = StudentService.get_id(email_id)
+        have_permission, rsp = validate_permission(student_id)
+        if not have_permission:
+            return rsp
+        event = StudentService.withdraw_event(student_id, event_id)
+        res = json.dumps(event, default=str)
+        rsp = Response(res, status=200, content_type="application/JSON")
+    except Exception as e:
+        print("/api/<resource>, e = ", e)
+        rsp = Response(e, status=500, content_type="text/plain")
     return rsp
 
 
 # Create a new club
 @mod.route('/student/club', methods=['POST'])
 def create_club():
-    data = request.get_json()
-    email_id = data["emailId"]
-    club_information = data["club"]
-    status, club_entry = StudentService.create_club(club_information)
-    res = json.dumps(club_entry, default=str)
-    rsp = Response(res, status=status, content_type="application/JSON")
+    try:
+        data = request.get_json()
+        email_id = data["emailId"]
+        student_id = StudentService.get_id(email_id)
+        have_permission, rsp = validate_permission(student_id)
+        if not have_permission:
+            return rsp
+        club_information = data["club"]
+        status, club_entry = StudentService.create_club(club_information)
+        res = json.dumps(club_entry, default=str)
+        rsp = Response(res, status=status, content_type="application/JSON")
+    except Exception as e:
+        print("/api/<resource>, e = ", e)
+        rsp = Response(e, status=500, content_type="text/plain")
     return rsp
 
 
 # View all the clubs and my role in it
 @mod.route('/student/get_roles', methods=['GET'])
-def get_roles(student_id=None):
-    data = request.get_json()
-    email_id = data["emailId"]
-    student_id = StudentService.get_id(email_id)
-    clubs = StudentService.get_roles(student_id)
-    res = json.dumps(clubs, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
+def get_roles():
+    try:
+        data = request.get_json()
+        email_id = data["emailId"]
+        student_id = StudentService.get_id(email_id)
+        have_permission, rsp = validate_permission(student_id)
+        if not have_permission:
+            return rsp
+        clubs = StudentService.get_roles(student_id)
+        res = json.dumps(clubs, default=str)
+        rsp = Response(res, status=200, content_type="application/JSON")
+    except Exception as e:
+        print("/api/<resource>, e = ", e)
+        rsp = Response(e, status=500, content_type="text/plain")
     return rsp
+
+
+def validate_permission(student_id):
+    if student_id is None:
+        message = "You do not have the required" \
+                  " permissions to perform this operation"
+        return False, Response(message, status=403, content_type="application/JSON")
