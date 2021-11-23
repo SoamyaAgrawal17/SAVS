@@ -63,6 +63,19 @@ def get_registered_events():
     return rsp
 
 
+# Withdraw event
+@mod.route('/student/withdraw_event', methods=['POST'])
+def withdraw_event():
+    data = request.get_json()
+    email_id = data["emailId"]
+    event_id = data["eventId"]
+    student_id = StudentService.get_id(email_id)
+    event = StudentService.withdraw_event(student_id, event_id)
+    res = json.dumps(event, default=str)
+    rsp = Response(res, status=200, content_type="application/JSON")
+    return rsp
+
+
 # Create a new club
 @mod.route('/student/club', methods=['POST'])
 def create_club():

@@ -96,6 +96,14 @@ def get_registered_events(student_id):
     return registered_events
 
 
+# Withdraw event
+def withdraw_event(student_id, event_id):
+    query = db.session.query(StudentEvent).filter_by(student_id=student_id, event_id=event_id)
+    event = query.first()
+    event.status = "Withdrew"
+    return "Successfully withdrew from the event"
+
+
 # Create a new club
 def create_club(club_information):
     name = club_information['name']
