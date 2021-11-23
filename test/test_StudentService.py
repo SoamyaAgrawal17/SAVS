@@ -142,14 +142,7 @@ class Test_TestStudentService(unittest.TestCase):
             EventService.propose_event(event['event'], student_id)
             event_id = 1
             registration = StudentService.register_event(event_id, student_id)
-            self.assertEqual(registration, "Student registered for the event")
-
-            registered_events = StudentService.get_registered_events(student_id)
-            registered_event = registered_events[0]
-            self.assertEqual(registered_event['student_id'], 1)
-            self.assertEqual(registered_event['event']['_id'], 1)
-            self.assertEqual(registered_event['event']['registered_count'], 1)
-            self.assertEqual(registered_event['status'], "Registered")
+            self.assertEqual(registration, "You cannot register for an event in the past")
 
     def test_register_max_students(self):
         # Test if a student can register for events
