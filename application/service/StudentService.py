@@ -104,8 +104,16 @@ def get_registered_events(student_id):
 # Withdraw event
 def withdraw_event(student_id, event_id):
     query = db.session.query(StudentEvent).filter_by(student_id=student_id, event_id=event_id)
-    event = query.first()
-    event.status = "Withdrew"
+    student_event = query.first()
+    if student_event is None:
+        return "Failure: Can't withdraw from an event not registered in"
+    event_id = student_event.event_id
+    event = db.session.query(Event).filter_by(_id=event_id).first()
+
+    if event.get_time_status_() == "Past":
+        return "Failure: Can't withdraw from past event"
+    student_event.status = "Withdrew"
+    event.registered_count -= 1
     return "Successfully withdrew from the event"
 
 
