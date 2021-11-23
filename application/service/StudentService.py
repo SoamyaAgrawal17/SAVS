@@ -9,7 +9,6 @@ from application.service.ClubService import club_exist
 from application.utilities.database import db
 from datetime import *
 
-
 # Get student id if email_id of student is provided
 def get_id(email_id):
     student = db.session.query(Student).filter(
@@ -86,6 +85,7 @@ def register_event(event_id, student_id):
 
 # View registered events
 def get_registered_events(student_id):
+
 
     query = db.session.query(StudentEvent).filter_by(student_id=student_id)
     student_events = query.all()
