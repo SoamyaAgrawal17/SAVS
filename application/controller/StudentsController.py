@@ -28,6 +28,8 @@ def create_student():
 def get_student(email_id=None):
     try:
         student_entry = StudentService.get_student(email_id)
+        if student_entry is None:
+            return "Student is not registered"
         res = json.dumps(student_entry, default=str)
         rsp = Response(res, status=200, content_type="application/JSON")
     except Exception as e:
@@ -42,6 +44,9 @@ def get_upcoming_events():
     try:
         data = request.get_json()
         email_id = data["emailId"]
+        have_permission, rsp = validate_permission(email_id)
+        if not have_permission:
+            return rsp
         events = StudentService.get_upcoming_events(email_id)
         res = json.dumps(events, default=str)
         rsp = Response(res, status=200, content_type="application/JSON")
@@ -58,6 +63,9 @@ def register_event(event_id=None):
         data = request.get_json()
         email_id = data["emailId"]
         student_id = StudentService.get_id(email_id)
+        have_permission, rsp = validate_permission(student_id)
+        if not have_permission:
+            return rsp
         event = StudentService.register_event(event_id, student_id)
         res = json.dumps(event, default=str)
         rsp = Response(res, status=200, content_type="application/JSON")
