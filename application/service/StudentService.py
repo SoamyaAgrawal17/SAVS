@@ -141,8 +141,8 @@ def withdraw_event(student_id, event_id):
 
 # Create a new club
 def create_club(club_information):
-    if club_information['name'] is None or club_information['head'] is None or club_information['category'] is None or club_information['description'] is None:
-        return 201, "Missing information(name, head, category, description) required to create club"
+    if 'name' not in club_information or 'head' not in club_information or 'category' not in club_information or 'description' not in club_information:
+        return 200, "Missing information(name, head, category, description) required to create club"
     name = club_information['name']
     head = club_information['head']
     category = club_information['category']
