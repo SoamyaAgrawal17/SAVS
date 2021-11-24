@@ -135,6 +135,7 @@ def withdraw_event(student_id, event_id):
         return "Failure: Can't withdraw from past event"
     student_event.status = "Withdrew"
     event.registered_count -= 1
+    db.session.commit()
     return "Successfully withdrew from the event"
 
 
