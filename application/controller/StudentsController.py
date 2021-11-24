@@ -152,7 +152,8 @@ def get_roles():
         rsp = Response(e, status=500, content_type="plain/text")
     return rsp
 
-@mod.route('/student/cleae_database', methods=['GET'])
+
+@mod.route('/student/clear_database', methods=['GET'])
 def clear_database():
     try:
         status = StudentService.clear_database()

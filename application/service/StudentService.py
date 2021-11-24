@@ -175,6 +175,15 @@ def get_roles(student_id):
         clubs.append(club.as_dict())
     return clubs
 
+
 def clear_database():
-    Club.__table__.drop()
-    Student.__table__.drop()
+    db.session.query(Role).delete()
+    db.session.query(StudentEvent).delete()
+    db.session.query(Club).delete()
+    db.session.query(Student).delete()
+    db.session.query(Event).delete()
+    db.session.execute("alter sequence club__id_seq restart 1")
+    db.session.execute("alter sequence student__id_seq restart 1");
+    db.session.execute("alter sequence event__id_seq restart 1");
+    db.session.commit()
+    return "Cleared database"
