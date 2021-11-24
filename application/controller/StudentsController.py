@@ -158,3 +158,4 @@ def validate_permission(student_id):
         message = "You do not have the required" \
                   " permissions to perform this operation"
         return False, Response(message, status=403, content_type="plain/text")
+    return True, Response("Valid student", status=200, content_type="plain/text")
