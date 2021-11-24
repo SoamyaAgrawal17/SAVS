@@ -78,7 +78,10 @@ def propose_event(event_information, student_id):
         name = event_information['name']
         category = event_information['category']
         description = event_information['description']
-        visibility = "Club Member"
+        if 'visibility' not in event_information:
+            visibility = "Club Member"
+        else:
+            visibility = event_information['visibility']
         start_timestamp = event_information['start_timestamp']
         end_timestamp = event_information['end_timestamp']
         location = event_information['location']
