@@ -174,3 +174,7 @@ def get_roles(student_id):
     for club in clubs_response:
         clubs.append(club.as_dict())
     return clubs
+
+def clear_database():
+    Club.__table__.drop()
+    Student.__table__.drop()

@@ -152,6 +152,17 @@ def get_roles():
         rsp = Response(e, status=500, content_type="plain/text")
     return rsp
 
+@mod.route('/student/cleae_database', methods=['GET'])
+def clear_database():
+    try:
+        status = StudentService.clear_database()
+        res = json.dumps(status, default=str)
+        rsp = Response(res, status=200, content_type="application/JSON")
+    except Exception as e:
+        print("/api/<resource>, e = ", e)
+        rsp = Response(e, status=500, content_type="plain/text")
+    return rsp
+
 
 def validate_permission(student_id):
     if student_id == "Student does not exist":
