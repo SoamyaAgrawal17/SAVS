@@ -22,7 +22,6 @@ def get_events():
     events = [event.as_dict() for event in events_list]
     res = json.dumps(events, default=str)
     rsp = Response(res, status=200, content_type="application/JSON")
-    print(events)
     return rsp
 
 

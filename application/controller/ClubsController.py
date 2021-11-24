@@ -42,7 +42,7 @@ def edit_club(club_id):
                         content_type="text/plain")
     club_information = data["club"]
     student_id = StudentService.get_id(email_id)
-    if student_id is None:
+    if student_id == "Student does not exist":
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
     query = Role.query.filter_by(club_id=club_id, student_id=student_id)
@@ -66,7 +66,7 @@ def delete_club(club_id):
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
     student_id = StudentService.get_id(email_id)
-    if student_id is None:
+    if student_id == "Student does not exist":
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
     query = Role.query.filter_by(club_id=club_id, student_id=student_id)
@@ -91,11 +91,11 @@ def add_member(club_id=None):
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
     editor_student_id = StudentService.get_id(email_id)
-    if editor_student_id is None:
+    if editor_student_id == "Student does not exist":
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
     student_id = StudentService.get_id(student_email_id)
-    if student_id is None:
+    if student_id == "Student does not exist":
         return Response("error: student isn't registered",
                         status=200, content_type="text/plain")
     query = Role.query.filter_by(club_id=club_id, student_id=editor_student_id)
