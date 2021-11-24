@@ -147,7 +147,7 @@ def create_club(club_information):
     description = club_information['description']
 
     if club_exist(name):
-        return 201, "Club with same name already exist"
+        return 200, "Club with same name already exist"
 
     new_club = Club(name=name, head=head, category=category,
                     description=description)
