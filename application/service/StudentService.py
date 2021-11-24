@@ -86,7 +86,7 @@ def register_event(event_id, student_id):
     if event.get_time_status_() == "Past":
         return "You cannot register for an event in the past"
 
-    if event.visibility == "Club member":
+    if event.visibility == "Club Member":
         query = db.session.query(Role).filter_by(student_id=student_id, club_id=event.club_id)
         clubs_response = query.all()
         if len(clubs_response) == 0:
