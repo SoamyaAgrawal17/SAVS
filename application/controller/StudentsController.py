@@ -44,10 +44,11 @@ def get_upcoming_events():
     try:
         data = request.get_json()
         email_id = data["emailId"]
-        have_permission, rsp = validate_permission(email_id)
+        student_id = StudentService.get_id(email_id)
+        have_permission, rsp = validate_permission(student_id)
         if not have_permission:
             return rsp
-        events = StudentService.get_upcoming_events(email_id)
+        events = StudentService.get_upcoming_events(student_id)
         res = json.dumps(events, default=str)
         rsp = Response(res, status=200, content_type="application/JSON")
     except Exception as e:

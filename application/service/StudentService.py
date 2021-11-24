@@ -56,8 +56,7 @@ def get_student(email_id=None):
 
 
 # View all upcoming events.
-def get_upcoming_events(student_email_id):
-    student_id = get_id(student_email_id)
+def get_upcoming_events(student_id):
     student_events = db.session.query(StudentEvent).filter(
         StudentEvent.student_id.in_([student_id]))
 
