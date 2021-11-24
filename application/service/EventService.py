@@ -16,7 +16,7 @@ def get_events(created_by=None):
     else:
         query = db.session.query(Event)
         event_list = query.all()
-
+    event_list.sort(key=lambda x: x._id)
     return event_list
 
 

@@ -83,9 +83,6 @@ def register_event(event_id, student_id):
     # Check if student is eligible to register based on club
     event = get_event(event_id)
 
-    if event.registered_count == event.max_registration:
-        return "The event is at maximum capacity"
-
     if event.get_time_status_() == "Past":
         return "You cannot register for an event in the past"
 
@@ -94,6 +91,9 @@ def register_event(event_id, student_id):
         clubs_response = query.all()
         if len(clubs_response) == 0:
             return "You need to be part of this club to register for this event."
+
+    if event.registered_count == event.max_registration:
+        return "The event is at maximum capacity"
 
     # Register for event
     new_registration = StudentEvent(student_id=student_id,
