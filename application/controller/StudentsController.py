@@ -19,7 +19,7 @@ def create_student():
         rsp = Response(res, status=200, content_type="application/JSON")
     except Exception as e:
         print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="text/plain")
+        rsp = Response(e, status=500, content_type="plain/text")
     return rsp
 
 
@@ -34,7 +34,7 @@ def get_student(email_id=None):
         rsp = Response(res, status=200, content_type="application/JSON")
     except Exception as e:
         print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="text/plain")
+        rsp = Response(e, status=500, content_type="plain/text")
     return rsp
 
 
@@ -52,7 +52,7 @@ def get_upcoming_events():
         rsp = Response(res, status=200, content_type="application/JSON")
     except Exception as e:
         print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="text/plain")
+        rsp = Response(e, status=500, content_type="plain/text")
     return rsp
 
 
@@ -71,7 +71,7 @@ def register_event(event_id=None):
         rsp = Response(res, status=200, content_type="application/JSON")
     except Exception as e:
         print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="text/plain")
+        rsp = Response(e, status=500, content_type="plain/text")
     return rsp
 
 
@@ -90,7 +90,7 @@ def get_registered_events():
         rsp = Response(res, status=200, content_type="application/JSON")
     except Exception as e:
         print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="text/plain")
+        rsp = Response(e, status=500, content_type="plain/text")
     return rsp
 
 
@@ -110,7 +110,7 @@ def withdraw_event():
         rsp = Response(res, status=200, content_type="application/JSON")
     except Exception as e:
         print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="text/plain")
+        rsp = Response(e, status=500, content_type="plain/text")
     return rsp
 
 
@@ -130,7 +130,7 @@ def create_club():
         rsp = Response(res, status=status, content_type="application/JSON")
     except Exception as e:
         print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="text/plain")
+        rsp = Response(e, status=500, content_type="plain/text")
     return rsp
 
 
@@ -149,12 +149,12 @@ def get_roles():
         rsp = Response(res, status=200, content_type="application/JSON")
     except Exception as e:
         print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="text/plain")
+        rsp = Response(e, status=500, content_type="plain/text")
     return rsp
 
 
 def validate_permission(student_id):
-    if student_id is None:
+    if student_id == "Student does not exist":
         message = "You do not have the required" \
                   " permissions to perform this operation"
-        return False, Response(message, status=403, content_type="application/JSON")
+        return False, Response(message, status=403, content_type="plain/text")

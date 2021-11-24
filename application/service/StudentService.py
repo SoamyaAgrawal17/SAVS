@@ -108,8 +108,6 @@ def register_event(event_id, student_id):
 
 # View registered events
 def get_registered_events(student_id):
-
-
     query = db.session.query(StudentEvent).filter_by(student_id=student_id)
     student_events = query.all()
     registered_events = []
