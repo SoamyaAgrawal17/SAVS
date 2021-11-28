@@ -84,7 +84,8 @@ def remove_member(club_id, student_id):
     club = Club.query.get(club_id)
     if club is None:
         return "error: club not found"
-    role = Role.query.filter(student_id=student_id, club_id=club_id)
-    db.session.delete(role)
+    Role.query.filter(Role.student_id == student_id, Role.club_id == club_id).delete()
+    # role = Role.query.filter(student_id=student_id, club_id=club_id)
+    # db.session.delete(role)
     db.session.commit()
     return "Club member has been removed"
