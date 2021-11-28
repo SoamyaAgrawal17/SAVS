@@ -87,4 +87,4 @@ def remove_member(club_id, student_id):
     db.session.delete(Role(student_id=student_id, club_id=club_id,
                         role="Club Member"))
     db.session.commit()
-    return "Club member removed"
+    return "Club member has been removed"
