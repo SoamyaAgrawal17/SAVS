@@ -74,3 +74,17 @@ def add_member(club_id, student_id):
                         role="Club Member"))
     db.session.commit()
     return "Club member added"
+
+# remove member corresponding to student_id
+# to the club corresponding to club_id
+def remove_member(club_id, student_id):
+    student = Student.query.get(student_id)
+    if student is None:
+        return "error: student not found"
+    club = Club.query.get(club_id)
+    if club is None:
+        return "error: club not found"
+    db.session.delete(Role(student_id=student_id, club_id=club_id,
+                        role="Club Member"))
+    db.session.commit()
+    return "Club member removed"

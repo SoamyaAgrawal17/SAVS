@@ -107,3 +107,32 @@ def add_member(club_id=None):
     member = ClubService.add_member(club_id, student_id)
     rsp = Response(member, status=200, content_type="application/JSON")
     return rsp
+
+
+# Remove a member from a club
+@mod.route('/member/<club_id>', methods=['DELETE'])
+def remove_member(club_id=None):
+    data = request.get_json()
+    email_id = data["emailId"]
+    student_email_id = data["student_email_id"]
+    # when email is none the request is invalid
+    if email_id is None:
+        return Response("Invalid Request", status=200,
+                        content_type="text/plain")
+    editor_student_id = StudentService.get_id(email_id)
+    if editor_student_id == "Student does not exist":
+        return Response("Invalid Request", status=200,
+                        content_type="text/plain")
+    student_id = StudentService.get_id(student_email_id)
+    if student_id == "Student does not exist":
+        return Response("error: student isn't registered",
+                        status=200, content_type="text/plain")
+    query = Role.query.filter_by(club_id=club_id, student_id=editor_student_id)
+    result = query.first()
+    # not club head
+    if result is None or result.role != "Club Head":
+        return Response("Invalid Request", status=200,
+                        content_type="text/plain")
+    member = ClubService.remove_member(club_id, student_id)
+    rsp = Response(member, status=200, content_type="application/JSON")
+    return rsp
