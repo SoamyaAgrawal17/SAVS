@@ -74,7 +74,7 @@ def delete_event(event_id):
     data = request.get_json()
     email_id = data["emailId"]
     student_id = StudentService.get_id(email_id)
-    response_message, status_code = EventService.edit_event(event_id, student_id)
+    response_message, status_code = EventService.delete_event(event_id, student_id)
     rsp = Response(response_message, status=status_code,
                    content_type="text/plain")
     return rsp
