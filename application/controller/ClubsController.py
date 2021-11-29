@@ -52,7 +52,9 @@ def edit_club(club_id):
                         content_type="text/plain")
     if 'new_head' in data:
         head_email_id = data["new_head"]
-        res = ClubService.assign_successor(club_id, head_email_id)
+        old_head_id = student_id
+        new_head_id = StudentService.get_id(head_email_id)
+        res = ClubService.assign_successor(club_id, head_email_id, old_head_id, new_head_id)
     else:
         club_information = data["club"]
         res = ClubService.edit_club(club_id, club_information)
