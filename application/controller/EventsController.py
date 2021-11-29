@@ -25,6 +25,17 @@ def get_events():
     return rsp
 
 
+# Get list of filtered events
+@mod.route('/filtered_events', methods=['GET'])
+def get_filtered_events():
+    data = request.get_json()
+    filters = data["filters"]
+    events = EventService.get_filtered_events(filters)
+    res = json.dumps(events, default=str)
+    rsp = Response(res, status=200, content_type="application/JSON")
+    return rsp
+
+
 # Add an event (by club member/head)
 @mod.route('/events', methods=['POST'])
 def propose_events():
@@ -49,10 +60,28 @@ def propose_events():
 def edit_events(event_id):
     data = request.get_json()
     email_id = data["emailId"]
-    event_information = data["event"]
+    if 'status' in data:
+        event_status = data["status"]
+        student_id = StudentService.get_id(email_id)
+        response_message, status_code = EventService.decide_event_status(
+            event_status, event_id, student_id)
+    else:
+        event_information = data["event"]
+        student_id = StudentService.get_id(email_id)
+        response_message, status_code = EventService.edit_event(
+            event_information, event_id, student_id)
+    rsp = Response(response_message, status=status_code,
+                       content_type="text/plain")
+    return rsp
+
+
+# Delete an event by club head
+@mod.route('/events/<event_id>', methods=['DELETE'])
+def delete_event(event_id):
+    data = request.get_json()
+    email_id = data["emailId"]
     student_id = StudentService.get_id(email_id)
-    response_message, status_code = EventService.edit_event(
-        event_information, event_id, student_id)
+    response_message, status_code = EventService.delete_event(event_id, student_id)
     rsp = Response(response_message, status=status_code,
                    content_type="text/plain")
     return rsp
