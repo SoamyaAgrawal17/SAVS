@@ -187,7 +187,7 @@ def clear_database():
     db.session.query(Student).delete()
     db.session.query(Event).delete()
     db.session.execute("alter sequence club__id_seq restart 1")
-    db.session.execute("alter sequence student__id_seq restart 1");
-    db.session.execute("alter sequence event__id_seq restart 1");
+    db.session.execute("alter sequence student__id_seq restart 1")
+    db.session.execute("alter sequence event__id_seq restart 1")
     db.session.commit()
     return "Cleared database"
