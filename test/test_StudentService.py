@@ -373,7 +373,7 @@ class Test_TestStudentService(unittest.TestCase):
             event_id = 1
             StudentService.register_event(event_id, student_id)
             upcoming_events = StudentService. \
-                get_upcoming_events("test_student@columbia.edu")
+                get_upcoming_events(1)
             self.assertEqual(len(upcoming_events), 1)
             upcoming_event = upcoming_events[0]
             self.assertEqual(upcoming_event['_id'], 1)
