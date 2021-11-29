@@ -9,7 +9,7 @@ log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
 
-# Signup a student
+# Signup a student :)
 @mod.route('/student', methods=['POST'])
 def create_student():
     try:
