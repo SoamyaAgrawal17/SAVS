@@ -1,4 +1,3 @@
-
 from application.model.Student import Student
 from application.model.Event import Event
 from application.model.StudentEvent import StudentEvent
@@ -9,6 +8,7 @@ from application.service.ClubService import club_exist
 from application.service.EventService import get_event
 from application.utilities.database import db
 from datetime import *
+
 
 # Get student id if email_id of student is provided
 def get_id(email_id):
