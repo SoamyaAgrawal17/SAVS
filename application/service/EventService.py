@@ -169,6 +169,39 @@ def edit_event(event_information, event_id, student_id):
     return message, status_code
 
 
+# Edit an event to a club by member/head
+def decide_event_status(event_status, event_id, student_id):
+    event = get_event(event_id)
+    role = get_role_in_club(event.club_id, student_id)
+    if role == "Club Head":
+        setattr(event, 'status', event_status)
+        db.session.commit()
+        message = "Event has been " + event_status
+        status_code = 201
+    else:
+        message = "You do not have the required" \
+                  " permissions to perform this operation"
+        status_code = 403
+    return message, status_code
+
+
+# Delete an event by club head
+def delete_event(event_id, student_id):
+    event = get_event(event_id)
+    role = get_role_in_club(event.club_id, student_id)
+    if role == "Club Head":
+        Event.query.filter(Event._id == event_id).delete()
+        db.session.commit()
+        message = "DELETED"
+        status_code = 201
+    else:
+        message = "You do not have the required" \
+                  " permissions to perform this operation"
+        status_code = 403
+
+    return message, status_code
+
+
 # Return the role of student in a club
 def get_role_in_club(club_id, student_id):
     query = db.session.query(Role).filter(Role.student_id.in_(

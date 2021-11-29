@@ -27,6 +27,9 @@ class Test_TestEventService(unittest.TestCase):
             student2 = Student.Student(name="Alice", email_id="alice@abc.com",
                                        college="College1", department="CS")
             student2._id = 2
+            student3 = Student.Student(name="Head", email_id="head@abc.com",
+                                       college="College1", department="CS")
+            student3._id = 3
             club1 = Club.Club(name="Club1", head="head@abc.com",
                               category="Sports", description="Description")
             club2 = Club.Club(name="Club2", head="head@abc.com",
@@ -35,6 +38,7 @@ class Test_TestEventService(unittest.TestCase):
             club2._id = 2
             role1 = Role.Role(student_id=1, club_id=1, role="Club Member")
             role2 = Role.Role(student_id=2, club_id=1, role="Club Member")
+            role3 = Role.Role(student_id=3, club_id=1, role="Club Head")
             role3 = Role.Role(student_id=2, club_id=2, role="Club Member")
             event1 = Event.Event(name="Event1", category="Sports",
                                  description="Desc", club_id=1,
@@ -50,10 +54,11 @@ class Test_TestEventService(unittest.TestCase):
                                  start_timestamp="2021-12-03 09:30:00",
                                  end_timestamp="2021-12-03 09:30:00",
                                  location="CA", max_registration=50,
-                                 fee=10, status="Proposed",
+                                 fee=5, status="Approved",
                                  registered_count=50, created_by=2)
             db.session.add(student1)
             db.session.add(student2)
+            db.session.add(student3)
             db.session.add(club1)
             db.session.add(club2)
             db.session.commit()
@@ -122,7 +127,7 @@ class Test_TestEventService(unittest.TestCase):
             # Test if a list of events filtered by fees are returned
             filters = {"fees": {"min": 0, "max": 7}}
             events = EventService.get_filtered_events(filters)
-            self.assertEqual(len(events), 1)
+            self.assertEqual(len(events), 2)
             self.assertEqual(events[0].name, "Event1")
             self.assertEqual(events[0].location, "NYC")
             self.assertEqual(events[0].description, "Desc")
@@ -174,7 +179,7 @@ class Test_TestEventService(unittest.TestCase):
                 "category": "Academic"
             }
 
-            msg, code = EventService.propose_event(event_obj, 3)
+            msg, code = EventService.propose_event(event_obj, 4)
             self.assertEqual(msg, "You do not have the required"
                                   " permissions to perform this operation")
             self.assertEqual(code, 403)
@@ -203,6 +208,28 @@ class Test_TestEventService(unittest.TestCase):
             self.assertEqual(event.location, "NJ")
             self.assertEqual(event.description, "Tennis")
 
+    def test_delete_event(self):
+        # Test if an event can be deleted by Club Head
+        with app.app_context():
+            msg, code = EventService.delete_event(1,3)
+            self.assertEqual(msg, "DELETED")
+            self.assertEqual(code, 201)
+
+    def test_approve_event(self):
+        # Test if an event can be deleted by Club Head
+        with app.app_context():
+            msg, code = EventService.decide_event_status("Approved", 2, 3)
+            self.assertEqual(msg, "Event has been Approved")
+            self.assertEqual(code, 201)
+
+
+    def test_reject_event(self):
+        # Test if an event can be deleted by Club Head
+        with app.app_context():
+            msg, code = EventService.decide_event_status("Rejected", 2, 3)
+            self.assertEqual(msg, "Event has been Rejected")
+            self.assertEqual(code, 201)
+
     def test_edit_events_unauthorized(self):
         '''
         Test if error is returned if a user tries to edit an event
@@ -220,7 +247,7 @@ class Test_TestEventService(unittest.TestCase):
                 "category": "Sports"
             }
 
-            msg, code = EventService.edit_event(event_obj, 1, 3)
+            msg, code = EventService.edit_event(event_obj, 1, 4)
             event = EventService.get_event(1)
             self.assertEqual(msg, "You do not have the required"
                                   " permissions to perform this operation")
