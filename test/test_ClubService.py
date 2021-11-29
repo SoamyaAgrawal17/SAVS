@@ -119,6 +119,23 @@ class Test_TestClubService(unittest.TestCase):
             clubs = ClubService.get_clubs()
             self.assertEqual(len(clubs), 2)
 
+    def test_assignSuccessor(self):
+        # Test if a club head has been assignment
+        with app.app_context():
+            club_id = 1
+            new_head_information = {
+                "name": "TestHead",
+                "email_id": "test_head@columbia.edu",
+                "college": "Fu Foundation",
+                "department": "Computer Science"
+            }
+            StudentService.create_student(new_head_information)
+            new_head_email_id = new_head_information["email_id"]
+            old_head_id = StudentService.get_id("test_student@columbia.edu")
+            new_head_id = StudentService.get_id(new_head_email_id)
+            result = ClubService.assign_successor(club_id, new_head_email_id, old_head_id, new_head_id)
+            self.assertEqual(result, "replaced successor")
+
     def tearDown(self):
         with app.app_context():
             db.drop_all()

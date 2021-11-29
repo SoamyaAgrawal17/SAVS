@@ -26,11 +26,15 @@ class Test_TestEventService(unittest.TestCase):
             student2 = Student.Student(name="Alice", email_id="alice@abc.com",
                                        college="College1", department="CS")
             student2._id = 2
+            student3 = Student.Student(name="Head", email_id="head@abc.com",
+                                       college="College1", department="CS")
+            student3._id = 3
             club1 = Club.Club(name="Club1", head="head@abc.com",
                               category="Sports", description="Description")
             club1._id = 1
             role1 = Role.Role(student_id=1, club_id=1, role="Club Member")
             role2 = Role.Role(student_id=2, club_id=1, role="Club Member")
+            role3 = Role.Role(student_id=3, club_id=1, role="Club Head")
             event1 = Event.Event(name="Event1", category="Sports",
                                  description="Desc", club_id=1,
                                  visibility="Students",
@@ -49,11 +53,13 @@ class Test_TestEventService(unittest.TestCase):
                                  registered_count=50, created_by=2)
             db.session.add(student1)
             db.session.add(student2)
+            db.session.add(student3)
             db.session.add(club1)
             db.session.commit()
 
             db.session.add(role1)
             db.session.add(role2)
+            db.session.add(role3)
             db.session.commit()
 
             db.session.add(event1)
@@ -167,7 +173,7 @@ class Test_TestEventService(unittest.TestCase):
                 "category": "Academic"
             }
 
-            msg, code = EventService.propose_event(event_obj, 3)
+            msg, code = EventService.propose_event(event_obj, 4)
             self.assertEqual(msg, "You do not have the required"
                                   " permissions to perform this operation")
             self.assertEqual(code, 403)
@@ -197,6 +203,28 @@ class Test_TestEventService(unittest.TestCase):
             self.assertEqual(event.location, "NJ")
             self.assertEqual(event.description, "Tennis")
 
+    def test_delete_event(self):
+        # Test if an event can be deleted by Club Head
+        with app.app_context():
+            msg, code = EventService.delete_event(1,3)
+            self.assertEqual(msg, "DELETED")
+            self.assertEqual(code, 201)
+
+    def test_approve_event(self):
+        # Test if an event can be deleted by Club Head
+        with app.app_context():
+            msg, code = EventService.decide_event_status("Approved", 2, 3)
+            self.assertEqual(msg, "Event has been Approved")
+            self.assertEqual(code, 201)
+
+
+    def test_reject_event(self):
+        # Test if an event can be deleted by Club Head
+        with app.app_context():
+            msg, code = EventService.decide_event_status("Rejected", 2, 3)
+            self.assertEqual(msg, "Event has been Rejected")
+            self.assertEqual(code, 201)
+
     def test_edit_events_unauthorized(self):
         '''
         Test if error is returned if a user tries to edit an event
@@ -215,7 +243,7 @@ class Test_TestEventService(unittest.TestCase):
                 "category": "Sports"
             }
 
-            msg, code = EventService.edit_event(event_obj, 1, 3)
+            msg, code = EventService.edit_event(event_obj, 1, 4)
             event = EventService.get_event(1)
             self.assertEqual(msg, "You do not have the required"
                                   " permissions to perform this operation")
