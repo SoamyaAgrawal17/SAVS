@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
-          command: python -m unittest
+          command: python -m unittest discover -s test -t test
       - store_test_results:
           path: test-results
 
