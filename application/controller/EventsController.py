@@ -68,6 +68,21 @@ def edit_events(event_id):
                    content_type="text/plain")
     return rsp
 
+
+# Edit an event (by club member/head)
+@mod.route('/events/<event_id>', methods=['PUT'])
+def decide_event_status(event_id):
+    data = request.get_json()
+    email_id = data["emailId"]
+    event_status = data["status"]
+    student_id = StudentService.get_id(email_id)
+    response_message, status_code = EventService.decide_event_status(
+        event_status, event_id, student_id)
+    rsp = Response(response_message, status=status_code,
+                   content_type="text/plain")
+    return rsp
+
+
 # Delete an event by club head
 @mod.route('/events/<event_id>', methods=['DELETE'])
 def delete_event(event_id):
