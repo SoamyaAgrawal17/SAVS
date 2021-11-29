@@ -68,6 +68,17 @@ def edit_events(event_id):
                    content_type="text/plain")
     return rsp
 
+# Delete an event by club head
+@mod.route('/events/<event_id>', methods=['DELETE'])
+def delete_event(event_id):
+    data = request.get_json()
+    email_id = data["emailId"]
+    student_id = StudentService.get_id(email_id)
+    response_message, status_code = EventService.edit_event(event_id, student_id)
+    rsp = Response(response_message, status=status_code,
+                   content_type="text/plain")
+    return rsp
+
 
 # Get details of an event with specified id
 @mod.route('/events/<event_id>', methods=['GET'])
