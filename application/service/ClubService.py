@@ -50,6 +50,18 @@ def edit_club(club_id, club_details):
     return "edited club"
 
 
+# update club head corresponding to club_id
+def assign_successor(club_id, club_head_email, old_head_id, new_head_id):
+    # assign new head
+    club = Club.query.get(club_id)
+    Role.query.filter(Role.student_id == old_head_id, Role.club_id == club_id).delete()
+    setattr(club, 'head', club_head_email)
+    role = Role(student_id=new_head_id, club_id=club_id, role="Club Head")
+    db.session.add(role)
+    db.session.commit()
+    return "replaced successor"
+
+
 # delete club corresponding to club_id
 def delete_club(club_id):
     # delete club

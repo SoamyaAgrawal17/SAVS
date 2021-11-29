@@ -40,7 +40,6 @@ def edit_club(club_id):
     if email_id is None:
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
-    club_information = data["club"]
     student_id = StudentService.get_id(email_id)
     if student_id == "Student does not exist":
         return Response("Invalid Request", status=200,
@@ -51,7 +50,12 @@ def edit_club(club_id):
     if result is None or result.role != "Club Head":
         return Response("Invalid Request", status=200,
                         content_type="text/plain")
-    res = ClubService.edit_club(club_id, club_information)
+    if 'new_head' in data:
+        head_email_id = data["new_head"]
+        res = ClubService.assign_successor(club_id, head_email_id)
+    else:
+        club_information = data["club"]
+        res = ClubService.edit_club(club_id, club_information)
     rsp = Response(res, status=200, content_type="text/plain")
     return rsp
 
