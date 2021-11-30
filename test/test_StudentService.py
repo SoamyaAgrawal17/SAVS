@@ -317,6 +317,9 @@ class Test_TestStudentService(unittest.TestCase):
             }
             response = StudentService.create_student(student)
             self.assertEqual(response, "Student Entry Created")
+            response = StudentService.create_student(student)
+            self.assertEqual(response, "Student Already Exists")
+
             student_id = StudentService.get_student(
                 "test_student2@columbia.edu")['_id']
             self.assertEqual(student_id, 1)
@@ -364,6 +367,10 @@ class Test_TestStudentService(unittest.TestCase):
             student_id = StudentService.get_student(
                 "test_student@columbia.edu")['_id']
             self.assertEqual(student_id, 1)
+            student_id = StudentService.get_id("test_student@columbia.edu")
+            self.assertEqual(student_id, 1)
+            response = StudentService.get_id("test_unregistered_student@columbia.edu")
+            self.assertEqual(response, "Student does not exist")
 
             club_information = {
                 "name": "Test Club 3",

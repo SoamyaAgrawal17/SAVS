@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for application/service/StudentService.py: 91%</title>
+    <title>Coverage for application/service/StudentService.py: 93%</title>
     <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
@@ -18,15 +18,15 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>application/service/StudentService.py</b> :
-            <span class="pc_cov">91%</span>
+            <span class="pc_cov">93%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             117 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">110 run</button>
-            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">7 missing</button>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">112 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">5 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
-            <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">5 partial</button>
+            <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">3 partial</button>
         </h2>
     </div>
 </div>
@@ -69,8 +69,8 @@
     <p id="t14" class="run"><span class="n"><a href="#t14">14</a></span><span class="t"><span class="key">def</span> <span class="nam">get_id</span><span class="op">(</span><span class="nam">email_id</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t15" class="run"><span class="n"><a href="#t15">15</a></span><span class="t">    <span class="nam">student</span> <span class="op">=</span> <span class="nam">db</span><span class="op">.</span><span class="nam">session</span><span class="op">.</span><span class="nam">query</span><span class="op">(</span><span class="nam">Student</span><span class="op">)</span><span class="op">.</span><span class="nam">filter</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p id="t16" class="pln"><span class="n"><a href="#t16">16</a></span><span class="t">        <span class="nam">Student</span><span class="op">.</span><span class="nam">email_id</span><span class="op">.</span><span class="nam">in_</span><span class="op">(</span><span class="op">[</span><span class="nam">email_id</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">.</span><span class="nam">first</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t17" class="par run show_par"><span class="n"><a href="#t17">17</a></span><span class="t">    <span class="key">if</span> <span class="nam">student</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">17&#x202F;&#x219B;&#x202F;18</span><span class="annotate long">line 17 didn't jump to line 18, because the condition on line 17 was never true</span></span></p>
-    <p id="t18" class="mis show_mis"><span class="n"><a href="#t18">18</a></span><span class="t">        <span class="key">return</span> <span class="str">"Student does not exist"</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t17" class="run"><span class="n"><a href="#t17">17</a></span><span class="t">    <span class="key">if</span> <span class="nam">student</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t18" class="run"><span class="n"><a href="#t18">18</a></span><span class="t">        <span class="key">return</span> <span class="str">"Student does not exist"</span>&nbsp;</span><span class="r"></span></p>
     <p id="t19" class="run"><span class="n"><a href="#t19">19</a></span><span class="t">    <span class="nam">student_id</span> <span class="op">=</span> <span class="nam">student</span><span class="op">.</span><span class="nam">_id</span>&nbsp;</span><span class="r"></span></p>
     <p id="t20" class="run"><span class="n"><a href="#t20">20</a></span><span class="t">    <span class="key">return</span> <span class="nam">student_id</span>&nbsp;</span><span class="r"></span></p>
     <p id="t21" class="pln"><span class="n"><a href="#t21">21</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -93,8 +93,8 @@
     <p id="t38" class="run"><span class="n"><a href="#t38">38</a></span><span class="t">    <span class="nam">college</span> <span class="op">=</span> <span class="nam">student_information</span><span class="op">[</span><span class="str">'college'</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p id="t39" class="run"><span class="n"><a href="#t39">39</a></span><span class="t">    <span class="nam">department</span> <span class="op">=</span> <span class="nam">student_information</span><span class="op">[</span><span class="str">'department'</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p id="t40" class="pln"><span class="n"><a href="#t40">40</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t41" class="par run show_par"><span class="n"><a href="#t41">41</a></span><span class="t">    <span class="key">if</span> <span class="nam">get_student</span><span class="op">(</span><span class="nam">email_id</span><span class="op">)</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">41&#x202F;&#x219B;&#x202F;42</span><span class="annotate long">line 41 didn't jump to line 42, because the condition on line 41 was never true</span></span></p>
-    <p id="t42" class="mis show_mis"><span class="n"><a href="#t42">42</a></span><span class="t">        <span class="key">return</span> <span class="str">"Student Already Exists"</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t41" class="run"><span class="n"><a href="#t41">41</a></span><span class="t">    <span class="key">if</span> <span class="nam">get_student</span><span class="op">(</span><span class="nam">email_id</span><span class="op">)</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t42" class="run"><span class="n"><a href="#t42">42</a></span><span class="t">        <span class="key">return</span> <span class="str">"Student Already Exists"</span>&nbsp;</span><span class="r"></span></p>
     <p id="t43" class="pln"><span class="n"><a href="#t43">43</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t44" class="run"><span class="n"><a href="#t44">44</a></span><span class="t">    <span class="nam">new_student</span> <span class="op">=</span> <span class="nam">Student</span><span class="op">(</span><span class="nam">name</span><span class="op">=</span><span class="nam">name</span><span class="op">,</span> <span class="nam">email_id</span><span class="op">=</span><span class="nam">email_id</span><span class="op">,</span> <span class="nam">college</span><span class="op">=</span><span class="nam">college</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p id="t45" class="pln"><span class="n"><a href="#t45">45</a></span><span class="t">                          <span class="nam">department</span><span class="op">=</span><span class="nam">department</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
@@ -238,7 +238,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
-            created at 2021-11-30 14:24 -0500
+            created at 2021-11-30 14:56 -0500
         </p>
     </div>
 </div>
