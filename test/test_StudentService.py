@@ -29,6 +29,15 @@ class Test_TestStudentService(unittest.TestCase):
         # Test if a student can register for events
         with app.app_context():
             student_information = {
+                "email_id": "test_student@columbia.edu",
+                "college": "Fu Foundation",
+                "department": "Computer Science"
+            }
+
+            response = StudentService.create_student(student_information)
+            self.assertEqual(response, "Missing information(name, email_id, college, department) required to create student")
+
+            student_information = {
                 "name": "TestStudent",
                 "email_id": "test_student@columbia.edu",
                 "college": "Fu Foundation",
