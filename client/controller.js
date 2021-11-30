@@ -127,3 +127,38 @@ function create_club(){
     });
     xhr.send(data);
 }
+
+function create_event(){
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "/events";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            document.getElementById("create-event-response").style.display = "inline";
+            document.getElementById("create-event-response").innerHTML = json;
+        }else{
+            var json = JSON.parse(xhr.responseText);
+            document.getElementById("create-event-response").style.display = "inline";
+            document.getElementById("create-event-response").innerHTML = json;
+        }
+    };
+    var data = JSON.stringify({
+        "emailId":login_email_id,
+        "event":{
+            "name": document.getElementById("create-event-name").value,
+            "club_id": document.getElementById("create-event-club-id").value,
+            "start_timestamp": document.getElementById("create-event-start-timestamp").value,
+            "end_timestamp": document.getElementById("create-event-end-timestamp").value,
+            "location": document.getElementById("create-event-location").value,
+            "max_registration": document.getElementById("create-event-max-registration").value,
+            "description": document.getElementById("create-event-description").value,
+            "fee": document.getElementById("create-event-fee").value,
+            "category": document.getElementById("create-event-category").value,
+            "visibility": document.getElementById("create-event-visibility").value,
+
+        }
+    });
+    xhr.send(data);
+}
