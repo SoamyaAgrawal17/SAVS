@@ -27,6 +27,7 @@ def propose_events():
     rsp = Response("INTERNAL ERROR", status=500, content_type="text/plain")
     try:
         data = request.get_json()
+        print(data)
         email_id = data["emailId"]
         event_information = data["event"]
         student_id = StudentService.get_id(email_id)
