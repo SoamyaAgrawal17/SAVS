@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Client</title>
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="row heading">
+            <div class="col-2"></div>
+            <div class="col-8" align="center"><h3>This is a SAVS Client</h3></div>
+            <div class="col-2"></div>
+        </div>
+        <div class="row login">
+            <div class="col-2"></div>
+            <div class="col-8" id="login-form" align="center">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="student-email-id" placeholder="Student Email ID" aria-label="Student Email ID" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" onclick="student_login(document.getElementById('student-email-id').value)">Sign In</button>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <div class="row" id="information-container" style="display:none;">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6" align="center">
+                        <h5>Clubs</h5>
+                        <div class="club-by-id">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="club-id" placeholder="Club ID" aria-label="Club ID" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                          <button class="btn btn-outline-secondary" type="button" onclick="get_club_by_id(document.getElementById('club-id').value)">Search</button>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row" id="club-id-found" style="display:none;">
+                                <div class="col-12">
+                                    <div class="row" id="club-id-found-id">
+                                    </div>
+                                    <div class="row" id="club-id-found-name">
+                                    </div>
+                                    <div class="row" id="club-id-found-head">
+                                    </div>
+                                    <div class="row" id="club-id-found-category">
+                                    </div>
+                                    <div class="row" id="club-id-found-description">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="club-id-not-found" style="display:none;">
+                                <div class="col-12">
+                                    Club not found
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6" align="center">
+                        <h5>Events</h5>
+                        <div class="event-by-id">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="event-id" placeholder="Event ID" aria-label="Event ID" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                          <button class="btn btn-outline-secondary" type="button" onclick="get_event_by_id(document.getElementById('event-id').value)">Search</button>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row" id="event-id-found" style="display:none;">
+                                <div class="col-12">
+                                    <div class="row" id="event-id-found-id">
+                                    </div>
+                                    <div class="row" id="event-id-found-name">
+                                    </div>
+                                    <div class="row" id="event-id-found-description">
+                                    </div>
+                                    <div class="row" id="event-id-found-location">
+                                    </div>
+                                    <div class="row" id="event-id-found-start">
+                                    </div>
+                                    <div class="row" id="event-id-found-end">
+                                    </div>
+                                    <div class="row" id="event-id-found-category">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="event-id-not-found" style="display:none;">
+                                <div class="col-12">
+                                    Event not found
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6" align="center">
+                        <h5>Create Club</h5>
+                        <div class="create-club">
+                                <div class="form-group">
+                                  <input type="text" class="form-control" id="create-club-name" placeholder="Enter club name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="create-club-head" placeholder="Enter club head id">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="create-club-category" placeholder="Enter club category">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="create-club-description" placeholder="Enter club description">
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="create_club()">Create Club</button>
+                                <div id="create-club-response" style="display:none;"></div>
+                        </div>
+                    </div>
+                    <div class="col-6" align="center">
+                        <h5>Create Event</h5>
+                        <div class="create-club">
+                                <div class="form-group">
+                                  <input type="text" class="form-control" id="create-club-name" placeholder="Enter club name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="create-club-head" placeholder="Enter club head id">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="create-club-category" placeholder="Enter club category">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="create-club-description" placeholder="Enter club description">
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="create_club()">Create Club</button>
+                                <div id="create-club-response" style="display:none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="controller.js"></script>
+  </body>
+</html>
