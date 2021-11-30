@@ -288,7 +288,7 @@ class Test_TestStudentService(unittest.TestCase):
                     "description": "Winter Hackathon December 2021",
                     "fee": 10,
                     "category": "Academic",
-                    "visibility": "Club member",
+                    "visibility": "All",
                     "status": "Created"
                 }
             }
@@ -305,6 +305,26 @@ class Test_TestStudentService(unittest.TestCase):
 
             registration = StudentService.register_event(event_id, student_id3)
             self.assertEqual(registration, "The event is at maximum capacity")
+            event2 = {
+                "emailId": "test_club_member@columbia.edu",
+                "event": {
+                    "name": "Hackathon 2021 Columbia",
+                    "club_id": 1,
+                    "start_timestamp": "2021-12-23 09:30:00",
+                    "end_timestamp": "2021-12-25 00:00:00",
+                    "location": "New York City",
+                    "max_registration": 2,
+                    "description": "Winter Hackathon December 2021",
+                    "fee": 10,
+                    "category": "Academic",
+                    "visibility": "Club Member",
+                    "status": "Created"
+                }
+            }
+            EventService.propose_event(event2['event'], student_id1)
+            event_id = 2
+            registration = StudentService.register_event(event_id, student_id3)
+            self.assertEqual(registration, "You need to be part of this club to register for this event.")
 
     def test_create_new_club_and_role_in_it(self):
         # Test if a student can create a new club
