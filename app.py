@@ -1,7 +1,7 @@
 from application.utilities.database import db
 from flask import Flask
 from application.controller import ClubsController, EventsController
-from application.controller import StudentsController
+from application.controller import StudentsController, DatabaseController
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -10,7 +10,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://xbasblmhnpkibi:8a1264b9c4b
 blueprints = [
     ClubsController.mod,
     StudentsController.mod,
-    EventsController.mod
+    EventsController.mod,
+    DatabaseController.mod
 ]
 
 for bp in blueprints:
