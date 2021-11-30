@@ -3,7 +3,7 @@ var global_url = "http://localhost:5000/";
 
 function student_login(email){
     var xhr = new XMLHttpRequest();
-    var url = global_url + "/student/" + email;
+    var url = global_url + "student/" + email;
     xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.onreadystatechange = function () {
@@ -28,7 +28,7 @@ function student_login(email){
 
 function get_club_by_id(club_id){
     var xhr = new XMLHttpRequest();
-    var url = global_url + "/clubs/" + club_id;
+    var url = global_url + "clubs/" + club_id;
     xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.onreadystatechange = function () {

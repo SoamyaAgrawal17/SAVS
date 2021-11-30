@@ -32,10 +32,8 @@ def get_student(email_id=None):
 # View all upcoming events.
 @mod.route('/student/get_upcoming_events', methods=['POST', 'GET'])
 def get_upcoming_events():
-    print("start")
     data = request.get_json()
     print(data)
-    print("test")
     email_id = data["emailId"]
     events = StudentService.get_upcoming_events(email_id)
     res = json.dumps(events, default=str)
