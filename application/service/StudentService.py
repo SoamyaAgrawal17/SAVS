@@ -44,7 +44,10 @@ def create_student(student_information):
 def get_student(email_id=None):
     query = db.session.query(Student).filter(Student.email_id.in_([email_id]))
     result = query.first()
-    return result.as_dict()
+    if result is None:
+        return "Student does not exist"
+    else:
+        return result.as_dict()
 
 
 # View all upcoming events.

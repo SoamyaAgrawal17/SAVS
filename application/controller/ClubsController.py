@@ -21,7 +21,7 @@ def get_clubs():
     return rsp
 
 
-@mod.route('/clubs/<club_id>', methods=['GET'])
+@mod.route('<cl/clubs/club_id>', methods=['GET'])
 def get_club_by_id(club_id):
     event = ClubService.get_club(club_id)
     res = json.dumps(event, default=str)

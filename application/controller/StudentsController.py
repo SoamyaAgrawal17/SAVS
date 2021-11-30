@@ -2,12 +2,13 @@ import logging
 import json
 from flask import Blueprint, request, Response
 from application.service import StudentService
+import os
+from flask_cors import CORS
 
 mod = Blueprint('students', __name__)
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
-
 
 # Signup a student
 @mod.route('/student', methods=['POST'])
@@ -29,9 +30,12 @@ def get_student(email_id=None):
 
 
 # View all upcoming events.
-@mod.route('/student/get_upcoming_events', methods=['GET'])
+@mod.route('/student/get_upcoming_events', methods=['POST', 'GET'])
 def get_upcoming_events():
+    print("start")
     data = request.get_json()
+    print(data)
+    print("test")
     email_id = data["emailId"]
     events = StudentService.get_upcoming_events(email_id)
     res = json.dumps(events, default=str)
@@ -66,7 +70,9 @@ def get_registered_events():
 # Create a new club
 @mod.route('/student/club', methods=['POST'])
 def create_club():
+    print("start")
     data = request.get_json()
+    print(data)
     email_id = data["emailId"]
     club_information = data["club"]
     status, club_entry = StudentService.create_club(club_information)
