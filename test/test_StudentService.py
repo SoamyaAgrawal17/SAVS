@@ -166,7 +166,6 @@ class Test_TestStudentService(unittest.TestCase):
                     "fee": 10,
                     "category": "Academic",
                     "visibility": "Club member",
-                    "status": "Created"
                 }
 
             EventService.edit_event(event_information, event_id, student_id)

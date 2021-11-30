@@ -15,6 +15,7 @@ class Test_TestEventService(unittest.TestCase):
             'c2ab9de3ce2ca931f13aa6e62667607ac5f19929425b7ef16a237fe' \
             '61c664d97@ec2-34-198-189-252.compute-1.amazonaws.com:5432/' \
             'dbjeqssrqgcj15'
+
         with app.app_context():
             db.init_app(app)
             from application.model import Club, Event, Role, Student
@@ -31,10 +32,14 @@ class Test_TestEventService(unittest.TestCase):
             student3._id = 3
             club1 = Club.Club(name="Club1", head="head@abc.com",
                               category="Sports", description="Description")
+            club2 = Club.Club(name="Club2", head="head@abc.com",
+                              category="Academic", description="Description")
             club1._id = 1
+            club2._id = 2
             role1 = Role.Role(student_id=1, club_id=1, role="Club Member")
             role2 = Role.Role(student_id=2, club_id=1, role="Club Member")
             role3 = Role.Role(student_id=3, club_id=1, role="Club Head")
+            role4 = Role.Role(student_id=2, club_id=2, role="Club Member")
             event1 = Event.Event(name="Event1", category="Sports",
                                  description="Desc", club_id=1,
                                  visibility="Students",
@@ -49,17 +54,19 @@ class Test_TestEventService(unittest.TestCase):
                                  start_timestamp="2021-12-03 09:30:00",
                                  end_timestamp="2021-12-03 09:30:00",
                                  location="CA", max_registration=50,
-                                 fee=5, status="Approved",
+                                 fee=5, status="Proposed",
                                  registered_count=50, created_by=2)
             db.session.add(student1)
             db.session.add(student2)
             db.session.add(student3)
             db.session.add(club1)
+            db.session.add(club2)
             db.session.commit()
 
             db.session.add(role1)
             db.session.add(role2)
             db.session.add(role3)
+            db.session.add(role4)
             db.session.commit()
 
             db.session.add(event1)
@@ -120,7 +127,8 @@ class Test_TestEventService(unittest.TestCase):
 
             # Test if a list of events filtered by fees are returned
             filters = {"fees": {"min": 0, "max": 7}}
-            events = EventService.get_filtered_events(filters)
+            events_list = EventService.get_filtered_events(filters)
+            events = sorted(events_list, key=lambda x: x._id)
             self.assertEqual(len(events), 2)
             self.assertEqual(events[0].name, "Event1")
             self.assertEqual(events[0].location, "NYC")
@@ -187,18 +195,17 @@ class Test_TestEventService(unittest.TestCase):
                 "name": "Event Title",
                 "club_id": 1,
                 "start_timestamp": "2021-12-03 09:30:00",
-                "end_timestamp": "021-12-05 00:00:00",
+                "end_timestamp": "2021-12-05 00:00:00",
                 "location": "NJ",
                 "max_registration": 75,
                 "description": "Tennis",
-                "fee": 5,
                 "category": "Sports"
             }
 
             msg, code = EventService.edit_event(event_obj, 1, 1)
             event = EventService.get_event(1)
-            self.assertEqual(msg, "CREATED")
-            self.assertEqual(code, 201)
+            self.assertEqual(msg, "OK")
+            self.assertEqual(code, 200)
             self.assertEqual(event.name, "Event Title")
             self.assertEqual(event.location, "NJ")
             self.assertEqual(event.description, "Tennis")
@@ -206,7 +213,7 @@ class Test_TestEventService(unittest.TestCase):
     def test_delete_event(self):
         # Test if an event can be deleted by Club Head
         with app.app_context():
-            msg, code = EventService.delete_event(1,3)
+            msg, code = EventService.delete_event(1, 3)
             self.assertEqual(msg, "DELETED")
             self.assertEqual(code, 201)
 
@@ -216,7 +223,6 @@ class Test_TestEventService(unittest.TestCase):
             msg, code = EventService.decide_event_status("Approved", 2, 3)
             self.assertEqual(msg, "Event has been Approved")
             self.assertEqual(code, 201)
-
 
     def test_reject_event(self):
         # Test if an event can be deleted by Club Head
@@ -239,7 +245,6 @@ class Test_TestEventService(unittest.TestCase):
                 "location": "NJ",
                 "max_registration": 75,
                 "description": "Tennis",
-                "fee": 5,
                 "category": "Sports"
             }
 
@@ -250,6 +255,156 @@ class Test_TestEventService(unittest.TestCase):
             self.assertEqual(code, 403)
             self.assertEqual(event.name, "Event1")
             self.assertEqual(event.location, "NYC")
+
+    def test_edit_events_forbidden_fields_approved(self):
+        with app.app_context():
+            event_obj = {
+                "name": "Event Title",
+                "club_id": 1,
+                "start_timestamp": "2021-12-03 09:30:00",
+                "end_timestamp": "021-12-05 00:00:00",
+                "location": "NJ",
+                "max_registration": 75,
+                "description": "Tennis",
+                "category": "Sports",
+                "fee": 12
+            }
+
+            msg, code = EventService.edit_event(event_obj, 1, 1)
+            event = EventService.get_event(1)
+            self.assertEqual(msg, "You cannot edit forbidden fields: fee")
+            self.assertEqual(code, 500)
+            self.assertEqual(event.name, "Event1")
+            self.assertEqual(event.location, "NYC")
+
+    def test_edit_events_forbidden_fields_proposed(self):
+        with app.app_context():
+            event_obj = {
+                "name": "Event Title",
+                "club_id": 1,
+                "start_timestamp": "2021-12-03 09:30:00",
+                "end_timestamp": "021-12-05 00:00:00",
+                "location": "NJ",
+                "max_registration": 75,
+                "description": "Tennis",
+                "category": "Sports",
+                "fee": 12,
+                "registered_count": 25
+            }
+
+            msg, code = EventService.edit_event(event_obj, 2, 2)
+            event = EventService.get_event(2)
+            self.assertEqual(msg, "You cannot edit forbidden fields: registered_count")
+            self.assertEqual(code, 500)
+            self.assertEqual(event.name, "Event2")
+            self.assertEqual(event.location, "CA")
+
+    def test_edit_past_events(self):
+        with app.app_context():
+            from application.model import Event
+            event3 = Event.Event(name="Event3", category="Academic",
+                                 description="Hackathon", club_id=1,
+                                 visibility="Students",
+                                 start_timestamp="2020-12-03 09:30:00",
+                                 end_timestamp="2020-12-03 09:30:00",
+                                 location="SF", max_registration=100,
+                                 fee=10, status="Approved",
+                                 registered_count=100, created_by=2)
+            db.session.add(event3)
+            db.session.commit()
+            event_obj = {
+                "name": "New Hackathon",
+                "club_id": 1,
+                "location": "CA",
+                "max_registration": 75,
+            }
+
+            msg, code = EventService.edit_event(event_obj, 3, 2)
+            event = EventService.get_event(3)
+            self.assertEqual(msg, "Cannot edit past events")
+            self.assertEqual(code, 500)
+            self.assertEqual(event.name, "Event3")
+            self.assertEqual(event.location, "SF")
+
+    def test_edit_rejected_events(self):
+        with app.app_context():
+            from application.model import Event
+            event3 = Event.Event(name="Event3", category="Academic",
+                                 description="Hackathon", club_id=1,
+                                 visibility="Students",
+                                 start_timestamp="2025-12-03 09:30:00",
+                                 end_timestamp="2025-12-03 09:30:00",
+                                 location="SF", max_registration=100,
+                                 fee=10, status="Rejected",
+                                 registered_count=100, created_by=2)
+            db.session.add(event3)
+            db.session.commit()
+            event_obj = {
+                "name": "New Hackathon",
+                "club_id": 1,
+                "location": "CA",
+                "max_registration": 75,
+            }
+
+            msg, code = EventService.edit_event(event_obj, 3, 2)
+            event = EventService.get_event(3)
+            self.assertEqual(msg, "You cannot edit Rejected Events")
+            self.assertEqual(code, 500)
+            self.assertEqual(event.name, "Event3")
+            self.assertEqual(event.location, "SF")
+
+    def test_edit_club_id(self):
+        with app.app_context():
+            from application.model import Event
+            event3 = Event.Event(name="Event3", category="Academic",
+                                 description="Hackathon", club_id=2,
+                                 visibility="Students",
+                                 start_timestamp="2025-12-03 09:30:00",
+                                 end_timestamp="2025-12-03 09:30:00",
+                                 location="SF", max_registration=100,
+                                 fee=10, status="Proposed",
+                                 registered_count=100, created_by=2)
+            db.session.add(event3)
+            db.session.commit()
+            event_obj = {
+                "name": "New Hackathon",
+                "club_id": 1,
+                "location": "CA",
+                "max_registration": 75,
+            }
+            msg, code = EventService.edit_event(event_obj, 3, 2)
+            event = EventService.get_event(3)
+            self.assertEqual(msg, "You cannot edit club id of event")
+            self.assertEqual(code, 500)
+            self.assertEqual(event.name, "Event3")
+            self.assertEqual(event.location, "SF")
+
+    def test_edit_event_club_head(self):
+        with app.app_context():
+            from application.model import Event
+            event3 = Event.Event(name="Event3", category="Academic",
+                                 description="Hackathon", club_id=1,
+                                 visibility="Students",
+                                 start_timestamp="2025-12-03 09:30:00",
+                                 end_timestamp="2025-12-03 09:30:00",
+                                 location="SF", max_registration=100,
+                                 fee=10, status="Approved",
+                                 registered_count=100, created_by=2)
+            db.session.add(event3)
+            db.session.commit()
+            event_obj = {
+                "name": "New Hackathon",
+                "club_id": 1,
+                "location": "CA",
+                "max_registration": 75,
+            }
+            msg, code = EventService.edit_event(event_obj, 3, 3)
+            event = EventService.get_event(3)
+            self.assertEqual(msg, "OK")
+            self.assertEqual(code, 200)
+            self.assertEqual(event.name, "New Hackathon")
+            self.assertEqual(event.location, "CA")
+            self.assertEqual(event.max_registration, 75)
 
 
 if __name__ == '__main__':

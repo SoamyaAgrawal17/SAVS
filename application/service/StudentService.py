@@ -1,4 +1,3 @@
-
 from application.model.Student import Student
 from application.model.Event import Event
 from application.model.StudentEvent import StudentEvent
@@ -9,6 +8,7 @@ from application.service.ClubService import club_exist
 from application.service.EventService import get_event
 from application.utilities.database import db
 from datetime import *
+
 
 # Get student id if email_id of student is provided
 def get_id(email_id):
@@ -187,7 +187,7 @@ def clear_database():
     db.session.query(Student).delete()
     db.session.query(Event).delete()
     db.session.execute("alter sequence club__id_seq restart 1")
-    db.session.execute("alter sequence student__id_seq restart 1");
-    db.session.execute("alter sequence event__id_seq restart 1");
+    db.session.execute("alter sequence student__id_seq restart 1")
+    db.session.execute("alter sequence event__id_seq restart 1")
     db.session.commit()
     return "Cleared database"

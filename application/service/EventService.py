@@ -119,16 +119,46 @@ def edit_event(event_information, event_id, student_id):
     role = get_role_in_club(club_id, student_id)
     message = None
     status_code = None
-    if role == "Club Member" or role == "Club Head":
-        event = db.session.query(Event).filter(Event._id.in_(
-            [event_id])).update(event_information)
-        db.session.commit()
-        message = "CREATED"
-        status_code = 201
-    else:
+    event = get_event(event_id)
+    if event.get_time_status_() == "Past":
+        message = "Cannot edit past events"
+        status_code = 500
+        return message, status_code
+
+    if event.created_by != student_id and role != "Club Head":
         message = "You do not have the required" \
                   " permissions to perform this operation"
         status_code = 403
+        return message, status_code
+
+    event_status = event.status
+    proposed_prohibited = ["registered_count", "created_by", "status"]
+    approved_prohibited = ["visibility", "fee", "created_by", "registered_count", "status"]
+
+    if event_status == "Proposed" or event_status == "Approved":
+        if event.club_id != club_id:
+            message = "You cannot edit club id of event"
+            status_code = 500
+            return message, status_code
+        field_list = []
+        check_fields = proposed_prohibited if event_status == "Proposed" else approved_prohibited
+        for key in check_fields:
+            if key in event_information:
+                field_list.append(key)
+        if len(field_list) > 0:
+            message = "You cannot edit forbidden fields: " + ', '.join(field_list)
+            status_code = 500
+            return message, status_code
+    else:
+        message = "You cannot edit Rejected Events"
+        status_code = 500
+        return message, status_code
+
+    event_edit = db.session.query(Event).filter(Event._id.in_(
+        [event_id])).update(event_information)
+    db.session.commit()
+    message = "OK"
+    status_code = 200
 
     return message, status_code
 
