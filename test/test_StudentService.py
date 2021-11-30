@@ -311,6 +311,16 @@ class Test_TestStudentService(unittest.TestCase):
             student_id = StudentService.get_student(
                 "test_student2@columbia.edu")['_id']
             self.assertEqual(student_id, 1)
+
+            club_information = {
+                "name": "Test Club 3",
+                "category": "Test Category 2",
+                "description": "Test Club Description 2"
+            }
+            status, response = StudentService.create_club(club_information)
+            self.assertEqual(response, "Missing information(name, head, category, description) required to create club")
+            self.assertEqual(status, 200)
+
             club_information = {
                 "name": "Test Club 3",
                 "head": "test_student2@columbia.edu",
@@ -320,6 +330,11 @@ class Test_TestStudentService(unittest.TestCase):
             status, response = StudentService.create_club(club_information)
             self.assertEqual(response, "Club Entry Created")
             self.assertEqual(status, 200)
+
+            status, response = StudentService.create_club(club_information)
+            self.assertEqual(response, "Club with same name already exist")
+            self.assertEqual(status, 200)
+
             clubs = StudentService.get_roles(student_id)
             self.assertEqual(len(clubs), 1)
             club = clubs[0]
