@@ -125,16 +125,15 @@ def edit_event(event_information, event_id, student_id):
         status_code = 500
         return message, status_code
 
-    '''
-    if event.created_by != student_id:
-        message = "You cannot edit events not proposed by you"
+    if event.created_by != student_id and role != "Club Head":
+        message = "You do not have the required" \
+                  " permissions to perform this operation"
         status_code = 403
         return message, status_code
-    '''
 
     event_status = event.status
-    proposed_prohibited = ["registered_count", "created_by"]
-    approved_prohibited = ["visibility", "fee", "created_by", "registered_count"]
+    proposed_prohibited = ["registered_count", "created_by", "status"]
+    approved_prohibited = ["visibility", "fee", "created_by", "registered_count", "status"]
 
     if event_status == "Proposed" or event_status == "Approved":
         if event.club_id != club_id:
@@ -155,16 +154,11 @@ def edit_event(event_information, event_id, student_id):
         status_code = 500
         return message, status_code
 
-    if role == "Club Member" or role == "Club Head":
-        event_edit = db.session.query(Event).filter(Event._id.in_(
-            [event_id])).update(event_information)
-        db.session.commit()
-        message = "CREATED"
-        status_code = 201
-    else:
-        message = "You do not have the required" \
-                  " permissions to perform this operation"
-        status_code = 403
+    event_edit = db.session.query(Event).filter(Event._id.in_(
+        [event_id])).update(event_information)
+    db.session.commit()
+    message = "OK"
+    status_code = 200
 
     return message, status_code
 

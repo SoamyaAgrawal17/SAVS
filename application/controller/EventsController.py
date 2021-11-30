@@ -5,7 +5,6 @@ import json
 
 from application.service import EventService, StudentService
 
-
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
@@ -58,20 +57,25 @@ def propose_events():
 # Edit an event (by club member/head)
 @mod.route('/events/<event_id>', methods=['PUT'])
 def edit_events(event_id):
-    data = request.get_json()
-    email_id = data["emailId"]
-    if 'status' in data:
-        event_status = data["status"]
-        student_id = StudentService.get_id(email_id)
-        response_message, status_code = EventService.decide_event_status(
-            event_status, event_id, student_id)
-    else:
-        event_information = data["event"]
-        student_id = StudentService.get_id(email_id)
-        response_message, status_code = EventService.edit_event(
-            event_information, event_id, student_id)
-    rsp = Response(response_message, status=status_code,
+    rsp = Response("INTERNAL ERROR", status=500, content_type="text/plain")
+    try:
+        data = request.get_json()
+        email_id = data["emailId"]
+        if 'status' in data:
+            event_status = data["status"]
+            student_id = StudentService.get_id(email_id)
+            response_message, status_code = EventService.decide_event_status(
+                event_status, event_id, student_id)
+        else:
+            event_information = data["event"]
+            student_id = StudentService.get_id(email_id)
+            response_message, status_code = EventService.edit_event(
+                event_information, event_id, student_id)
+        rsp = Response(response_message, status=status_code,
                        content_type="text/plain")
+    except Exception as e:
+        print("/api/<resource>, e = ", e)
+        rsp = Response(e, status=500, content_type="text/plain")
     return rsp
 
 
