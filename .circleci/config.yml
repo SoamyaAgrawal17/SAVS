@@ -37,8 +37,6 @@ jobs:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: python -m unittest discover -s test -t test
-      - store_test_results:
-          path: test-results
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
