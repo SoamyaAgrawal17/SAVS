@@ -80,7 +80,7 @@ function get_event_by_id(event_id){
 
                 event_name = json.name;
                 event_description = json.description;
-                event_location = json.event_location;
+                event_location = json.location;
                 event_start = json.start_timestamp;
                 event_end = json.end_timestamp;
                 event_category = json.category;
@@ -123,6 +123,45 @@ function create_club(){
             "head": document.getElementById("create-club-head").value,
             "category": document.getElementById("create-club-category").value,
             "description": document.getElementById("create-club-description").value,
+        }
+    });
+    xhr.send(data);
+}
+
+function create_event(){
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "/events";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 201) {
+//            var json = JSON.parse(xhr.responseText);
+            var json = xhr.responseText;
+            console.log(json)
+            document.getElementById("create-event-response").style.display = "inline";
+            document.getElementById("create-event-response").innerHTML = json;
+        }else{
+//            var json = JSON.parse(xhr.responseText);
+            var json = xhr.responseText;
+            console.log(json)
+            document.getElementById("create-event-response").style.display = "inline";
+            document.getElementById("create-event-response").innerHTML = json;
+        }
+    };
+    var data = JSON.stringify({
+        "emailId":login_email_id,
+        "event":{
+            "name": document.getElementById("create-event-name").value,
+            "club_id": parseInt(document.getElementById("create-event-club-id").value),
+            "start_timestamp": document.getElementById("create-event-start-timestamp").value,
+            "end_timestamp": document.getElementById("create-event-end-timestamp").value,
+            "location": document.getElementById("create-event-location").value,
+            "max_registration": parseInt(document.getElementById("create-event-max-registration").value),
+            "description": document.getElementById("create-event-description").value,
+            "fee": parseInt(document.getElementById("create-event-fee").value),
+            "category": document.getElementById("create-event-category").value,
+            "visibility": document.getElementById("create-event-visibility").value,
+
         }
     });
     xhr.send(data);
