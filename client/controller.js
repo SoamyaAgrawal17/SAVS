@@ -334,14 +334,13 @@ function get_registered_events(student_email_id) {
                 for (let i = 0; i < json.length; i++) {
                     innerHTML = innerHTML + `<div class="row">
                                         <div class="col-12">
-                                        <div class="row">Event ID: `+json[i]._id+`</div>
-                                        <div class="row">Event Name: `+json[i].name+`</div>
-                                        <div class="row">Event Description: `+json[i].description+`</div>
-                                        <div class="row">Event Location: `+json[i].location+`</div>
-                                        <div class="row">Event Start Timestamp: `+json[i].start_timestamp+`</div>
-                                        <div class="row">Event End Timestamp: `+json[i].end_timestamp+`</div>
-                                        <div class="row">Event Category: `+json[i].category+`</div>
-                                        <div class="row">Event Visibility: `+json[i].visibility+`</div>
+                                        <div class="row">Event ID: `+json[i].event._id+`</div>
+                                        <div class="row">Event Name: `+json[i].event.name+`</div>
+                                        <div class="row">Event Description: `+json[i].event.description+`</div>
+                                        <div class="row">Event Location: `+json[i].event.location+`</div>
+                                        <div class="row">Event Start Timestamp: `+json[i].event.start_timestamp+`</div>
+                                        <div class="row">Event End Timestamp: `+json[i].event.end_timestamp+`</div>
+                                        <div class="row">Event Category: `+json[i].event.category+`</div>
                                     </div>
                                 </div><br>`
                   }
