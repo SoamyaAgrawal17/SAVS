@@ -50,7 +50,9 @@ jobs:
       - image: 'node:latest'
     steps:
       - checkout
-      - sonarcloud-python/sonar-scan
+      - sonarcloud-python/sonar-scan:
+          project-key: savs
+          organization: SoamyaAgrawal
   newman-collection-run:
     executor: newman/postman-newman-docker
     steps:
