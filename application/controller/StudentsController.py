@@ -80,7 +80,7 @@ def create_club():
 
 
 # View all the clubs and my role in it
-@mod.route('/student/get_roles', methods=['GET'])
+@mod.route('/student/get_roles', methods=['POST', 'GET'])
 def get_roles(student_id=None):
     data = request.get_json()
     email_id = data["emailId"]

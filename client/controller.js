@@ -128,6 +128,123 @@ function create_club(){
     xhr.send(data);
 }
 
+function get_all_clubs(){
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "clubs";
+    xhr.open("GET", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            console.log(json)
+            if (json.length>0){
+                var innerHTML = ""
+                for (let i = 0; i < json.length; i++) {
+                    innerHTML = innerHTML + `<div class="row">
+                                        <div class="col-12">
+                                        <div class="row">Club ID: `+json[i]._id+`</div>
+                                        <div class="row">Club Name: `+json[i].name+`</div>
+                                        <div class="row">Club Head: `+json[i].head+`</div>
+                                        <div class="row">Club Category: `+json[i].category+`</div>
+                                        <div class="row">Club Description: `+json[i].description+`</div>
+                                    </div>
+                                </div><br>`
+                  }
+                document.getElementById("all-clubs-information").innerHTML = innerHTML;
+            }else{
+                // No clubs found
+                document.getElementById("all-clubs-information").innerHTML = "No Clubs in the database";
+            }
+        }else{
+            console.log("here");
+        }
+    };
+    xhr.send();
+}
+
+function add_member(){
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "member/" + document.getElementById("member-club-id").value;
+    xhr.open("PUT", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = xhr.responseText;
+            console.log(json)
+            document.getElementById("add-member-response").innerHTML = json;
+        }else{
+            console.log("here");
+            var json = xhr.responseText;
+            console.log(json)
+            document.getElementById("add-member-response").innerHTML = json;
+        }
+    };
+    var data = JSON.stringify({
+        "emailId":login_email_id,
+        "student_email_id":document.getElementById("member-id").value
+    })
+    xhr.send(data);   
+}
+
+function delete_club(){
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "clubs/" + document.getElementById("delete-club-id").value;
+    xhr.open("DELETE", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = xhr.responseText;
+            console.log(json)
+            document.getElementById("delete-club-response").innerHTML = json;
+        }else{
+            console.log("here");
+            var json = xhr.responseText;
+            console.log(json)
+            document.getElementById("delete-club-response").innerHTML = json;
+        }
+    };
+    var data = JSON.stringify({
+        "emailId":login_email_id
+    })
+    xhr.send(data); 
+}
+
+function get_roles(){
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "student/get_roles";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            if (json.length>0){
+                var innerHTML = ""
+                for (let i = 0; i < json.length; i++) {
+                    innerHTML = innerHTML + `<div class="row">
+                                        <div class="col-12">
+                                        <div class="row">Club ID: `+json[i].club_id+`</div>
+                                        <div class="row">Role: `+json[i].role+`</div>
+                                    </div>
+                                </div><br>`
+                  }
+                document.getElementById("get-roles-response").innerHTML = innerHTML;
+            }else{
+                // No clubs found
+                document.getElementById("get-roles-response").innerHTML = "Not registered in any clubs";
+            }
+        }else{
+            console.log("here");
+            var json = xhr.responseText;
+            console.log(json)
+            // document.getElementById("get-roles-response").innerHTML = json;
+        }
+    };
+    var data = JSON.stringify({"emailId":login_email_id});
+    xhr.send(data); 
+}
+
+// EVENTS
+
 function create_event(){
     var xhr = new XMLHttpRequest();
     var url = global_url + "/events";

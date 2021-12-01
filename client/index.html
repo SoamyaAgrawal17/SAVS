@@ -24,7 +24,7 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" id="student-email-id" placeholder="Student Email ID" aria-label="Student Email ID" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" onclick="student_login(document.getElementById('student-email-id').value)">Sign In</button>
+                      <button class="btn btn-primary" type="button" onclick="student_login(document.getElementById('student-email-id').value)">Sign In</button>
                     </div>
                   </div>
             </div>
@@ -35,13 +35,13 @@
                 <div class="row">
                     <div class="col-6" align="center">
                         <h5>Clubs</h5>
-                        <div class="club-by-id">
+                        <div class="club-by-id-container">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" id="club-id" placeholder="Club ID" aria-label="Club ID" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="button" onclick="get_club_by_id(document.getElementById('club-id').value)">Search</button>
+                                            <button class="btn btn-primary" type="button" onclick="get_club_by_id(document.getElementById('club-id').value)">Search</button>
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row create-club-container">
                             <div class="col-12" align="center">
                                 <h5>Create Club</h5>
                                 <div class="create-club">
@@ -86,7 +86,50 @@
                                         <div id="create-club-response" style="display:none;"></div>
                                 </div>
                             </div>
+                        </div><br>
+                        <div class="row get-all-clubs">
+                            <div class="col-12" align="center">
+                                <h5>Get All Clubs</h5>
+                                <button type="button" class="btn btn-primary" onclick="get_all_clubs()">GET</button>
+                                <div id="all-clubs-information"></div>
+                            </div>
                         </div>
+                        <div class="row add-member-container">
+                            <div class="col-12" align="center">
+                                <h5>Add Member to club</h5>
+                                <div class="add-member">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" id="member-club-id" placeholder="Club ID">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="member-id" placeholder="Enter Student ID of member to be added">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" onclick="add_member()">Add Member</button>
+                                        <div id="add-member-response"></div>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="row delete-club-container">
+                            <div class="col-12" align="center">
+                                <h5>Delete Club</h5>
+                                <div class="delete-club">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" id="delete-club-id" placeholder="Club ID to be deleted">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" onclick="delete_club()">Delete Club</button>
+                                        <div id="delete-club-response"></div>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="row get-roles-container">
+                            <div class="col-12" align="center">
+                                <h5>Get Roles</h5>
+                                <div class="get-roles">
+                                        <button type="submit" class="btn btn-primary" onclick="get_roles()">Get Roles</button>
+                                        <div id="get-roles-response"></div>
+                                </div>
+                            </div>
+                        </div><br>
                     </div>
                     <div class="col-6" align="center">
                         <h5>Events</h5>

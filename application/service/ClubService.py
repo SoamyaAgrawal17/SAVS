@@ -56,6 +56,7 @@ def delete_club(club_id):
 
 def add_member(club_id, student_id):
     student = Student.query.get(student_id)
+    print(student)
     if student is None:
         return "error: student not found"
     club = Club.query.get(club_id)
