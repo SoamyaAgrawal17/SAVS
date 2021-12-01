@@ -52,7 +52,7 @@ jobs:
       - checkout
       - sonarcloud-python/sonar-scan:
           parameters:
-            project-key: savs
+            project_key: savs
             organization: SoamyaAgrawal
   newman-collection-run:
     executor: newman/postman-newman-docker
