@@ -54,7 +54,7 @@ def register_event(event_id=None):
 
 
 # View registered events
-@mod.route('/student/get_registered_events', methods=['GET'])
+@mod.route('/student/get_registered_events', methods=['GET', 'POST'])
 def get_registered_events():
     data = request.get_json()
     email_id = data["emailId"]

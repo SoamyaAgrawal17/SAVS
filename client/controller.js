@@ -320,3 +320,65 @@ function get_all_events(){
     };
     xhr.send();
 }
+
+function get_registered_events(student_email_id) {
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "student/get_registered_events";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            if (json.length>0){
+                var innerHTML = ""
+                for (let i = 0; i < json.length; i++) {
+                    innerHTML = innerHTML + `<div class="row">
+                                        <div class="col-12">
+                                        <div class="row">Event ID: `+json[i]._id+`</div>
+                                        <div class="row">Event Name: `+json[i].name+`</div>
+                                        <div class="row">Event Description: `+json[i].description+`</div>
+                                        <div class="row">Event Location: `+json[i].location+`</div>
+                                        <div class="row">Event Start Timestamp: `+json[i].start_timestamp+`</div>
+                                        <div class="row">Event End Timestamp: `+json[i].end_timestamp+`</div>
+                                        <div class="row">Event Category: `+json[i].category+`</div>
+                                        <div class="row">Event Visibility: `+json[i].visibility+`</div>
+                                    </div>
+                                </div><br>`
+                  }
+                document.getElementById("get-registered-events-response").innerHTML = innerHTML;
+            }else{
+                // No events found
+                document.getElementById("get-registered-events-response").innerHTML = "Not registered in any event";
+            }
+        }else{
+            console.log("here");
+            var json = xhr.responseText;
+            console.log(json)
+        }
+    };
+    var data = JSON.stringify({"emailId":login_email_id});
+    xhr.send(data);
+}
+
+function register_event(){
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "student/register_event/" + document.getElementById("register-event-id").value;
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = xhr.responseText;
+            console.log(json)
+            document.getElementById("register-event-response").innerHTML = json;
+        }else{
+            console.log("here");
+            var json = xhr.responseText;
+            console.log(json)
+            document.getElementById("register-event-response").innerHTML = json;
+        }
+    };
+    var data = JSON.stringify({
+        "emailId":login_email_id
+    })
+    xhr.send(data);
+}
