@@ -11,7 +11,36 @@ orbs:
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
   python: circleci/python@1.2
   newman: postman/newman@0.0.2
-  sonarcloud: sonarsource/sonarcloud@1.0.0
+  sonarcloud-python: ksmc/sonarcloud-python@0.0.1
+
+commands:
+  sonar-scan:
+    parameters:
+      project_key:
+        type: string
+        default: savs
+      organization:
+        type: string
+        default: SoamyaAgrawal
+    steps:
+      - run:
+          name: Install Sonarqube scanner
+          command: |
+            if test ! -d /tmp/sonar-scanner; then
+                wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip
+                unzip sonar-scanner-cli-4.2.0.1873-linux.zip
+                rm sonar-scanner-cli-4.2.0.1873-linux.zip
+                mv sonar-scanner-4.2.0.1873-linux /tmp/sonar-scanner
+            fi
+      - run:
+          name: Run Sonarqube scanner
+          command: |
+            /tmp/sonar-scanner/bin/sonar-scanner \
+              -Dsonar.projectKey=<< parameters.project_key >> \
+              -Dsonar.organization=<< parameters.organization >> \
+              -Dsonar.sources=. \
+              -Dsonar.host.url=<< parameters.host_url >> \
+              -Dsonar.login=<< parameters.sonarlogin >>
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -21,10 +50,7 @@ jobs:
       - image: 'node:latest'
     steps:
       - checkout
-      - sonarcloud/scan:
-          parameters:
-            project-key: savs
-            github-project-slug: SoamyaAgrawal17/SAVS
+      - sonarcloud-python/sonar-scan
   newman-collection-run:
     executor: newman/postman-newman-docker
     steps:
