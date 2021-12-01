@@ -1,4 +1,5 @@
 from application.utilities.database import db
+from datetime import *
 
 
 class Event(db.Model):
@@ -17,7 +18,7 @@ class Event(db.Model):
     max_registration = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(100), nullable=True)
     fee = db.Column(db.Integer, nullable=False)
-    status = db.Column(db.String(10), nullable=False)
+    status = db.Column(db.String(10), nullable=False)  # Approved, Rejected, Proposed
     registered_count = db.Column(db.Integer, nullable=False)
     created_by = db.Column(db.Integer,
                            db.ForeignKey('student._id', onupdate="CASCADE",
@@ -43,3 +44,8 @@ class Event(db.Model):
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+    def get_time_status_(self):
+        if self.end_timestamp <= datetime.today():
+            return "Past"
+        return "Upcoming"
