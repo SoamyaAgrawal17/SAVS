@@ -21,7 +21,9 @@ jobs:
       - image: 'node:latest'
     steps:
       - checkout
-      - sonarcloud/scan
+      - sonarcloud/scan:
+          project-key: "savs"
+          organization: "Soamya Agrawal"
   newman-collection-run:
     executor: newman/postman-newman-docker
     steps:
