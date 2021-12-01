@@ -21,8 +21,7 @@ jobs:
       - image: 'node:latest'
     steps:
       - checkout
-      - sonarcloud/scan:
-          project-key: savs
+      - sonarcloud/scan
   newman-collection-run:
     executor: newman/postman-newman-docker
     steps:
