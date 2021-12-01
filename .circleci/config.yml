@@ -16,14 +16,14 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build-and-sonarcloud:
+  sonarcloud:
     docker:
       - image: 'node:latest'
     steps:
       - checkout
       - sonarcloud-python/sonar-scan:
           project_key: savs
-          organization: Soamya Agrawal
+          organization: "Soamya Agrawal"
   newman-collection-run:
     executor: newman/postman-newman-docker
     steps:
@@ -60,7 +60,7 @@ workflows:
   sample: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - build-and-sonarcloud:
+      - sonarcloud:
           context: sonarcloud
       - build-and-test
       - newman-collection-run
