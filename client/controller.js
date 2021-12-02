@@ -61,45 +61,6 @@ function get_club_by_id(club_id){
     xhr.send();
 }
 
-function get_event_by_id(event_id){
-    var xhr = new XMLHttpRequest();
-    var url = global_url + "events/" + event_id;
-    xhr.open("GET", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
-            var json = JSON.parse(xhr.responseText);
-            console.log(json)
-            if (json == null){
-                document.getElementById("event-id-found").style.display = "none"
-                document.getElementById("event-id-not-found").style.display = "inline"
-            }else{
-                document.getElementById("event-id-found").style.display = "inline"
-                document.getElementById("event-id-not-found").style.display = "none"
-
-                event_name = json.name;
-                event_description = json.description;
-                event_location = json.location;
-                event_start = json.start_timestamp;
-                event_end = json.end_timestamp;
-                event_category = json.category;
-
-                document.getElementById("event-id-found-id").innerHTML = "Event ID: " + event_id;
-                document.getElementById("event-id-found-name").innerHTML = "Event Name: " + event_name;
-                document.getElementById("event-id-found-description").innerHTML = "Event Description: " + event_description;
-                document.getElementById("event-id-found-location").innerHTML = "Event Location: " + event_location;
-                document.getElementById("event-id-found-start").innerHTML = "Event Start: " + event_start;
-                document.getElementById("event-id-found-end").innerHTML = "Event End: " + event_end;
-                document.getElementById("event-id-found-category").innerHTML = "Event Category: " + event_category;
-            }
-        }else{
-            console.log("here");
-        }
-    };
-    xhr.send();
-}
-
 function create_club(){
     var xhr = new XMLHttpRequest();
     var url = global_url + "student/club";
@@ -245,6 +206,45 @@ function get_roles(){
 
 // EVENTS
 
+function get_event_by_id(event_id){
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "events/" + event_id;
+    xhr.open("GET", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+            var json = JSON.parse(xhr.responseText);
+            console.log(json)
+            if (json == null){
+                document.getElementById("event-id-found").style.display = "none"
+                document.getElementById("event-id-not-found").style.display = "inline"
+            }else{
+                document.getElementById("event-id-found").style.display = "inline"
+                document.getElementById("event-id-not-found").style.display = "none"
+
+                event_name = json.name;
+                event_description = json.description;
+                event_location = json.location;
+                event_start = json.start_timestamp;
+                event_end = json.end_timestamp;
+                event_category = json.category;
+
+                document.getElementById("event-id-found-id").innerHTML = "Event ID: " + event_id;
+                document.getElementById("event-id-found-name").innerHTML = "Event Name: " + event_name;
+                document.getElementById("event-id-found-description").innerHTML = "Event Description: " + event_description;
+                document.getElementById("event-id-found-location").innerHTML = "Event Location: " + event_location;
+                document.getElementById("event-id-found-start").innerHTML = "Event Start: " + event_start;
+                document.getElementById("event-id-found-end").innerHTML = "Event End: " + event_end;
+                document.getElementById("event-id-found-category").innerHTML = "Event Category: " + event_category;
+            }
+        }else{
+            console.log("here");
+        }
+    };
+    xhr.send();
+}
+
 function create_event(){
     var xhr = new XMLHttpRequest();
     var url = global_url + "/events";
@@ -281,5 +281,103 @@ function create_event(){
 
         }
     });
+    xhr.send(data);
+}
+
+function get_all_events(){
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "events";
+    xhr.open("GET", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            console.log(json)
+            if (json.length>0){
+                var innerHTML = ""
+                for (let i = 0; i < json.length; i++) {
+                    innerHTML = innerHTML + `<div class="row">
+                                        <div class="col-12">
+                                        <div class="row">Event ID: `+json[i]._id+`</div>
+                                        <div class="row">Event Name: `+json[i].name+`</div>
+                                        <div class="row">Event Description: `+json[i].description+`</div>
+                                        <div class="row">Event Location: `+json[i].location+`</div>
+                                        <div class="row">Event Start Timestamp: `+json[i].start_timestamp+`</div>
+                                        <div class="row">Event End Timestamp: `+json[i].end_timestamp+`</div>
+                                        <div class="row">Event Category: `+json[i].category+`</div>
+                                        <div class="row">Event Visibility: `+json[i].visibility+`</div>
+                                    </div>
+                                </div><br>`
+                  }
+                document.getElementById("all-events-information").innerHTML = innerHTML;
+            }else{
+                // No events found
+                document.getElementById("all-events-information").innerHTML = "No Events in the database";
+            }
+        }else{
+            console.log("here");
+        }
+    };
+    xhr.send();
+}
+
+function get_registered_events(student_email_id) {
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "student/get_registered_events";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            if (json.length>0){
+                var innerHTML = ""
+                for (let i = 0; i < json.length; i++) {
+                    innerHTML = innerHTML + `<div class="row">
+                                        <div class="col-12">
+                                        <div class="row">Event ID: `+json[i].event._id+`</div>
+                                        <div class="row">Event Name: `+json[i].event.name+`</div>
+                                        <div class="row">Event Description: `+json[i].event.description+`</div>
+                                        <div class="row">Event Location: `+json[i].event.location+`</div>
+                                        <div class="row">Event Start Timestamp: `+json[i].event.start_timestamp+`</div>
+                                        <div class="row">Event End Timestamp: `+json[i].event.end_timestamp+`</div>
+                                        <div class="row">Event Category: `+json[i].event.category+`</div>
+                                    </div>
+                                </div><br>`
+                  }
+                document.getElementById("get-registered-events-response").innerHTML = innerHTML;
+            }else{
+                // No events found
+                document.getElementById("get-registered-events-response").innerHTML = "Not registered in any event";
+            }
+        }else{
+            console.log("here");
+            var json = xhr.responseText;
+            console.log(json)
+        }
+    };
+    var data = JSON.stringify({"emailId":login_email_id});
+    xhr.send(data);
+}
+
+function register_event(){
+    var xhr = new XMLHttpRequest();
+    var url = global_url + "student/register_event/" + document.getElementById("register-event-id").value;
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = xhr.responseText;
+            console.log(json)
+            document.getElementById("register-event-response").innerHTML = json;
+        }else{
+            console.log("here");
+            var json = xhr.responseText;
+            console.log(json)
+            document.getElementById("register-event-response").innerHTML = json;
+        }
+    };
+    var data = JSON.stringify({
+        "emailId":login_email_id
+    })
     xhr.send(data);
 }

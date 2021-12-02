@@ -203,6 +203,37 @@
                             <button type="submit" class="btn btn-primary" onclick="create_event()">Create Event</button>
                             <div id="create-event-response" style="display:none;"></div>
                         </div>
+                        <div class="row get-all-events">
+                            <div class="col-12" align="center">
+                                <h5>Get All Events</h5>
+                                <button type="button" class="btn btn-primary" onclick="get_all_events()">GET</button>
+                                <div id="all-events-information"></div>
+                            </div>
+                        </div>
+                        <div class="row register-event-container">
+                            <div class="col-12" align="center">
+                                <h5>Register to an event</h5>
+                                <div class="register-event">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" id="register-event-id" placeholder="Event ID">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary" onclick="register_event()">Register to an Event</button>
+                                        <div id="register-event-response"></div>
+                                </div>
+                            </div>
+                        </div><br>
+
+                        <div class="row get-all-registered-events">
+                            <div class="col-12" align="center">
+                                <h5>Get Registered Events</h5>
+                                <div class="get-registered-events">
+                                    <button type="submit" class="btn btn-primary" onclick="get_registered_events()">Get Registered Events</button>
+                                    <div id="get-registered-events-response"></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
