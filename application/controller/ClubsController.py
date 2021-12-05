@@ -37,28 +37,28 @@ def edit_club(club_id):
     data = request.get_json()
     email_id = data["emailId"]
     # when email is none the request is invalid
-    if email_id is None:
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
-    student_id = StudentService.get_id(email_id)
-    if student_id == "Student does not exist":
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
-    query = Role.query.filter_by(club_id=club_id, student_id=student_id)
-    result = query.first()
-    # not club head
-    if result is None or result.role != "Club Head":
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
+    # if email_id is None:
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
+    # student_id = StudentService.get_id(email_id)
+    # if student_id == "Student does not exist":
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
+    # query = Role.query.filter_by(club_id=club_id, student_id=student_id)
+    # result = query.first()
+    # # not club head
+    # if result is None or result.role != "Club Head":
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
     if 'new_head' in data:
         head_email_id = data["new_head"]
-        old_head_id = student_id
-        new_head_id = StudentService.get_id(head_email_id)
-        res = ClubService.assign_successor(club_id, head_email_id, old_head_id, new_head_id)
+        # old_head_id = student_id
+        # new_head_id = StudentService.get_id(head_email_id)
+        res, code = ClubService.assign_successor(email_id, club_id, head_email_id)
     else:
         club_information = data["club"]
-        res = ClubService.edit_club(club_id, club_information)
-    rsp = Response(res, status=200, content_type="text/plain")
+        res, code = ClubService.edit_club(email_id, club_id, club_information)
+    rsp = Response(res, status=code, content_type="text/plain")
     return rsp
 
 
@@ -68,21 +68,21 @@ def delete_club(club_id):
     data = request.get_json()
     email_id = data["emailId"]
     # when email is none the request is invalid
-    if email_id is None:
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
-    student_id = StudentService.get_id(email_id)
-    if student_id == "Student does not exist":
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
-    query = Role.query.filter_by(club_id=club_id, student_id=student_id)
-    result = query.first()
-    # not club head
-    if result is None or result.role != "Club Head":
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
-    res = ClubService.delete_club(club_id)
-    rsp = Response(res, status=200, content_type="text/plain")
+    # if email_id is None:
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
+    # student_id = StudentService.get_id(email_id)
+    # if student_id == "Student does not exist":
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
+    # query = Role.query.filter_by(club_id=club_id, student_id=student_id)
+    # result = query.first()
+    # # not club head
+    # if result is None or result.role != "Club Head":
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
+    res, code = ClubService.delete_club(email_id, club_id)
+    rsp = Response(res, status=code, content_type="text/plain")
     return rsp
 
 
@@ -92,26 +92,27 @@ def add_member(club_id=None):
     data = request.get_json()
     email_id = data["emailId"]
     student_email_id = data["student_email_id"]
-    # when email is none the request is invalid
-    if email_id is None:
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
-    editor_student_id = StudentService.get_id(email_id)
-    if editor_student_id == "Student does not exist":
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
-    student_id = StudentService.get_id(student_email_id)
-    if student_id == "Student does not exist":
-        return Response("error: student isn't registered",
-                        status=200, content_type="text/plain")
-    query = Role.query.filter_by(club_id=club_id, student_id=editor_student_id)
-    result = query.first()
-    # not club head
-    if result is None or result.role != "Club Head":
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
-    member = ClubService.add_member(club_id, student_id)
-    rsp = Response(member, status=200, content_type="application/JSON")
+    # # when email is none the request is invalid
+    # if email_id is None:
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
+    # editor_student_id = StudentService.get_id(email_id)
+    # if editor_student_id == "Student does not exist":
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
+    # student_id = StudentService.get_id(student_email_id)
+    # if student_id == "Student does not exist":
+    #     return Response("error: student isn't registered",
+    #                     status=200, content_type="text/plain")
+    # query = Role.query.filter_by(club_id=club_id, student_id=editor_student_id)
+    # result = query.first()
+    # # not club head
+    # if result is None or result.role != "Club Head":
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
+    # member = ClubService.add_member(club_id, student_id)
+    res, code = ClubService.add_member(email_id, club_id, student_email_id)
+    rsp = Response(res, status=code, content_type="application/JSON")
     return rsp
 
 
@@ -122,23 +123,23 @@ def remove_member(club_id=None):
     email_id = data["emailId"]
     student_email_id = data["student_email_id"]
     # when email is none the request is invalid
-    if email_id is None:
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
-    editor_student_id = StudentService.get_id(email_id)
-    if editor_student_id == "Student does not exist":
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
-    student_id = StudentService.get_id(student_email_id)
-    if student_id == "Student does not exist":
-        return Response("error: student isn't registered",
-                        status=200, content_type="text/plain")
-    query = Role.query.filter_by(club_id=club_id, student_id=editor_student_id)
-    result = query.first()
-    # not club head
-    if result is None or result.role != "Club Head":
-        return Response("Invalid Request", status=200,
-                        content_type="text/plain")
-    member = ClubService.remove_member(club_id, student_id)
-    rsp = Response(member, status=200, content_type="application/JSON")
+    # if email_id is None:
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
+    # editor_student_id = StudentService.get_id(email_id)
+    # if editor_student_id == "Student does not exist":
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
+    # student_id = StudentService.get_id(student_email_id)
+    # if student_id == "Student does not exist":
+    #     return Response("error: student isn't registered",
+    #                     status=200, content_type="text/plain")
+    # query = Role.query.filter_by(club_id=club_id, student_id=editor_student_id)
+    # result = query.first()
+    # # not club head
+    # if result is None or result.role != "Club Head":
+    #     return Response("Invalid Request", status=200,
+    #                     content_type="text/plain")
+    res, code = ClubService.remove_member(email_id, club_id, student_email_id)
+    rsp = Response(res, status=code, content_type="application/JSON")
     return rsp
