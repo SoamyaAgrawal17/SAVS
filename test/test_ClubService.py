@@ -7,7 +7,8 @@ from application.utilities.database import db
 from app import app
 
 app.config["TESTING"] = True
-
+college = "Fu Foundation"
+department = "Computer Science"
 
 class Test_TestClubService(unittest.TestCase):
     def setUp(self):
@@ -26,8 +27,8 @@ class Test_TestClubService(unittest.TestCase):
             student_information = {
                 "name": "TestStudent",
                 "email_id": "test_student@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college,
+                "department": department
             }
             # setup a demo club
             club_information = {
@@ -39,8 +40,8 @@ class Test_TestClubService(unittest.TestCase):
             student_information_2 = {
                 "name": "TestStudent2",
                 "email_id": "test_student_2@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college,
+                "department": department
             }
 
             StudentService.create_student(student_information)
@@ -141,8 +142,8 @@ class Test_TestClubService(unittest.TestCase):
             member_information = {
                 "name": "TestMember",
                 "email_id": "test_member@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college,
+                "department": department
             }
             StudentService.create_student(member_information)
             student_email = member_information["email_id"]
@@ -160,8 +161,8 @@ class Test_TestClubService(unittest.TestCase):
             member_information = {
                 "name": "TestMember",
                 "email_id": "test_member@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college,
+                "department": department
             }
             student_email = member_information["email_id"]
             StudentService.create_student(member_information)
@@ -185,8 +186,8 @@ class Test_TestClubService(unittest.TestCase):
             member_information = {
                 "name": "TestMember",
                 "email_id": "test_member@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college,
+                "department": department
             }
             StudentService.create_student(member_information)
             student_email = member_information["email_id"]
@@ -204,8 +205,8 @@ class Test_TestClubService(unittest.TestCase):
             member_information = {
                 "name": "TestMember",
                 "email_id": "test_member@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college,
+                "department": department
             }
             StudentService.create_student(member_information)
             student_email = member_information["email_id"]
@@ -224,8 +225,8 @@ class Test_TestClubService(unittest.TestCase):
             member_information = {
                 "name": "TestMember",
                 "email_id": "test_member@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college,
+                "department": department
             }
             StudentService.create_student(member_information)
             student_email = member_information["email_id"]
@@ -245,8 +246,8 @@ class Test_TestClubService(unittest.TestCase):
             member_information = {
                 "name": "TestMember",
                 "email_id": "test_member@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college,
+                "department": department
             }
             StudentService.create_student(member_information)
             student_email = member_information["email_id"]
@@ -264,8 +265,8 @@ class Test_TestClubService(unittest.TestCase):
             student_information = {
                 "name": "TestStudent2",
                 "email_id": "test_student2@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college,
+                "department": department
             }
             club_information = {
                 "name": "TestClub2",
@@ -285,8 +286,8 @@ class Test_TestClubService(unittest.TestCase):
             new_head_information = {
                 "name": "TestHead",
                 "email_id": "test_head@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college,
+                "department": department
             }
             StudentService.create_student(new_head_information)
             new_head_email_id = new_head_information["email_id"]
@@ -312,8 +313,8 @@ class Test_TestClubService(unittest.TestCase):
             new_head_information = {
                 "name": "TestHead",
                 "email_id": "test_head@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college,
+                "department": department
             }
             StudentService.create_student(new_head_information)
             new_head_email_id = new_head_information["email_id"]
