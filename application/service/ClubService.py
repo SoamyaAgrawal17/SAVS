@@ -41,10 +41,10 @@ def get_club(club_id):
 # and set new club_details
 def edit_club(email_id, club_id, club_details):
     # update club
-    club = Club.query.get(club_id)
     res, code = verify_club_head(email_id, club_id)
     if code != 200:
         return res, code
+    club = Club.query.get(club_id)
     if 'name' in club_details.keys():
         if club_details['name'] == '':
             return "club cannot have empty name", 400
@@ -57,12 +57,14 @@ def edit_club(email_id, club_id, club_details):
 # update club head corresponding to club_id
 def assign_successor(email_id, club_id, club_head_email):
     # assign new head
-    club = Club.query.get(club_id)
     res, code = verify_club_head(email_id, club_id)
     if code != 200:
         return res, code
+    club = Club.query.get(club_id)
     old_head_id = get_student_id(email_id)
     new_head_id = get_student_id(club_head_email)
+    if new_head_id == "Student does not exist":
+        return "error: student isn't registered", 400
     Role.query.filter(Role.student_id == old_head_id, Role.club_id == club_id).delete()
     setattr(club, 'head', club_head_email)
     role = Role(student_id=new_head_id, club_id=club_id, role="Club Head")
@@ -74,12 +76,12 @@ def assign_successor(email_id, club_id, club_head_email):
 # delete club corresponding to club_id
 def delete_club(email_id, club_id):
     # delete club
-    club = Club.query.filter_by(_id=club_id)
     res, code = verify_club_head(email_id, club_id)
     if code != 200:
         return res, code
-    if club is None:
-        return "club does not exist", 400
+    club = Club.query.filter_by(_id=club_id)
+    # if club is None:
+    #     return "club does not exist", 400
     Club.query.filter_by(_id=club_id).delete()
     db.session.commit()
     return "club deleted", 200
@@ -95,11 +97,9 @@ def add_member(email_id, club_id, student_email_id):
     if student_id == "Student does not exist":
         return "error: student isn't registered", 400
     student = Student.query.get(student_id)
-    if student is None:
-        return "error: student not found", 400
     club = Club.query.get(club_id)
-    if club is None:
-        return "error: club not found", 400
+    # if club is None:
+    #     return "error: club not found", 400
     db.session.add(Role(student_id=student_id, club_id=club_id,
                         role="Club Member"))
     db.session.commit()
@@ -115,18 +115,18 @@ def remove_member(email_id, club_id, student_email_id):
     student_id = get_student_id(student_email_id)
     if student_id == "Student does not exist":
         return "error: student isn't registered", 400
-    student = Student.query.get(student_id)
-    if student is None:
-        return "error: student not found", 400
     club = Club.query.get(club_id)
-    if club is None:
-        return "error: club not found", 400
+    # if club is None:
+    #     return "error: club not found", 400
     Role.query.filter(Role.student_id == student_id, Role.club_id == club_id).delete()
     db.session.commit()
     return "Club member has been removed", 200
 
 
 def verify_club_head(email_id, club_id):
+    club = Club.query.get(club_id)
+    if club is None:
+        return "club does not exist", 400
     if email_id is None:
         return "Invalid Request", 400
 
@@ -143,6 +143,7 @@ def verify_club_head(email_id, club_id):
     if result is None or result.role != "Club Head":
         return "Invalid Request", 400
     return "Valid request", 200
+
 
 def get_student_id(email_id):
     student = Student.query.filter_by(email_id=email_id).first()
