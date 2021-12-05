@@ -65,7 +65,8 @@ def assign_successor(email_id, club_id, club_head_email):
     new_head_id = get_student_id(club_head_email)
     if new_head_id == "Student does not exist":
         return "error: student isn't registered", 400
-    Role.query.filter(Role.student_id == old_head_id, Role.club_id == club_id).delete()
+    Role.query.filter(Role.student_id == old_head_id,
+                      Role.club_id == club_id).delete()
     setattr(club, 'head', club_head_email)
     role = Role(student_id=new_head_id, club_id=club_id, role="Club Head")
     db.session.add(role)
@@ -79,9 +80,6 @@ def delete_club(email_id, club_id):
     res, code = verify_club_head(email_id, club_id)
     if code != 200:
         return res, code
-    club = Club.query.filter_by(_id=club_id)
-    # if club is None:
-    #     return "club does not exist", 400
     Club.query.filter_by(_id=club_id).delete()
     db.session.commit()
     return "club deleted", 200
@@ -96,10 +94,6 @@ def add_member(email_id, club_id, student_email_id):
     student_id = get_student_id(student_email_id)
     if student_id == "Student does not exist":
         return "error: student isn't registered", 400
-    student = Student.query.get(student_id)
-    club = Club.query.get(club_id)
-    # if club is None:
-    #     return "error: club not found", 400
     db.session.add(Role(student_id=student_id, club_id=club_id,
                         role="Club Member"))
     db.session.commit()
@@ -115,14 +109,14 @@ def remove_member(email_id, club_id, student_email_id):
     student_id = get_student_id(student_email_id)
     if student_id == "Student does not exist":
         return "error: student isn't registered", 400
-    club = Club.query.get(club_id)
-    # if club is None:
-    #     return "error: club not found", 400
-    Role.query.filter(Role.student_id == student_id, Role.club_id == club_id).delete()
+    Role.query.filter(Role.student_id == student_id,
+                      Role.club_id == club_id).delete()
     db.session.commit()
     return "Club member has been removed", 200
 
 
+# verify that the club and club head
+# information is accurate
 def verify_club_head(email_id, club_id):
     club = Club.query.get(club_id)
     if club is None:
@@ -130,8 +124,6 @@ def verify_club_head(email_id, club_id):
     if email_id is None:
         return "Invalid Request", 400
 
-    # student = Student.query.filter_by(email_id=email_id).first()
-    # student_id = student._id
     student_id = get_student_id(email_id)
 
     if student_id == "Student does not exist":
@@ -145,11 +137,11 @@ def verify_club_head(email_id, club_id):
     return "Valid request", 200
 
 
+# get student id given student email
+# we cannot depend on student service to avoid circular dependency
 def get_student_id(email_id):
     student = Student.query.filter_by(email_id=email_id).first()
     if student is None:
         return "Student does not exist"
     student_id = student._id
     return student_id
-
-
