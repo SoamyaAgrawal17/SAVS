@@ -53,7 +53,7 @@ def get_student(email_id=None):
     query = db.session.query(Student).filter(Student.email_id.in_([email_id]))
     result = query.first()
     if result is None:
-        return "Student does not exist"
+        return None
     return result.as_dict()
 
 
