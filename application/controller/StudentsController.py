@@ -2,8 +2,6 @@ import logging
 import json
 from flask import Blueprint, request, Response
 from application.service import StudentService
-import os
-from flask_cors import CORS
 
 mod = Blueprint('students', __name__)
 
