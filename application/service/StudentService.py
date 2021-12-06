@@ -38,7 +38,7 @@ def create_student(student_information):
     college = student_information['college']
     department = student_information['department']
 
-    if get_student(email_id) is not None:
+    if get_student(email_id) != "Student does not exist":
         return "Student Already Exists"
 
     new_student = Student(name=name, email_id=email_id, college=college,
@@ -53,7 +53,7 @@ def get_student(email_id=None):
     query = db.session.query(Student).filter(Student.email_id.in_([email_id]))
     result = query.first()
     if result is None:
-        return None
+        return "Student does not exist"
     return result.as_dict()
 
 
