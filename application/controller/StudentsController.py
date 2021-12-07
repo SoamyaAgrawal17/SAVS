@@ -44,7 +44,25 @@ def get_student(email_id=None):
 
 
 # View all upcoming events.
-@mod.route('/student/get_upcoming_events', methods=['POST', 'GET'])
+@mod.route('/student/get_upcoming_events', methods=['GET'])
+def get_upcoming_events():
+    try:
+        data = request.get_json()
+        email_id = data["emailId"]
+        student_id = StudentService.get_id(email_id)
+        have_permission, rsp = validate_permission(student_id)
+        if not have_permission:
+            return rsp
+        events = StudentService.get_upcoming_events(student_id)
+        res = json.dumps(events, default=str)
+        rsp = Response(res, status=200, content_type=application_json)
+    except Exception as e:
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
+    return rsp
+
+# View all upcoming events.
+@mod.route('/student/get_upcoming_events', methods=['POST'])
 def get_upcoming_events():
     try:
         data = request.get_json()
@@ -82,7 +100,25 @@ def register_event(event_id=None):
 
 
 # View registered events
-@mod.route('/student/get_registered_events', methods=['GET', 'POST'])
+@mod.route('/student/get_registered_events', methods=['GET'])
+def get_registered_events():
+    try:
+        data = request.get_json()
+        email_id = data["emailId"]
+        student_id = StudentService.get_id(email_id)
+        have_permission, rsp = validate_permission(student_id)
+        if not have_permission:
+            return rsp
+        event = StudentService.get_registered_events(student_id)
+        res = json.dumps(event, default=str)
+        rsp = Response(res, status=200, content_type=application_json)
+    except Exception as e:
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
+    return rsp
+
+# View registered events
+@mod.route('/student/get_registered_events', methods=['POST'])
 def get_registered_events():
     try:
         data = request.get_json()
@@ -141,7 +177,25 @@ def create_club():
 
 
 # View all the clubs and my role in it
-@mod.route('/student/get_roles', methods=['GET', 'POST'])
+@mod.route('/student/get_roles', methods=['GET'])
+def get_roles():
+    try:
+        data = request.get_json()
+        email_id = data["emailId"]
+        student_id = StudentService.get_id(email_id)
+        have_permission, rsp = validate_permission(student_id)
+        if not have_permission:
+            return rsp
+        clubs = StudentService.get_roles(student_id)
+        res = json.dumps(clubs, default=str)
+        rsp = Response(res, status=200, content_type=application_json)
+    except Exception as e:
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
+    return rsp
+
+# View all the clubs and my role in it
+@mod.route('/student/get_roles', methods=['POST'])
 def get_roles():
     try:
         data = request.get_json()
