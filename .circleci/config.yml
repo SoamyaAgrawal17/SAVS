@@ -16,7 +16,7 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  style-checker-application:
+  style-checker:
     docker:
       - image: cimg/python:3.8
       # Checkout the code as the first step. This is a dedicated CircleCI step.
@@ -113,7 +113,7 @@ workflows:
       - build-and-unit-test
       - coverage
       - system-test-collection-run
-      - style-checker-application
+      - style-checker
       - sonarcloud:
             context: sonarcloud
    
