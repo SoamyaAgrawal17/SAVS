@@ -12,3 +12,4 @@ application/service/EventService.py:136:80: E501 line too long (91 > 79 characte
 application/service/EventService.py:144:80: E501 line too long (97 > 79 characters)
 application/service/EventService.py:149:80: E501 line too long (82 > 79 characters)
 application/service/EventService.py:157:5: F841 local variable 'event_edit' is assigned to but never used
+application/service/StudentService.py:43:16: E128 continuation line under-indented for visual indent
