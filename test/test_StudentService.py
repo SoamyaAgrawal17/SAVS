@@ -13,6 +13,12 @@ club_member = "Club member"
 event_description = "Winter Hackathon December 2021"
 event_location = "New York City"
 event_name = "Hackathon 2021 Columbia"
+test_club_member = "test_club_member@columbia.edu"
+college_name = "Fu Foundation"
+department_name = "Computer Science"
+club_description_2 = "Test Club Description 2"
+club_3 = "Test Club 3"
+category_2 = "Test Category 2"
 
 class Test_TestStudentService(unittest.TestCase):
 
@@ -38,8 +44,8 @@ class Test_TestStudentService(unittest.TestCase):
         with app.app_context():
             student_information = {
                 "email_id": email_id,
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college_name,
+                "department": department_name
             }
 
             response = StudentService.create_student(student_information)
@@ -48,8 +54,8 @@ class Test_TestStudentService(unittest.TestCase):
             student_information = {
                 "name": "TestStudent",
                 "email_id": email_id,
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college_name,
+                "department": department_name
             }
 
             StudentService.create_student(student_information)
@@ -58,10 +64,10 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(student_id, 1)
 
             club_information = {
-                "name": "Test Club 3",
+                "name": club_3,
                 "head": email_id,
-                "category": "Test Category 2",
-                "description": "Test Club Description 2"
+                "category": category_2,
+                "description": club_description_2
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(status, 200)
@@ -120,8 +126,8 @@ class Test_TestStudentService(unittest.TestCase):
             student_information = {
                 "name": "TestStudent",
                 "email_id": email_id,
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college_name,
+                "department": department_name
             }
 
             StudentService.create_student(student_information)
@@ -130,10 +136,10 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(student_id, 1)
 
             club_information = {
-                "name": "Test Club 3",
+                "name": club_3,
                 "head": email_id,
-                "category": "Test Category 2",
-                "description": "Test Club Description 2"
+                "category": category_2,
+                "description": club_description_2
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(status, 200)
@@ -196,8 +202,8 @@ class Test_TestStudentService(unittest.TestCase):
             student_information = {
                 "name": "TestStudent",
                 "email_id": email_id,
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college_name,
+                "department": department_name
             }
 
             StudentService.create_student(student_information)
@@ -206,10 +212,10 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(student_id, 1)
 
             club_information = {
-                "name": "Test Club 3",
+                "name": club_3,
                 "head": email_id,
-                "category": "Test Category 2",
-                "description": "Test Club Description 2"
+                "category": category_2,
+                "description": club_description_2
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(status, 200)
@@ -243,22 +249,22 @@ class Test_TestStudentService(unittest.TestCase):
             student_information1 = {
                 "name": "TestStudent",
                 "email_id": email_id_1,
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college_name,
+                "department": department_name
             }
 
             student_information2 = {
                 "name": "TestStudent2",
                 "email_id": email_id_2,
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college_name,
+                "department": department_name
             }
 
             student_information3 = {
                 "name": "TestStudent3",
                 "email_id": "test_student3@columbia.edu",
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college_name,
+                "department": department_name
             }
 
             StudentService.create_student(student_information1)
@@ -275,10 +281,10 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(student_id3, 3)
 
             club_information = {
-                "name": "Test Club 3",
+                "name": club_3,
                 "head": email_id_1,
-                "category": "Test Category 2",
-                "description": "Test Club Description 2"
+                "category": category_2,
+                "description": club_description_2
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(status, 200)
@@ -339,8 +345,8 @@ class Test_TestStudentService(unittest.TestCase):
             student = {
                 "name": "TestStudent2",
                 "email_id": email_id_2,
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college_name,
+                "department": department_name
             }
             response = StudentService.create_student(student)
             self.assertEqual(response, "Student Entry Created")
@@ -352,19 +358,19 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(student_id, 1)
 
             club_information = {
-                "name": "Test Club 3",
-                "category": "Test Category 2",
-                "description": "Test Club Description 2"
+                "name": club_3,
+                "category": category_2,
+                "description": club_description_2
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(response, "Missing information(name, head, category, description) required to create club")
             self.assertEqual(status, 200)
 
             club_information = {
-                "name": "Test Club 3",
+                "name": club_3,
                 "head": email_id_2,
-                "category": "Test Category 2",
-                "description": "Test Club Description 2"
+                "category": category_2,
+                "description": club_description_2
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(response, "Club Entry Created")
@@ -386,8 +392,8 @@ class Test_TestStudentService(unittest.TestCase):
             student_information = {
                 "name": "TestStudent",
                 "email_id": email_id,
-                "college": "Fu Foundation",
-                "department": "Computer Science"
+                "college": college_name,
+                "department": department_name
             }
 
             StudentService.create_student(student_information)
@@ -400,10 +406,10 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(response, "Student does not exist")
 
             club_information = {
-                "name": "Test Club 3",
+                "name": club_3,
                 "head": email_id,
-                "category": "Test Category 2",
-                "description": "Test Club Description 2"
+                "category": category_2,
+                "description": club_description_2
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(status, 200)
