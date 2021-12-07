@@ -14,6 +14,7 @@ application_json = "application/JSON"
 api_resource = "/api/<resource>, e = "
 plain_text = "plain/text"
 
+
 # Signup a student
 @mod.route('/student', methods=['POST'])
 def create_student():
@@ -60,6 +61,7 @@ def get_upcoming_events():
         print(api_resource, e)
         rsp = Response(e, status=500, content_type=plain_text)
     return rsp
+
 
 # View all upcoming events.
 @mod.route('/student/get_upcoming_events', methods=['POST'])
@@ -116,6 +118,7 @@ def get_registered_events():
         print(api_resource, e)
         rsp = Response(e, status=500, content_type=plain_text)
     return rsp
+
 
 # View registered events
 @mod.route('/student/get_registered_events', methods=['POST'])
@@ -193,6 +196,7 @@ def get_roles():
         print(api_resource, e)
         rsp = Response(e, status=500, content_type=plain_text)
     return rsp
+
 
 # View all the clubs and my role in it
 @mod.route('/student/get_roles', methods=['POST'])
