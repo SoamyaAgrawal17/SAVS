@@ -111,6 +111,7 @@ workflows:
       - build-and-unit-test
       - coverage
       - system-test-collection-run
+      - style-checker-application
       - sonarcloud:
             context: sonarcloud
    
