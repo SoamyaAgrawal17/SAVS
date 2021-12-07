@@ -63,7 +63,7 @@ def get_upcoming_events():
 
 # View all upcoming events.
 @mod.route('/student/get_upcoming_events', methods=['POST'])
-def get_upcoming_events():
+def get_upcoming_events_post():
     try:
         data = request.get_json()
         email_id = data["emailId"]
@@ -119,7 +119,7 @@ def get_registered_events():
 
 # View registered events
 @mod.route('/student/get_registered_events', methods=['POST'])
-def get_registered_events():
+def get_registered_events_post():
     try:
         data = request.get_json()
         email_id = data["emailId"]
@@ -196,7 +196,7 @@ def get_roles():
 
 # View all the clubs and my role in it
 @mod.route('/student/get_roles', methods=['POST'])
-def get_roles():
+def get_roles_post():
     try:
         data = request.get_json()
         email_id = data["emailId"]
