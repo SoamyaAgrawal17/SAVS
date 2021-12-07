@@ -52,8 +52,8 @@ class test_student_service(unittest.TestCase):
 
             response = StudentService.create_student(student_information)
             self.assertEqual(response,
-                             "Missing information(name, email_id, \
-                             college, department) required to create student")
+                             "Missing information(name, email_id, " +
+                             "college, department) required to create student")
 
             student_information = {
                 "name": "TestStudent",
@@ -101,7 +101,7 @@ class test_student_service(unittest.TestCase):
 
             # Register in an event
             registration = StudentService.register_event(event_id, student_id)
-            self.assertEqual(registration, "Student already "
+            self.assertEqual(registration, "Student already " +
                                            "registered for the event")
             registered_events = StudentService.\
                 get_registered_events(student_id)
@@ -125,8 +125,8 @@ class test_student_service(unittest.TestCase):
             # Withdraw from an event not registered in
             response = StudentService.withdraw_event(3, student_id)
             self.assertEqual(response,
-                             "Failure: Can't withdraw \
-                             from an event not registered in")
+                             "Failure: Can't withdraw " +
+                             "from an event not registered in")
 
     def test_withdraw_from_past_event(self):
         # Test if a student can register for events
@@ -177,7 +177,7 @@ class test_student_service(unittest.TestCase):
 
             # Register in an event
             registration = StudentService.register_event(event_id, student_id)
-            self.assertEqual(registration, "Student already "
+            self.assertEqual(registration, "Student already " +
                                            "registered for the event")
             registered_events = StudentService.\
                 get_registered_events(student_id)
@@ -348,8 +348,8 @@ class test_student_service(unittest.TestCase):
             event_id = 2
             registration = StudentService.register_event(event_id, student_id3)
             self.assertEqual(registration,
-                             "You need to be part of \
-                             this club to register for this event.")
+                             "You need to be part of " +
+                             "this club to register for this event.")
 
     def test_create_new_club_and_role_in_it(self):
         # Test if a student can create a new club
@@ -376,9 +376,9 @@ class test_student_service(unittest.TestCase):
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(response,
-                             "Missing information(name, \
-                             head, category, description) \
-                             required to create club")
+                             "Missing information(name, " +
+                             "head, category, description) " +
+                             "required to create club")
             self.assertEqual(status, 200)
 
             club_information = {
