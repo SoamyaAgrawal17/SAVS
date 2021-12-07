@@ -35,8 +35,12 @@ def check_if_already_registered(event_id, student_id):
 
 # Signup a student
 def create_student(student_information):
-    if 'name' not in student_information or 'email_id' not in student_information or 'college' not in student_information or 'department' not in student_information:
-        return "Missing information(name, email_id, college, department) required to create student"
+    if ('name' not in student_information or
+            'email_id' not in student_information or
+            'college' not in student_information or
+            'department' not in student_information):
+        return "Missing information(name, email_id, college, "\
+               "department) required to create student"
     name = student_information['name']
     email_id = student_information['email_id']
     college = student_information['college']
@@ -92,10 +96,12 @@ def register_event(event_id, student_id):
         return "You cannot register for an event in the past"
 
     if event.visibility == "Club Member":
-        query = db.session.query(Role).filter_by(student_id=student_id, club_id=event.club_id)
+        query = db.session.query(Role).\
+                filter_by(student_id=student_id, club_id=event.club_id)
         clubs_response = query.all()
         if len(clubs_response) == 0:
-            return "You need to be part of this club to register for this event."
+            return "You need to be part of\
+                     this club to register for this event."
 
     if event.registered_count == event.max_registration:
         return "The event is at maximum capacity"
@@ -118,7 +124,8 @@ def get_registered_events(student_id):
     student_events.sort(key=lambda x: x.event_id)
     registered_events = []
     for student_event_id in student_events:
-        event = db.session.query(Event).filter_by(_id=student_event_id.event_id).first()
+        event = db.session.query(Event).\
+                filter_by(_id=student_event_id.event_id).first()
         json_response = {
             "student_id": student_id,
             "event": event.as_dict(),
@@ -131,7 +138,8 @@ def get_registered_events(student_id):
 
 # Withdraw event
 def withdraw_event(student_id, event_id):
-    query = db.session.query(StudentEvent).filter_by(student_id=student_id, event_id=event_id)
+    query = db.session.query(StudentEvent).\
+            filter_by(student_id=student_id, event_id=event_id)
     student_event = query.first()
     if student_event is None:
         return "Failure: Can't withdraw from an event not registered in"
@@ -148,8 +156,12 @@ def withdraw_event(student_id, event_id):
 
 # Create a new club
 def create_club(club_information):
-    if 'name' not in club_information or 'head' not in club_information or 'category' not in club_information or 'description' not in club_information:
-        return 200, "Missing information(name, head, category, description) required to create club"
+    if 'name' not in club_information or\
+            'head' not in club_information or\
+            'category' not in club_information or\
+            'description' not in club_information:
+        return 200, "Missing information(name, head,\
+             category, description) required to create club"
     name = club_information['name']
     head = club_information['head']
     category = club_information['category']
