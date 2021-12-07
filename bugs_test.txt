@@ -1,0 +1,17 @@
+test/test_ClubService.py:13:1: E302 expected 2 blank lines, found 1
+test/test_EventService.py:1:1: F401 'datetime' imported but unused
+test/test_EventService.py:6:1: F403 'from datetime import *' used; unable to detect undefined names
+test/test_EventService.py:6:1: F401 'datetime.*' imported but unused
+test/test_EventService.py:121:80: E501 line too long (100 > 79 characters)
+test/test_EventService.py:126:80: E501 line too long (82 > 79 characters)
+test/test_EventService.py:301:80: E501 line too long (89 > 79 characters)
+test/test_StudentService.py:54:80: E501 line too long (125 > 79 characters)
+test/test_StudentService.py:104:80: E501 line too long (80 > 79 characters)
+test/test_StudentService.py:114:80: E501 line too long (80 > 79 characters)
+test/test_StudentService.py:123:80: E501 line too long (97 > 79 characters)
+test/test_StudentService.py:176:80: E501 line too long (80 > 79 characters)
+test/test_StudentService.py:199:80: E501 line too long (81 > 79 characters)
+test/test_StudentService.py:246:80: E501 line too long (90 > 79 characters)
+test/test_StudentService.py:341:80: E501 line too long (106 > 79 characters)
+test/test_StudentService.py:367:80: E501 line too long (120 > 79 characters)
+test/test_StudentService.py:406:80: E501 line too long (86 > 79 characters)

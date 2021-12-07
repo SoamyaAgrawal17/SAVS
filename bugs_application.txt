@@ -1,0 +1,23 @@
+application/controller/EventsController.py:89:80: E501 line too long (83 > 79 characters)
+application/controller/DatabaseController.py:23:1: W391 blank line at end of file
+application/controller/StudentsController.py:18:1: E302 expected 2 blank lines, found 1
+application/model/Event.py:2:1: F403 'from datetime import *' used; unable to detect undefined names
+application/model/Event.py:21:80: E501 line too long (85 > 79 characters)
+application/model/Event.py:49:34: F405 'datetime' may be undefined, or defined from star imports: datetime
+application/service/EventService.py:33:80: E501 line too long (104 > 79 characters)
+application/service/EventService.py:34:80: E501 line too long (100 > 79 characters)
+application/service/EventService.py:42:80: E501 line too long (91 > 79 characters)
+application/service/EventService.py:59:80: E501 line too long (115 > 79 characters)
+application/service/EventService.py:60:80: E501 line too long (121 > 79 characters)
+application/service/EventService.py:136:80: E501 line too long (91 > 79 characters)
+application/service/EventService.py:144:80: E501 line too long (97 > 79 characters)
+application/service/EventService.py:149:80: E501 line too long (82 > 79 characters)
+application/service/EventService.py:157:5: F841 local variable 'event_edit' is assigned to but never used
+application/service/StudentService.py:38:80: E501 line too long (165 > 79 characters)
+application/service/StudentService.py:39:80: E501 line too long (100 > 79 characters)
+application/service/StudentService.py:95:80: E501 line too long (94 > 79 characters)
+application/service/StudentService.py:98:80: E501 line too long (81 > 79 characters)
+application/service/StudentService.py:121:80: E501 line too long (88 > 79 characters)
+application/service/StudentService.py:134:80: E501 line too long (94 > 79 characters)
+application/service/StudentService.py:151:80: E501 line too long (151 > 79 characters)
+application/service/StudentService.py:152:80: E501 line too long (100 > 79 characters)
