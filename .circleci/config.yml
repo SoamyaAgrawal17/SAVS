@@ -112,9 +112,9 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-unit-test
-      - coverage
+#      - coverage
+#      - style-checker
       - system-test-collection-run
-      - style-checker
       - sonarcloud:
             context: sonarcloud
    
