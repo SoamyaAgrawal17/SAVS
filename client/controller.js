@@ -1,6 +1,6 @@
 var login_email_id = "no id";
 // var global_url = "http://localhost:5000/";
-var global_url = "https://savs-project-final.herokuapp.com/"; 
+var global_url = "https://savs-project-final.herokuapp.com/";
 
 function student_login(email){
     var xhr = new XMLHttpRequest();
