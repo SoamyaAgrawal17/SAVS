@@ -64,7 +64,7 @@ class test_student_service(unittest.TestCase):
             student_id = StudentService.get_student(
                 email_id)['_id']
             self.assertEqual(student_id, 1)
-##
+
             club_information = {
                 "name": club_3,
                 "head": email_id,
