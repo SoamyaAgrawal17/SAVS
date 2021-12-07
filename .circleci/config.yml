@@ -16,18 +16,6 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  sonarcloud:
-    docker:
-      - image: cimg/python:3.8
-    steps:
-      - checkout
-      - sonarcloud/scan
-  system-test-collection-run:
-    executor: newman/postman-newman-docker
-    steps:
-      - checkout
-      - newman/newman-run:
-          collection: ./SAVS.student_postman_collection.json
   coverage: # This is the name of the job, feel free to change it to better match what you're trying to do!
     # These next lines defines a Docker executors: https://circleci.com/docs/2.0/executor-types/
     # You can specify an image from Dockerhub or use one of the convenience images from CircleCI's Developer Hub
@@ -55,6 +43,7 @@ jobs:
             coverage html
       - store_artifacts:
           path: htmlcov
+
   build-and-unit-test: # This is the name of the job, feel free to change it to better match what you're trying to do!
     # These next lines defines a Docker executors: https://circleci.com/docs/2.0/executor-types/
     # You can specify an image from Dockerhub or use one of the convenience images from CircleCI's Developer Hub
@@ -78,6 +67,20 @@ jobs:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: python -m unittest discover -s test -t test
+
+  system-test-collection-run:
+    executor: newman/postman-newman-docker
+    steps:
+      - checkout
+      - newman/newman-run:
+          collection: ./SAVS.student_postman_collection.json
+
+  sonarcloud:
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - sonarcloud/scan
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
