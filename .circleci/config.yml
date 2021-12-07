@@ -22,13 +22,13 @@ jobs:
     steps:
       - checkout
       - sonarcloud/scan
-  newman-collection-run:
+  integration-test-collection-run:
     executor: newman/postman-newman-docker
     steps:
       - checkout
       - newman/newman-run:
           collection: ./SAVS.student_postman_collection.json
-  build-and-test: # This is the name of the job, feel free to change it to better match what you're trying to do!
+  build-and-unit-test: # This is the name of the job, feel free to change it to better match what you're trying to do!
     # These next lines defines a Docker executors: https://circleci.com/docs/2.0/executor-types/
     # You can specify an image from Dockerhub or use one of the convenience images from CircleCI's Developer Hub
     # A list of available CircleCI Docker convenience images are available here: https://circleci.com/developer/images/image/cimg/python
@@ -60,6 +60,6 @@ workflows:
     jobs:
       - sonarcloud:
           context: sonarcloud
-      - build-and-test
-      - newman-collection-run
+      - build-and-unit-test
+      - integration-test-collection-run
    
