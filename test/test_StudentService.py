@@ -407,8 +407,8 @@ class Test_TestStudentService(unittest.TestCase):
                 "event": {
                     "name": "Hackathon 2021 Columbia",
                     "club_id": 1,
-                    "start_timestamp": "2021-12-03 09:30:00",
-                    "end_timestamp": "2021-12-05 00:00:00",
+                    "start_timestamp": "2022-12-03 09:30:00",
+                    "end_timestamp": "2022-12-05 00:00:00",
                     "location": "New York City",
                     "max_registration": 125,
                     "description": "Winter Hackathon December 2021",

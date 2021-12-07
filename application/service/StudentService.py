@@ -38,7 +38,7 @@ def create_student(student_information):
     college = student_information['college']
     department = student_information['department']
 
-    if get_student(email_id) is not None:
+    if get_student(email_id) != "Student does not exist":
         return "Student Already Exists"
 
     new_student = Student(name=name, email_id=email_id, college=college,
@@ -53,15 +53,15 @@ def get_student(email_id=None):
     query = db.session.query(Student).filter(Student.email_id.in_([email_id]))
     result = query.first()
     if result is None:
-        return None
+        return "Student does not exist"
     return result.as_dict()
 
 
 # View all upcoming events.
 def get_upcoming_events(student_id):
     student_events = db.session.query(StudentEvent).filter(
-        StudentEvent.student_id.in_([student_id]))
-
+        StudentEvent.student_id.in_([student_id])).all()
+    student_events.sort(key=lambda x: x.event_id)
     upcoming_events = []
 
     for student_event in student_events:
@@ -111,6 +111,7 @@ def register_event(event_id, student_id):
 def get_registered_events(student_id):
     query = db.session.query(StudentEvent).filter_by(student_id=student_id)
     student_events = query.all()
+    student_events.sort(key=lambda x: x.event_id)
     registered_events = []
     for student_event_id in student_events:
         event = db.session.query(Event).filter_by(_id=student_event_id.event_id).first()
@@ -120,6 +121,7 @@ def get_registered_events(student_id):
             "status": student_event_id.status
         }
         registered_events.append(json_response)
+
     return registered_events
 
 
@@ -174,6 +176,7 @@ def create_club(club_information):
 def get_roles(student_id):
     query = db.session.query(Role).filter_by(student_id=student_id)
     clubs_response = query.all()
+    clubs_response.sort(key=lambda x: x.club_id)
     clubs = []
     for club in clubs_response:
         clubs.append(club.as_dict())
