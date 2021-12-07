@@ -19,6 +19,7 @@ department_name = "Computer Science"
 club_description_2 = "Test Club Description 2"
 club_3 = "Test Club 3"
 category_2 = "Test Category 2"
+club_entry_created = "Club Entry Created"
 
 class Test_TestStudentService(unittest.TestCase):
 
@@ -71,10 +72,10 @@ class Test_TestStudentService(unittest.TestCase):
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(status, 200)
-            self.assertEqual(response, "Club Entry Created")
+            self.assertEqual(response, club_entry_created)
 
             event = {
-                "emailId": "test_club_member@columbia.edu",
+                "emailId": test_club_member,
                 "event": {
                     "name": event_name,
                     "club_id": 1,
@@ -143,10 +144,10 @@ class Test_TestStudentService(unittest.TestCase):
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(status, 200)
-            self.assertEqual(response, "Club Entry Created")
+            self.assertEqual(response, club_entry_created)
 
             event = {
-                "emailId": "test_club_member@columbia.edu",
+                "emailId": test_club_member,
                 "event": {
                     "name": event_name,
                     "club_id": 1,
@@ -219,10 +220,10 @@ class Test_TestStudentService(unittest.TestCase):
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(status, 200)
-            self.assertEqual(response, "Club Entry Created")
+            self.assertEqual(response, club_entry_created)
 
             event = {
-                "emailId": "test_club_member@columbia.edu",
+                "emailId": test_club_member,
                 "event": {
                     "name": event_name,
                     "club_id": 1,
@@ -288,10 +289,10 @@ class Test_TestStudentService(unittest.TestCase):
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(status, 200)
-            self.assertEqual(response, "Club Entry Created")
+            self.assertEqual(response, club_entry_created)
 
             event = {
-                "emailId": "test_club_member@columbia.edu",
+                "emailId": test_club_member,
                 "event": {
                     "name": event_name,
                     "club_id": 1,
@@ -309,7 +310,6 @@ class Test_TestStudentService(unittest.TestCase):
 
             EventService.propose_event(event['event'], student_id1)
             event_id = 1
-            event_details = EventService.get_event(event_id).as_dict()
             registration = StudentService.register_event(event_id, student_id1)
             self.assertEqual(registration, student_registered_for_event)
 
@@ -319,7 +319,7 @@ class Test_TestStudentService(unittest.TestCase):
             registration = StudentService.register_event(event_id, student_id3)
             self.assertEqual(registration, "The event is at maximum capacity")
             event2 = {
-                "emailId": "test_club_member@columbia.edu",
+                "emailId": test_club_member,
                 "event": {
                     "name": event_name,
                     "club_id": 1,
@@ -373,7 +373,7 @@ class Test_TestStudentService(unittest.TestCase):
                 "description": club_description_2
             }
             status, response = StudentService.create_club(club_information)
-            self.assertEqual(response, "Club Entry Created")
+            self.assertEqual(response, club_entry_created)
             self.assertEqual(status, 200)
 
             status, response = StudentService.create_club(club_information)
@@ -413,10 +413,10 @@ class Test_TestStudentService(unittest.TestCase):
             }
             status, response = StudentService.create_club(club_information)
             self.assertEqual(status, 200)
-            self.assertEqual(response, "Club Entry Created")
+            self.assertEqual(response, club_entry_created)
 
             event = {
-                "emailId": "test_club_member@columbia.edu",
+                "emailId": test_club_member,
                 "event": {
                     "name": event_name,
                     "club_id": 1,
