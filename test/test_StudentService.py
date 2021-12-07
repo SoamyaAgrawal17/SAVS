@@ -9,7 +9,7 @@ email_id = "test_student@columbia.edu"
 email_id_1 = "test_student1@columbia.edu"
 email_id_2 = "test_student2@columbia.edu"
 student_registered_for_event = "Student registered for the event"
-club_member = "Club member"
+club_member = "Club Member"
 event_description = "Winter Hackathon December 2021"
 event_location = "New York City"
 event_name = "Hackathon 2021 Columbia"
@@ -21,7 +21,8 @@ club_3 = "Test Club 3"
 category_2 = "Test Category 2"
 club_entry_created = "Club Entry Created"
 
-class Test_TestStudentService(unittest.TestCase):
+
+class test_student_service(unittest.TestCase):
 
     def setUp(self):
         app.config['SQLALCHEMY_DATABASE_URI'] = \
