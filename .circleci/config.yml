@@ -34,10 +34,10 @@ jobs:
             name: Run style checker
             # This assumes pytest is installed via the install-package step above.
             command: |
-              flake8 ./ test --output-file test-reports
+              flake8 ./ --output-file style-checker-reports
         - store_artifacts:
-            path: test-reports
-            destination: test-reports
+            path: style-checker-reports
+            destination: style-checker-reports
   build-and-unit-test: # This is the name of the job, feel free to change it to better match what you're trying to do!
     # These next lines defines a Docker executors: https://circleci.com/docs/2.0/executor-types/
     # You can specify an image from Dockerhub or use one of the convenience images from CircleCI's Developer Hub
