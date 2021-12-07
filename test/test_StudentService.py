@@ -5,9 +5,10 @@ from application.utilities.database import db
 from app import app
 
 app.config['TESTING'] = True
-
+email_id = "test_student@columbia.edu"
 
 class Test_TestStudentService(unittest.TestCase):
+
     def setUp(self):
         app.config['SQLALCHEMY_DATABASE_URI'] = \
             'postgresql://qvlexpubbtkawz:c415dbfa33e578124d9b3774' \
@@ -29,7 +30,7 @@ class Test_TestStudentService(unittest.TestCase):
         # Test if a student can register for events
         with app.app_context():
             student_information = {
-                "email_id": "test_student@columbia.edu",
+                "email_id": email_id,
                 "college": "Fu Foundation",
                 "department": "Computer Science"
             }
@@ -39,19 +40,19 @@ class Test_TestStudentService(unittest.TestCase):
 
             student_information = {
                 "name": "TestStudent",
-                "email_id": "test_student@columbia.edu",
+                "email_id": email_id,
                 "college": "Fu Foundation",
                 "department": "Computer Science"
             }
 
             StudentService.create_student(student_information)
             student_id = StudentService.get_student(
-                "test_student@columbia.edu")['_id']
+                email_id)['_id']
             self.assertEqual(student_id, 1)
 
             club_information = {
                 "name": "Test Club 3",
-                "head": "test_student@columbia.edu",
+                "head": email_id,
                 "category": "Test Category 2",
                 "description": "Test Club Description 2"
             }
@@ -111,19 +112,19 @@ class Test_TestStudentService(unittest.TestCase):
         with app.app_context():
             student_information = {
                 "name": "TestStudent",
-                "email_id": "test_student@columbia.edu",
+                "email_id": email_id,
                 "college": "Fu Foundation",
                 "department": "Computer Science"
             }
 
             StudentService.create_student(student_information)
             student_id = StudentService.get_student(
-                "test_student@columbia.edu")['_id']
+                email_id)['_id']
             self.assertEqual(student_id, 1)
 
             club_information = {
                 "name": "Test Club 3",
-                "head": "test_student@columbia.edu",
+                "head": email_id,
                 "category": "Test Category 2",
                 "description": "Test Club Description 2"
             }
@@ -187,19 +188,19 @@ class Test_TestStudentService(unittest.TestCase):
         with app.app_context():
             student_information = {
                 "name": "TestStudent",
-                "email_id": "test_student@columbia.edu",
+                "email_id": email_id,
                 "college": "Fu Foundation",
                 "department": "Computer Science"
             }
 
             StudentService.create_student(student_information)
             student_id = StudentService.get_student(
-                "test_student@columbia.edu")['_id']
+                email_id)['_id']
             self.assertEqual(student_id, 1)
 
             club_information = {
                 "name": "Test Club 3",
-                "head": "test_student@columbia.edu",
+                "head": email_id,
                 "category": "Test Category 2",
                 "description": "Test Club Description 2"
             }
@@ -378,23 +379,23 @@ class Test_TestStudentService(unittest.TestCase):
         with app.app_context():
             student_information = {
                 "name": "TestStudent",
-                "email_id": "test_student@columbia.edu",
+                "email_id": email_id,
                 "college": "Fu Foundation",
                 "department": "Computer Science"
             }
 
             StudentService.create_student(student_information)
             student_id = StudentService.get_student(
-                "test_student@columbia.edu")['_id']
+                email_id)['_id']
             self.assertEqual(student_id, 1)
-            student_id = StudentService.get_id("test_student@columbia.edu")
+            student_id = StudentService.get_id(email_id)
             self.assertEqual(student_id, 1)
             response = StudentService.get_id("test_unregistered_student@columbia.edu")
             self.assertEqual(response, "Student does not exist")
 
             club_information = {
                 "name": "Test Club 3",
-                "head": "test_student@columbia.edu",
+                "head": email_id,
                 "category": "Test Category 2",
                 "description": "Test Club Description 2"
             }
