@@ -54,12 +54,14 @@ To build, run and test on localhost or Heroku, follow the following steps:
 
 - Manual Testing can be done by using the above Endpoint. <br>
 - Unit Testing could be done by running the command coverage run -m unittest discover test or using push button to run all the unit tests. <br>
-- For integration testing clear the database and run the collection SAVS on Postman(The collection json is shared and IA is added to the postman workspace).
+- For integration testing clear the database and run the collection SAVS on Postman(The collection json is shared and IA is added to the postman workspace). <br>
 
+To build client:
+  Run the file /SAVS/client/index.html in browser. 
   
 CI/CD reports: <br>
-  Unit Test Cases: https://app.circleci.com/pipelines/github/SoamyaAgrawal17/SAVS/77/workflows/1fe42c71-3db1-479d-9d05-8e5b89826f0f/jobs/143 <br>
+  Unit Test Cases and Coverage: https://app.circleci.com/pipelines/github/SoamyaAgrawal17/SAVS/77/workflows/1fe42c71-3db1-479d-9d05-8e5b89826f0f/jobs/143 <br>
   Integration Test Cases: https://app.circleci.com/pipelines/github/SoamyaAgrawal17/SAVS/77/workflows/1fe42c71-3db1-479d-9d05-8e5b89826f0f/jobs/144 <br>
-  SonarCloud: https://github.com/SoamyaAgrawal17/SAVS/runs/4447106326 <br>
-  Coverage Report: <br>
+  Bug Finder using SonarCloud: https://github.com/SoamyaAgrawal17/SAVS/runs/4447106326 <br>
+  Style Checker using Flake: 
   
