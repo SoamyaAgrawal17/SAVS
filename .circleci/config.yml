@@ -34,8 +34,8 @@ jobs:
             name: Run style checker
             # This assumes pytest is installed via the install-package step above.
             command: |
-            flake8 application
-            flake8 test
+              flake8 application
+              flake8 test
         - store_artifacts:
             path: bugs
   build-and-unit-test: # This is the name of the job, feel free to change it to better match what you're trying to do!
