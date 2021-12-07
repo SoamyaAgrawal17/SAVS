@@ -40,7 +40,7 @@ def create_student(student_information):
             'college' not in student_information or
             'department' not in student_information):
         return ("Missing information(name, email_id, college, " +
-               "department) required to create student")
+                "department) required to create student")
     name = student_information['name']
     email_id = student_information['email_id']
     college = student_information['college']
@@ -160,8 +160,8 @@ def create_club(club_information):
             'head' not in club_information or\
             'category' not in club_information or\
             'description' not in club_information:
-        return 200, "Missing information(name, head,\
-             category, description) required to create club"
+        return (200, "Missing information(name, head, " +
+                "category, description) required to create club")
     name = club_information['name']
     head = club_information['head']
     category = club_information['category']
