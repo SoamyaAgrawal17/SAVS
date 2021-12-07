@@ -6,6 +6,13 @@ from app import app
 
 app.config['TESTING'] = True
 email_id = "test_student@columbia.edu"
+email_id_1 = "test_student1@columbia.edu"
+email_id_2 = "test_student2@columbia.edu"
+student_registered_for_event = "Student registered for the event"
+club_member = "Club member"
+event_description = "Winter Hackathon December 2021"
+event_location = "New York City"
+event_name = "Hackathon 2021 Columbia"
 
 class Test_TestStudentService(unittest.TestCase):
 
@@ -63,16 +70,16 @@ class Test_TestStudentService(unittest.TestCase):
             event = {
                 "emailId": "test_club_member@columbia.edu",
                 "event": {
-                    "name": "Hackathon 2021 Columbia",
+                    "name": event_name,
                     "club_id": 1,
                     "start_timestamp": "2021-12-26 09:30:00",
                     "end_timestamp": "2021-12-27 00:00:00",
-                    "location": "New York City",
+                    "location": event_location,
                     "max_registration": 125,
-                    "description": "Winter Hackathon December 2021",
+                    "description": event_description,
                     "fee": 10,
                     "category": "Academic",
-                    "visibility": "Club member",
+                    "visibility": club_member,
                     "status": "Created"
                 }
             }
@@ -80,7 +87,7 @@ class Test_TestStudentService(unittest.TestCase):
             EventService.propose_event(event['event'], student_id)
             event_id = 1
             registration = StudentService.register_event(event_id, student_id)
-            self.assertEqual(registration, "Student registered for the event")
+            self.assertEqual(registration, student_registered_for_event)
 
             # Register in an event
             registration = StudentService.register_event(event_id, student_id)
@@ -135,16 +142,16 @@ class Test_TestStudentService(unittest.TestCase):
             event = {
                 "emailId": "test_club_member@columbia.edu",
                 "event": {
-                    "name": "Hackathon 2021 Columbia",
+                    "name": event_name,
                     "club_id": 1,
                     "start_timestamp": "2021-12-26 09:30:00",
                     "end_timestamp": "2021-12-27 00:00:00",
-                    "location": "New York City",
+                    "location": event_location,
                     "max_registration": 125,
-                    "description": "Winter Hackathon December 2021",
+                    "description": event_description,
                     "fee": 10,
                     "category": "Academic",
-                    "visibility": "Club member",
+                    "visibility": club_member,
                     "status": "Created"
                 }
             }
@@ -152,7 +159,7 @@ class Test_TestStudentService(unittest.TestCase):
             EventService.propose_event(event['event'], student_id)
             event_id = 1
             registration = StudentService.register_event(event_id, student_id)
-            self.assertEqual(registration, "Student registered for the event")
+            self.assertEqual(registration, student_registered_for_event)
 
             # Register in an event
             registration = StudentService.register_event(event_id, student_id)
@@ -166,16 +173,16 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(registered_event['status'], "Registered")
 
             event_information = {
-                    "name": "Hackathon 2021 Columbia",
+                    "name": event_name,
                     "club_id": 1,
                     "start_timestamp": "2020-12-26 09:30:00",
                     "end_timestamp": "2020-12-27 00:00:00",
-                    "location": "New York City",
+                    "location": event_location,
                     "max_registration": 125,
-                    "description": "Winter Hackathon December 2021",
+                    "description": event_description,
                     "fee": 10,
                     "category": "Academic",
-                    "visibility": "Club member",
+                    "visibility": club_member,
                 }
 
             EventService.edit_event(event_information, event_id, student_id)
@@ -211,13 +218,13 @@ class Test_TestStudentService(unittest.TestCase):
             event = {
                 "emailId": "test_club_member@columbia.edu",
                 "event": {
-                    "name": "Hackathon 2021 Columbia",
+                    "name": event_name,
                     "club_id": 1,
                     "start_timestamp": "2020-12-03 09:30:00",
                     "end_timestamp": "2020-12-05 00:00:00",
-                    "location": "New York City",
+                    "location": event_location,
                     "max_registration": 125,
-                    "description": "Winter Hackathon December 2021",
+                    "description": event_description,
                     "fee": 10,
                     "category": "Academic",
                     "visibility": "all",
@@ -235,14 +242,14 @@ class Test_TestStudentService(unittest.TestCase):
         with app.app_context():
             student_information1 = {
                 "name": "TestStudent",
-                "email_id": "test_student1@columbia.edu",
+                "email_id": email_id_1,
                 "college": "Fu Foundation",
                 "department": "Computer Science"
             }
 
             student_information2 = {
                 "name": "TestStudent2",
-                "email_id": "test_student2@columbia.edu",
+                "email_id": email_id_2,
                 "college": "Fu Foundation",
                 "department": "Computer Science"
             }
@@ -258,10 +265,10 @@ class Test_TestStudentService(unittest.TestCase):
             StudentService.create_student(student_information2)
             StudentService.create_student(student_information3)
             student_id1 = StudentService.get_student(
-                "test_student1@columbia.edu")['_id']
+                email_id_1)['_id']
             self.assertEqual(student_id1, 1)
             student_id2 = StudentService.get_student(
-                "test_student2@columbia.edu")['_id']
+                email_id_2)['_id']
             self.assertEqual(student_id2, 2)
             student_id3 = StudentService.get_student(
                 "test_student3@columbia.edu")['_id']
@@ -269,7 +276,7 @@ class Test_TestStudentService(unittest.TestCase):
 
             club_information = {
                 "name": "Test Club 3",
-                "head": "test_student1@columbia.edu",
+                "head": email_id_1,
                 "category": "Test Category 2",
                 "description": "Test Club Description 2"
             }
@@ -280,13 +287,13 @@ class Test_TestStudentService(unittest.TestCase):
             event = {
                 "emailId": "test_club_member@columbia.edu",
                 "event": {
-                    "name": "Hackathon 2021 Columbia",
+                    "name": event_name,
                     "club_id": 1,
                     "start_timestamp": "2021-12-23 09:30:00",
                     "end_timestamp": "2021-12-25 00:00:00",
-                    "location": "New York City",
+                    "location": event_location,
                     "max_registration": 2,
-                    "description": "Winter Hackathon December 2021",
+                    "description": event_description,
                     "fee": 10,
                     "category": "Academic",
                     "visibility": "All",
@@ -297,28 +304,27 @@ class Test_TestStudentService(unittest.TestCase):
             EventService.propose_event(event['event'], student_id1)
             event_id = 1
             event_details = EventService.get_event(event_id).as_dict()
-            old_registration_count = event_details['registered_count']
             registration = StudentService.register_event(event_id, student_id1)
-            self.assertEqual(registration, "Student registered for the event")
+            self.assertEqual(registration, student_registered_for_event)
 
             registration = StudentService.register_event(event_id, student_id2)
-            self.assertEqual(registration, "Student registered for the event")
+            self.assertEqual(registration, student_registered_for_event)
 
             registration = StudentService.register_event(event_id, student_id3)
             self.assertEqual(registration, "The event is at maximum capacity")
             event2 = {
                 "emailId": "test_club_member@columbia.edu",
                 "event": {
-                    "name": "Hackathon 2021 Columbia",
+                    "name": event_name,
                     "club_id": 1,
                     "start_timestamp": "2021-12-23 09:30:00",
                     "end_timestamp": "2021-12-25 00:00:00",
-                    "location": "New York City",
+                    "location": event_location,
                     "max_registration": 2,
-                    "description": "Winter Hackathon December 2021",
+                    "description": event_description,
                     "fee": 10,
                     "category": "Academic",
-                    "visibility": "Club Member",
+                    "visibility": club_member,
                     "status": "Created"
                 }
             }
@@ -332,7 +338,7 @@ class Test_TestStudentService(unittest.TestCase):
         with app.app_context():
             student = {
                 "name": "TestStudent2",
-                "email_id": "test_student2@columbia.edu",
+                "email_id": email_id_2,
                 "college": "Fu Foundation",
                 "department": "Computer Science"
             }
@@ -342,7 +348,7 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(response, "Student Already Exists")
 
             student_id = StudentService.get_student(
-                "test_student2@columbia.edu")['_id']
+                email_id_2)['_id']
             self.assertEqual(student_id, 1)
 
             club_information = {
@@ -356,7 +362,7 @@ class Test_TestStudentService(unittest.TestCase):
 
             club_information = {
                 "name": "Test Club 3",
-                "head": "test_student2@columbia.edu",
+                "head": email_id_2,
                 "category": "Test Category 2",
                 "description": "Test Club Description 2"
             }
@@ -406,13 +412,13 @@ class Test_TestStudentService(unittest.TestCase):
             event = {
                 "emailId": "test_club_member@columbia.edu",
                 "event": {
-                    "name": "Hackathon 2021 Columbia",
+                    "name": event_name,
                     "club_id": 1,
                     "start_timestamp": "2022-12-03 09:30:00",
                     "end_timestamp": "2022-12-05 00:00:00",
-                    "location": "New York City",
+                    "location": event_location,
                     "max_registration": 125,
-                    "description": "Winter Hackathon December 2021",
+                    "description": event_description,
                     "fee": 10,
                     "category": "Academic",
                     "visibility": "all",
@@ -428,7 +434,7 @@ class Test_TestStudentService(unittest.TestCase):
             self.assertEqual(len(upcoming_events), 1)
             upcoming_event = upcoming_events[0]
             self.assertEqual(upcoming_event['_id'], 1)
-            self.assertEqual(upcoming_event["name"], "Hackathon 2021 Columbia")
+            self.assertEqual(upcoming_event["name"], event_name)
 
 
 if __name__ == '__main__':
