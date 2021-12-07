@@ -7,7 +7,11 @@ from application.service.ClubService import get_id as get_club_id
 from application.service.ClubService import club_exist
 from application.service.EventService import get_event
 from application.utilities.database import db
-from datetime import *
+from datetime import datetime
+
+
+# Variable declaration
+student_does_not_exist = "Student does not exist"
 
 
 # Get student id if email_id of student is provided
@@ -15,7 +19,7 @@ def get_id(email_id):
     student = db.session.query(Student).filter(
         Student.email_id.in_([email_id])).first()
     if student is None:
-        return "Student does not exist"
+        return student_does_not_exist
     student_id = student._id
     return student_id
 
@@ -38,7 +42,7 @@ def create_student(student_information):
     college = student_information['college']
     department = student_information['department']
 
-    if get_student(email_id) != "Student does not exist":
+    if get_student(email_id) != student_does_not_exist:
         return "Student Already Exists"
 
     new_student = Student(name=name, email_id=email_id, college=college,
@@ -53,7 +57,7 @@ def get_student(email_id=None):
     query = db.session.query(Student).filter(Student.email_id.in_([email_id]))
     result = query.first()
     if result is None:
-        return "Student does not exist"
+        return student_does_not_exist
     return result.as_dict()
 
 

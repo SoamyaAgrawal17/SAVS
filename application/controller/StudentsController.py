@@ -9,6 +9,11 @@ log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
 
+# Variable declaration
+application_json = "application/JSON"
+api_resource = "/api/<resource>, e = "
+plain_text = "plain/text"
+
 # Signup a student
 @mod.route('/student', methods=['POST'])
 def create_student():
@@ -16,10 +21,10 @@ def create_student():
         student_information = request.get_json()
         student_entry = StudentService.create_student(student_information)
         res = json.dumps(student_entry, default=str)
-        rsp = Response(res, status=200, content_type="application/JSON")
+        rsp = Response(res, status=200, content_type=application_json)
     except Exception as e:
-        print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="plain/text")
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -31,10 +36,10 @@ def get_student(email_id=None):
         if student_entry is None:
             return "Student is not registered"
         res = json.dumps(student_entry, default=str)
-        rsp = Response(res, status=200, content_type="application/JSON")
+        rsp = Response(res, status=200, content_type=application_json)
     except Exception as e:
-        print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="plain/text")
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -50,10 +55,10 @@ def get_upcoming_events():
             return rsp
         events = StudentService.get_upcoming_events(student_id)
         res = json.dumps(events, default=str)
-        rsp = Response(res, status=200, content_type="application/JSON")
+        rsp = Response(res, status=200, content_type=application_json)
     except Exception as e:
-        print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="plain/text")
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -69,10 +74,10 @@ def register_event(event_id=None):
             return rsp
         event = StudentService.register_event(event_id, student_id)
         res = json.dumps(event, default=str)
-        rsp = Response(res, status=200, content_type="application/JSON")
+        rsp = Response(res, status=200, content_type=application_json)
     except Exception as e:
-        print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="plain/text")
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -88,10 +93,10 @@ def get_registered_events():
             return rsp
         event = StudentService.get_registered_events(student_id)
         res = json.dumps(event, default=str)
-        rsp = Response(res, status=200, content_type="application/JSON")
+        rsp = Response(res, status=200, content_type=application_json)
     except Exception as e:
-        print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="plain/text")
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -108,10 +113,10 @@ def withdraw_event():
             return rsp
         event = StudentService.withdraw_event(student_id, event_id)
         res = json.dumps(event, default=str)
-        rsp = Response(res, status=200, content_type="application/JSON")
+        rsp = Response(res, status=200, content_type=application_json)
     except Exception as e:
-        print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="plain/text")
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -128,10 +133,10 @@ def create_club():
         club_information = data["club"]
         status, club_entry = StudentService.create_club(club_information)
         res = json.dumps(club_entry, default=str)
-        rsp = Response(res, status=status, content_type="application/JSON")
+        rsp = Response(res, status=status, content_type=application_json)
     except Exception as e:
-        print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="plain/text")
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -147,10 +152,10 @@ def get_roles():
             return rsp
         clubs = StudentService.get_roles(student_id)
         res = json.dumps(clubs, default=str)
-        rsp = Response(res, status=200, content_type="application/JSON")
+        rsp = Response(res, status=200, content_type=application_json)
     except Exception as e:
-        print("/api/<resource>, e = ", e)
-        rsp = Response(e, status=500, content_type="plain/text")
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -158,5 +163,5 @@ def validate_permission(student_id):
     if student_id == "Student does not exist":
         message = "You do not have the required" \
                   " permissions to perform this operation"
-        return False, Response(message, status=403, content_type="plain/text")
-    return True, Response("Valid student", status=200, content_type="plain/text")
+        return False, Response(message, status=403, content_type=plain_text)
+    return True, Response("Valid student", status=200, content_type=plain_text)
