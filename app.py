@@ -2,7 +2,6 @@ from application.utilities.database import db
 from flask import Flask
 from application.controller import ClubsController, EventsController
 from application.controller import StudentsController, DatabaseController
-from application.controller import StudentsController
 from flask_cors import CORS
 
 app = Flask(__name__)
