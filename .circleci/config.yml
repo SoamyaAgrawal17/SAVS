@@ -51,7 +51,7 @@ jobs:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: |
-            coverage run -m --branch unittest discover test
+            coverage run --source=application/service -m --branch unittest discover test
             coverage html
       - store_artifacts:
           path: htmlcov
