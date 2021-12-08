@@ -67,33 +67,11 @@ def get_upcoming_events():
     return rsp
 
 
-# View all upcoming events.
-@mod.route('/student/get_upcoming_events', methods=['POST'])
-@auth_required
-def get_upcoming_events_post():
-    try:
-        data = request.get_json()
-        user_info = get_token_info()
-        email_id = user_info["email"]
-        student_id = StudentService.get_id(email_id)
-        have_permission, rsp = validate_permission(student_id)
-        if not have_permission:
-            return rsp
-        events = StudentService.get_upcoming_events(student_id)
-        res = json.dumps(events, default=str)
-        rsp = Response(res, status=200, content_type=application_json)
-    except Exception as e:
-        print(api_resource, e)
-        rsp = Response(e, status=500, content_type=plain_text)
-    return rsp
-
-
 # Register for an event
 @mod.route('/student/register_event/<event_id>', methods=['POST'])
 @auth_required
 def register_event(event_id=None):
     try:
-        data = request.get_json()
         user_info = get_token_info()
         email_id = user_info["email"]
         student_id = StudentService.get_id(email_id)
@@ -113,27 +91,6 @@ def register_event(event_id=None):
 @mod.route('/student/get_registered_events', methods=['GET'])
 @auth_required
 def get_registered_events():
-    try:
-        data = request.get_json()
-        user_info = get_token_info()
-        email_id = user_info["email"]
-        student_id = StudentService.get_id(email_id)
-        have_permission, rsp = validate_permission(student_id)
-        if not have_permission:
-            return rsp
-        event = StudentService.get_registered_events(student_id)
-        res = json.dumps(event, default=str)
-        rsp = Response(res, status=200, content_type=application_json)
-    except Exception as e:
-        print(api_resource, e)
-        rsp = Response(e, status=500, content_type=plain_text)
-    return rsp
-
-
-# View registered events
-@mod.route('/student/get_registered_events', methods=['POST'])
-@auth_required
-def get_registered_events_post():
     try:
         user_info = get_token_info()
         email_id = user_info["email"]
@@ -178,7 +135,8 @@ def withdraw_event():
 def create_club():
     try:
         data = request.get_json()
-        email_id = data["emailId"]
+        user_info = get_token_info()
+        email_id = user_info["email"]
         student_id = StudentService.get_id(email_id)
         have_permission, rsp = validate_permission(student_id)
         if not have_permission:
@@ -198,28 +156,8 @@ def create_club():
 @auth_required
 def get_roles():
     try:
-        data = request.get_json()
-        email_id = data["emailId"]
-        student_id = StudentService.get_id(email_id)
-        have_permission, rsp = validate_permission(student_id)
-        if not have_permission:
-            return rsp
-        clubs = StudentService.get_roles(student_id)
-        res = json.dumps(clubs, default=str)
-        rsp = Response(res, status=200, content_type=application_json)
-    except Exception as e:
-        print(api_resource, e)
-        rsp = Response(e, status=500, content_type=plain_text)
-    return rsp
-
-
-# View all the clubs and my role in it
-@mod.route('/student/get_roles', methods=['POST'])
-@auth_required
-def get_roles_post():
-    try:
-        data = request.get_json()
-        email_id = data["emailId"]
+        user_info = get_token_info()
+        email_id = user_info["email"]
         student_id = StudentService.get_id(email_id)
         have_permission, rsp = validate_permission(student_id)
         if not have_permission:
