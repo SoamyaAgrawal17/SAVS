@@ -290,6 +290,7 @@ function student_login(email){
     var url = global_url + "student/" + email;
     xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log(xhr.responseText);
@@ -315,6 +316,7 @@ function get_club_by_id(club_id){
     var url = global_url + "clubs/" + club_id;
     xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log(xhr.responseText);
@@ -350,6 +352,7 @@ function create_club(){
     var url = global_url + "student/club";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var json = JSON.parse(xhr.responseText);
@@ -362,7 +365,6 @@ function create_club(){
         }
     };
     var data = JSON.stringify({
-        "emailId":login_email_id,
         "club":{
             "name": document.getElementById("create-club-name").value,
             "head": document.getElementById("create-club-head").value,
@@ -378,6 +380,7 @@ function get_all_clubs(){
     var url = global_url + "clubs";
     xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var json = JSON.parse(xhr.responseText);
@@ -412,6 +415,7 @@ function add_member(){
     var url = global_url + "member/" + document.getElementById("member-club-id").value;
     xhr.open("PUT", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var json = xhr.responseText;
@@ -436,6 +440,7 @@ function delete_club(){
     var url = global_url + "clubs/" + document.getElementById("delete-club-id").value;
     xhr.open("DELETE", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var json = xhr.responseText;
@@ -457,8 +462,9 @@ function delete_club(){
 function get_roles(){
     var xhr = new XMLHttpRequest();
     var url = global_url + "student/get_roles";
-    xhr.open("POST", url, true);
+    xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var json = JSON.parse(xhr.responseText);
@@ -485,7 +491,7 @@ function get_roles(){
         }
     };
     var data = JSON.stringify({"emailId":login_email_id});
-    xhr.send(data);
+    xhr.send();
 }
 
 // EVENTS
@@ -495,6 +501,7 @@ function get_event_by_id(event_id){
     var url = global_url + "events/" + event_id;
     xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log(xhr.responseText);
@@ -551,7 +558,6 @@ function create_event(){
         }
     };
     var data = JSON.stringify({
-        "emailId":login_email_id,
         "event":{
             "name": document.getElementById("create-event-name").value,
             "club_id": parseInt(document.getElementById("create-event-club-id").value),
@@ -574,6 +580,7 @@ function get_all_events(){
     var url = global_url + "events";
     xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var json = JSON.parse(xhr.responseText);
@@ -609,8 +616,9 @@ function get_all_events(){
 function get_registered_events(student_email_id) {
     var xhr = new XMLHttpRequest();
     var url = global_url + "student/get_registered_events";
-    xhr.open("POST", url, true);
+    xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var json = JSON.parse(xhr.responseText);
@@ -641,7 +649,7 @@ function get_registered_events(student_email_id) {
         }
     };
     var data = JSON.stringify({"emailId":login_email_id});
-    xhr.send(data);
+    xhr.send();
 }
 
 function register_event(){
@@ -649,6 +657,7 @@ function register_event(){
     var url = global_url + "student/register_event/" + document.getElementById("register-event-id").value;
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var json = xhr.responseText;
@@ -661,10 +670,7 @@ function register_event(){
             document.getElementById("register-event-response").innerHTML = json;
         }
     };
-    var data = JSON.stringify({
-        "emailId":login_email_id
-    })
-    xhr.send(data);
+    xhr.send();
 }
   </script>
 
