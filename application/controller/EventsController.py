@@ -3,6 +3,7 @@ from flask import Blueprint
 import logging
 import json
 
+from application.auth.google_auth import auth_required, get_token_info
 from application.service import EventService, StudentService
 
 log = logging.getLogger('werkzeug')
@@ -37,12 +38,13 @@ def get_filtered_events():
 
 # Add an event (by club member/head)
 @mod.route('/events', methods=['POST'])
+@auth_required
 def propose_events():
     rsp = Response("INTERNAL ERROR", status=500, content_type="text/plain")
     try:
         data = request.get_json()
-        print(data)
-        email_id = data["emailId"]
+        user_info = get_token_info()
+        email_id = user_info["email"]
         event_information = data["event"]
         student_id = StudentService.get_id(email_id)
         response_message, status_code = EventService.propose_event(
@@ -57,11 +59,13 @@ def propose_events():
 
 # Edit an event (by club member/head)
 @mod.route('/events/<event_id>', methods=['PUT'])
+@auth_required
 def edit_events(event_id):
     rsp = Response("INTERNAL ERROR", status=500, content_type="text/plain")
     try:
         data = request.get_json()
-        email_id = data["emailId"]
+        user_info = get_token_info()
+        email_id = user_info["email"]
         if 'status' in data:
             event_status = data["status"]
             student_id = StudentService.get_id(email_id)
@@ -99,6 +103,21 @@ def get_event_by_id(event_id):
     try:
         event = EventService.get_event(event_id)
         res = json.dumps(event.as_dict(), default=str)
+        rsp = Response(res, status=200, content_type="application/JSON")
+    except Exception as e:
+        print("/api/<resource>, e = ", e)
+        rsp = Response(e, status=500, content_type="text/plain")
+    return rsp
+
+
+@mod.route('/test', methods=['GET'])
+@auth_required
+def get_auth_test():
+    rsp = Response("INTERNAL ERROR", status=500, content_type="text/plain")
+    try:
+        user_info = get_token_info()
+        obj = {"key": user_info["email"]}
+        res = json.dumps(obj, default=str)
         rsp = Response(res, status=200, content_type="application/JSON")
     except Exception as e:
         print("/api/<resource>, e = ", e)

@@ -1,9 +1,8 @@
-import datetime
 import unittest
 from application.service import EventService
 from application.utilities.database import db
+from application.utilities.constants import CLUB_MEMBER
 from app import app
-from datetime import *
 
 app.config['TESTING'] = True
 
@@ -27,32 +26,33 @@ class Test_TestEventService(unittest.TestCase):
             student2 = Student.Student(name="Alice", email_id="alice@abc.com",
                                        college="College1", department="CS")
             student2._id = 2
-            student3 = Student.Student(name="Head", email_id="head@abc.com",
+            head_email = "head@abc.com"
+            student3 = Student.Student(name="Head", email_id=head_email,
                                        college="College1", department="CS")
             student3._id = 3
-            club1 = Club.Club(name="Club1", head="head@abc.com",
+            club1 = Club.Club(name="Club1", head=head_email,
                               category="Sports", description="Description")
-            club2 = Club.Club(name="Club2", head="head@abc.com",
+            club2 = Club.Club(name="Club2", head=head_email,
                               category="Academic", description="Description")
             club1._id = 1
             club2._id = 2
-            role1 = Role.Role(student_id=1, club_id=1, role="Club Member")
-            role2 = Role.Role(student_id=2, club_id=1, role="Club Member")
+            role1 = Role.Role(student_id=1, club_id=1, role=CLUB_MEMBER)
+            role2 = Role.Role(student_id=2, club_id=1, role=CLUB_MEMBER)
             role3 = Role.Role(student_id=3, club_id=1, role="Club Head")
-            role4 = Role.Role(student_id=2, club_id=2, role="Club Member")
+            role4 = Role.Role(student_id=2, club_id=2, role=CLUB_MEMBER)
             event1 = Event.Event(name="Event1", category="Sports",
                                  description="Desc", club_id=1,
                                  visibility="Students",
-                                 start_timestamp="2021-12-03 09:30:00",
-                                 end_timestamp="2021-12-03 09:30:00",
+                                 start_timestamp="2022-12-03 09:30:00",
+                                 end_timestamp="2022-12-03 09:30:00",
                                  location="NYC", max_registration=50,
                                  fee=5, status="Approved",
                                  registered_count=50, created_by=1)
             event2 = Event.Event(name="Event2", category="Music",
                                  description="Musical Night", club_id=1,
                                  visibility="Students",
-                                 start_timestamp="2021-12-03 09:30:00",
-                                 end_timestamp="2021-12-03 09:30:00",
+                                 start_timestamp="2022-12-03 09:30:00",
+                                 end_timestamp="2022-12-03 09:30:00",
                                  location="CA", max_registration=50,
                                  fee=5, status="Proposed",
                                  registered_count=50, created_by=2)
@@ -188,28 +188,27 @@ class Test_TestEventService(unittest.TestCase):
             events = EventService.get_events()
             self.assertEqual(len(events), 2)
 
-    # COMMENTED BY VANI FOR BUILD TEST CI/CD TO PASS
-    # def test_edit_events(self):
-    #     # Test if an event can be edited by Club Member
-    #     with app.app_context():
-    #         event_obj = {
-    #             "name": "Event Title",
-    #             "club_id": 1,
-    #             "start_timestamp": "2021-12-03 09:30:00",
-    #             "end_timestamp": "2021-12-05 00:00:00",
-    #             "location": "NJ",
-    #             "max_registration": 75,
-    #             "description": "Tennis",
-    #             "category": "Sports"
-    #         }
+    def test_edit_events(self):
+        # Test if an event can be edited by Club Member
+        with app.app_context():
+            event_obj = {
+                "name": "Event Title",
+                "club_id": 1,
+                "start_timestamp": "2022-12-03 09:30:00",
+                "end_timestamp": "2022-12-05 00:00:00",
+                "location": "NJ",
+                "max_registration": 75,
+                "description": "Tennis",
+                "category": "Sports"
+            }
 
-    #         msg, code = EventService.edit_event(event_obj, 1, 1)
-    #         event = EventService.get_event(1)
-    #         self.assertEqual(msg, "OK")
-    #         self.assertEqual(code, 200)
-    #         self.assertEqual(event.name, "Event Title")
-    #         self.assertEqual(event.location, "NJ")
-    #         self.assertEqual(event.description, "Tennis")
+            msg, code = EventService.edit_event(event_obj, 1, 1)
+            event = EventService.get_event(1)
+            self.assertEqual(msg, "OK")
+            self.assertEqual(code, 200)
+            self.assertEqual(event.name, "Event Title")
+            self.assertEqual(event.location, "NJ")
+            self.assertEqual(event.description, "Tennis")
 
     def test_delete_event(self):
         # Test if an event can be deleted by Club Head
@@ -232,76 +231,73 @@ class Test_TestEventService(unittest.TestCase):
             self.assertEqual(msg, "Event has been Rejected")
             self.assertEqual(code, 201)
 
-    # COMMENTED BY VANI FOR BUILD TEST CI/CD TO PASS
-    # def test_edit_events_unauthorized(self):
-    #     '''
-    #     Test if error is returned if a user tries to edit an event
-    #     for a club for which the user is not a member or head
-    #     '''
-    #     with app.app_context():
-    #         event_obj = {
-    #             "name": "Event Title",
-    #             "club_id": 1,
-    #             "start_timestamp": "2021-12-03 09:30:00",
-    #             "end_timestamp": "021-12-05 00:00:00",
-    #             "location": "NJ",
-    #             "max_registration": 75,
-    #             "description": "Tennis",
-    #             "category": "Sports"
-    #         }
+    def test_edit_events_unauthorized(self):
+        '''
+        Test if error is returned if a user tries to edit an event
+        for a club for which the user is not a member or head
+        '''
+        with app.app_context():
+            event_obj = {
+                "name": "Event Title",
+                "club_id": 1,
+                "start_timestamp": "2021-12-03 09:30:00",
+                "end_timestamp": "021-12-05 00:00:00",
+                "location": "NJ",
+                "max_registration": 75,
+                "description": "Tennis",
+                "category": "Sports"
+            }
 
-    #         msg, code = EventService.edit_event(event_obj, 1, 4)
-    #         event = EventService.get_event(1)
-    #         self.assertEqual(msg, "You do not have the required"
-    #                               " permissions to perform this operation")
-    #         self.assertEqual(code, 403)
-    #         self.assertEqual(event.name, "Event1")
-    #         self.assertEqual(event.location, "NYC")
+            msg, code = EventService.edit_event(event_obj, 1, 4)
+            event = EventService.get_event(1)
+            self.assertEqual(msg, "You do not have the required"
+                                  " permissions to perform this operation")
+            self.assertEqual(code, 403)
+            self.assertEqual(event.name, "Event1")
+            self.assertEqual(event.location, "NYC")
 
-    # COMMENTED BY VANI FOR BUILD TEST CI/CD TO PASS
-    # def test_edit_events_forbidden_fields_approved(self):
-    #     with app.app_context():
-    #         event_obj = {
-    #             "name": "Event Title",
-    #             "club_id": 1,
-    #             "start_timestamp": "2021-12-03 09:30:00",
-    #             "end_timestamp": "021-12-05 00:00:00",
-    #             "location": "NJ",
-    #             "max_registration": 75,
-    #             "description": "Tennis",
-    #             "category": "Sports",
-    #             "fee": 12
-    #         }
+    def test_edit_events_forbidden_fields_approved(self):
+        with app.app_context():
+            event_obj = {
+                "name": "Event Title",
+                "club_id": 1,
+                "start_timestamp": "2021-12-03 09:30:00",
+                "end_timestamp": "021-12-05 00:00:00",
+                "location": "NJ",
+                "max_registration": 75,
+                "description": "Tennis",
+                "category": "Sports",
+                "fee": 12
+            }
 
-    #         msg, code = EventService.edit_event(event_obj, 1, 1)
-    #         event = EventService.get_event(1)
-    #         self.assertEqual(msg, "You cannot edit forbidden fields: fee")
-    #         self.assertEqual(code, 500)
-    #         self.assertEqual(event.name, "Event1")
-    #         self.assertEqual(event.location, "NYC")
+            msg, code = EventService.edit_event(event_obj, 1, 1)
+            event = EventService.get_event(1)
+            self.assertEqual(msg, "You cannot edit forbidden fields: fee")
+            self.assertEqual(code, 500)
+            self.assertEqual(event.name, "Event1")
+            self.assertEqual(event.location, "NYC")
 
-    # COMMENTED BY VANI FOR BUILD TEST CI/CD TO PASS
-    # def test_edit_events_forbidden_fields_proposed(self):
-    #     with app.app_context():
-    #         event_obj = {
-    #             "name": "Event Title",
-    #             "club_id": 1,
-    #             "start_timestamp": "2021-12-03 09:30:00",
-    #             "end_timestamp": "021-12-05 00:00:00",
-    #             "location": "NJ",
-    #             "max_registration": 75,
-    #             "description": "Tennis",
-    #             "category": "Sports",
-    #             "fee": 12,
-    #             "registered_count": 25
-    #         }
+    def test_edit_events_forbidden_fields_proposed(self):
+        with app.app_context():
+            event_obj = {
+                "name": "Event Title",
+                "club_id": 1,
+                "start_timestamp": "2021-12-03 09:30:00",
+                "end_timestamp": "021-12-05 00:00:00",
+                "location": "NJ",
+                "max_registration": 75,
+                "description": "Tennis",
+                "category": "Sports",
+                "fee": 12,
+                "registered_count": 25
+            }
 
-    #         msg, code = EventService.edit_event(event_obj, 2, 2)
-    #         event = EventService.get_event(2)
-    #         self.assertEqual(msg, "You cannot edit forbidden fields: registered_count")
-    #         self.assertEqual(code, 500)
-    #         self.assertEqual(event.name, "Event2")
-    #         self.assertEqual(event.location, "CA")
+            msg, code = EventService.edit_event(event_obj, 2, 2)
+            event = EventService.get_event(2)
+            self.assertEqual(msg, "You cannot edit forbidden fields: registered_count")
+            self.assertEqual(code, 500)
+            self.assertEqual(event.name, "Event2")
+            self.assertEqual(event.location, "CA")
 
     def test_edit_past_events(self):
         with app.app_context():
