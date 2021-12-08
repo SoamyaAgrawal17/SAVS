@@ -2,6 +2,7 @@ import datetime
 
 from application.model.Event import Event
 from application.model.Role import Role
+from application.utilities.constants import CLUB_MEMBER, CLUB_HEAD, PERMISSION_ERROR_MESSAGE
 from application.utilities.database import db
 
 
@@ -74,7 +75,7 @@ def propose_event(event_information, student_id):
     message = None
     status_code = None
 
-    if role == "Club Member" or role == "Club Head":
+    if role == CLUB_MEMBER or role == CLUB_HEAD:
         name = event_information['name']
         category = event_information['category']
         description = event_information['description']
@@ -106,8 +107,7 @@ def propose_event(event_information, student_id):
         message = "CREATED"
         status_code = 201
     else:
-        message = "You do not have the required " \
-                  "permissions to perform this operation"
+        message = PERMISSION_ERROR_MESSAGE
         status_code = 403
 
     return message, status_code
@@ -126,8 +126,7 @@ def edit_event(event_information, event_id, student_id):
         return message, status_code
 
     if event.created_by != student_id and role != "Club Head":
-        message = "You do not have the required" \
-                  " permissions to perform this operation"
+        message = PERMISSION_ERROR_MESSAGE
         status_code = 403
         return message, status_code
 

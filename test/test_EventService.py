@@ -1,9 +1,8 @@
-import datetime
 import unittest
 from application.service import EventService
 from application.utilities.database import db
+from application.utilities.constants import CLUB_MEMBER
 from app import app
-from datetime import *
 
 app.config['TESTING'] = True
 
@@ -27,32 +26,33 @@ class Test_TestEventService(unittest.TestCase):
             student2 = Student.Student(name="Alice", email_id="alice@abc.com",
                                        college="College1", department="CS")
             student2._id = 2
-            student3 = Student.Student(name="Head", email_id="head@abc.com",
+            head_email = "head@abc.com"
+            student3 = Student.Student(name="Head", email_id=head_email,
                                        college="College1", department="CS")
             student3._id = 3
-            club1 = Club.Club(name="Club1", head="head@abc.com",
+            club1 = Club.Club(name="Club1", head=head_email,
                               category="Sports", description="Description")
-            club2 = Club.Club(name="Club2", head="head@abc.com",
+            club2 = Club.Club(name="Club2", head=head_email,
                               category="Academic", description="Description")
             club1._id = 1
             club2._id = 2
-            role1 = Role.Role(student_id=1, club_id=1, role="Club Member")
-            role2 = Role.Role(student_id=2, club_id=1, role="Club Member")
+            role1 = Role.Role(student_id=1, club_id=1, role=CLUB_MEMBER)
+            role2 = Role.Role(student_id=2, club_id=1, role=CLUB_MEMBER)
             role3 = Role.Role(student_id=3, club_id=1, role="Club Head")
-            role4 = Role.Role(student_id=2, club_id=2, role="Club Member")
+            role4 = Role.Role(student_id=2, club_id=2, role=CLUB_MEMBER)
             event1 = Event.Event(name="Event1", category="Sports",
                                  description="Desc", club_id=1,
                                  visibility="Students",
-                                 start_timestamp="2021-12-03 09:30:00",
-                                 end_timestamp="2021-12-03 09:30:00",
+                                 start_timestamp="2022-12-03 09:30:00",
+                                 end_timestamp="2022-12-03 09:30:00",
                                  location="NYC", max_registration=50,
                                  fee=5, status="Approved",
                                  registered_count=50, created_by=1)
             event2 = Event.Event(name="Event2", category="Music",
                                  description="Musical Night", club_id=1,
                                  visibility="Students",
-                                 start_timestamp="2021-12-03 09:30:00",
-                                 end_timestamp="2021-12-03 09:30:00",
+                                 start_timestamp="2022-12-03 09:30:00",
+                                 end_timestamp="2022-12-03 09:30:00",
                                  location="CA", max_registration=50,
                                  fee=5, status="Proposed",
                                  registered_count=50, created_by=2)
@@ -194,8 +194,8 @@ class Test_TestEventService(unittest.TestCase):
             event_obj = {
                 "name": "Event Title",
                 "club_id": 1,
-                "start_timestamp": "2021-12-03 09:30:00",
-                "end_timestamp": "2021-12-05 00:00:00",
+                "start_timestamp": "2022-12-03 09:30:00",
+                "end_timestamp": "2022-12-05 00:00:00",
                 "location": "NJ",
                 "max_registration": 75,
                 "description": "Tennis",
