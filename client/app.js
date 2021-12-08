@@ -3,7 +3,7 @@ var fs = require('fs');
 
 const PORT=8080;
 
-fs.readFile('./index1.html', function (err, html) {
+fs.readFile('./index2.html', function (err, html) {
 
     if (err) throw err;
 

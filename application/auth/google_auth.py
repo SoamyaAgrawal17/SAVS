@@ -39,7 +39,7 @@ def auth_required(f):
             return f(*args, **kwargs)
         except AuthError as e:
             return Response(e.message, status=e.status, content_type="application/json")
-
+    decorated.__name__ = f.__name__
     return decorated
 
 

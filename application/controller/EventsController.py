@@ -38,11 +38,13 @@ def get_filtered_events():
 
 # Add an event (by club member/head)
 @mod.route('/events', methods=['POST'])
+@auth_required
 def propose_events():
     rsp = Response("INTERNAL ERROR", status=500, content_type="text/plain")
     try:
         data = request.get_json()
-        email_id = data["emailId"]
+        user_info = get_token_info()
+        email_id = user_info["email"]
         event_information = data["event"]
         student_id = StudentService.get_id(email_id)
         response_message, status_code = EventService.propose_event(
@@ -57,11 +59,13 @@ def propose_events():
 
 # Edit an event (by club member/head)
 @mod.route('/events/<event_id>', methods=['PUT'])
+@auth_required
 def edit_events(event_id):
     rsp = Response("INTERNAL ERROR", status=500, content_type="text/plain")
     try:
         data = request.get_json()
-        email_id = data["emailId"]
+        user_info = get_token_info()
+        email_id = user_info["email"]
         if 'status' in data:
             event_status = data["status"]
             student_id = StudentService.get_id(email_id)

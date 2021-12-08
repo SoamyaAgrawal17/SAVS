@@ -263,6 +263,7 @@
   <script>
       var login_email_id = "no id";
 var global_url = "http://localhost:5000/";
+var authtoken = "abc";
 
 function onSignIn(googleUser) {
     console.log("here");
@@ -271,8 +272,17 @@ function onSignIn(googleUser) {
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    console.log(googleUser.getAuthResponse(true))
-    student_login(profile.getEmail())
+    console.log(googleUser.getAuthResponse(true));
+    student_login2(profile.getEmail(), googleUser.getAuthResponse(true));
+}
+
+function student_login2(email, authResponse){
+    document.getElementById("information-container").style.display = "block"
+    document.getElementById("login-form").innerHTML = "<h5>Welcome " + email + "</h5>"
+    login_email_id = email;
+    authtoken = "Bearer " + authResponse.access_token;
+    console.log("Access Token");
+    console.log(authtoken);
 }
 
 function student_login(email){
@@ -524,6 +534,7 @@ function create_event(){
     var url = global_url + "/events";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 201) {
 //            var json = JSON.parse(xhr.responseText);
