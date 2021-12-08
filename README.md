@@ -66,7 +66,7 @@ To build client: <br>
   2. Alternative through Homebrew: brew install node
   3. Check if node is installed: node -v
   4. Add your Google Client ID in index2.html
-  5. Go to SAVS/client and run app.js
+  5. Go to SAVS/client and run: node app.js
   6. Open Chrome in Guest mode or any other browser after logging out from google accounts and go to http://localhost:8080
   
 CI/CD reports: <br>
