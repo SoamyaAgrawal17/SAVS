@@ -2,6 +2,7 @@ import logging
 import json
 from flask import Blueprint, request, Response
 from application.service import StudentService
+from application.auth.google_auth import auth_required, get_token_info
 
 mod = Blueprint('students', __name__)
 
