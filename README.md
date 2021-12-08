@@ -61,7 +61,13 @@ To build, run and test on localhost or Heroku, follow the following steps:
 
 To build client: <br>
   Run the file /SAVS/client/index.html in browser. <br>
-  [ENTER THE INFORMATION REGARDING AUTH] <br>
+  
+  1. Install node: https://nodejs.org/en/download/
+  2. Alternative through Homebrew: brew install node
+  3. Check if node is installed: node -v
+  4. Add your Google Client ID in index2.html
+  5. Go to SAVS/client and run app.js
+  6. Open Chrome in Guest mode or any other browser after logging out from google accounts and go to http://localhost:8080
   
 CI/CD reports: <br>
   Unit Test Cases and Coverage: [ENTER THE LINK AFTER THE LAST COMMIT] <br>
