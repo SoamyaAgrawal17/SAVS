@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row heading">
             <div class="col-2"></div>
-            <div class="col-8" align="center"><h3>This is a SAVS Client</h3></div>
+            <div class="col-8" text-align="center"><h3>This is a SAVS Client</h3></div>
             <div class="col-2"></div>
         </div>
         <div class="row login">
@@ -39,7 +39,7 @@
         <div class="row" id="information-container" style="display:none;">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-6" align="center">
+                    <div class="col-6" text-align="center">
                         <h5>Clubs</h5>
                         <div class="club-by-id-container">
                             <div class="row">
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <div class="row create-club-container">
-                            <div class="col-12" align="center">
+                            <div class="col-12" text-align="center">
                                 <h5>Create Club</h5>
                                 <div class="create-club">
                                         <div class="form-group">
@@ -94,14 +94,14 @@
                             </div>
                         </div><br>
                         <div class="row get-all-clubs">
-                            <div class="col-12" align="center">
+                            <div class="col-12" text-align="center">
                                 <h5>Get All Clubs</h5>
                                 <button type="button" class="btn btn-primary" onclick="get_all_clubs()">GET</button>
                                 <div id="all-clubs-information"></div>
                             </div>
                         </div> <br>
                         <div class="row add-member-container">
-                            <div class="col-12" align="center">
+                            <div class="col-12" text-align="center">
                                 <h5>Add Member to club</h5>
                                 <div class="add-member">
                                         <div class="form-group">
@@ -116,7 +116,7 @@
                             </div>
                         </div><br>
                         <div class="row delete-club-container">
-                            <div class="col-12" align="center">
+                            <div class="col-12" text-align="center">
                                 <h5>Delete Club</h5>
                                 <div class="delete-club">
                                         <div class="form-group">
@@ -128,7 +128,7 @@
                             </div>
                         </div><br>
                         <div class="row get-roles-container">
-                            <div class="col-12" align="center">
+                            <div class="col-12" text-align="center">
                                 <h5>Get Roles</h5>
                                 <div class="get-roles">
                                         <button type="submit" class="btn btn-primary" onclick="get_roles()">Get Roles</button>
@@ -137,7 +137,7 @@
                             </div>
                         </div><br>
                     </div>
-                    <div class="col-6" align="center">
+                    <div class="col-6" text-align="center">
                         <h5>Events</h5>
                         <div class="event-by-id">
                             <div class="row">
@@ -210,14 +210,14 @@
                             <div id="create-event-response" style="display:none;"></div>
                         </div> <br>
                         <div class="row get-all-events">
-                            <div class="col-12" align="center">
+                            <div class="col-12" text-align="center">
                                 <h5>Get All Events</h5>
                                 <button type="button" class="btn btn-primary" onclick="get_all_events()">GET</button>
                                 <div id="all-events-information"></div>
                             </div>
                         </div> <br>
                         <div class="row register-event-container">
-                            <div class="col-12" align="center">
+                            <div class="col-12" text-align="center">
                                 <h5>Register to an event</h5>
                                 <div class="register-event">
                                         <div class="form-group">
@@ -231,7 +231,7 @@
                         </div><br>
 
                         <div class="row get-all-registered-events">
-                            <div class="col-12" align="center">
+                            <div class="col-12" text-align="center">
                                 <h5>Get Registered Events</h5>
                                 <div class="get-registered-events">
                                     <button type="submit" class="btn btn-primary" onclick="get_registered_events()">Get Registered Events</button>
@@ -540,13 +540,11 @@ function create_event(){
     xhr.setRequestHeader("Authorization", authtoken);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 201) {
-//            var json = JSON.parse(xhr.responseText);
             var json = xhr.responseText;
             console.log(json)
             document.getElementById("create-event-response").style.display = "inline";
             document.getElementById("create-event-response").innerHTML = json;
         }else{
-//            var json = JSON.parse(xhr.responseText);
             var json = xhr.responseText;
             console.log(json)
             document.getElementById("create-event-response").style.display = "inline";
