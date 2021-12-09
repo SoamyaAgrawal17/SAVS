@@ -19,13 +19,13 @@ def get_token_auth_header():
     parts = auth.split()
 
     if parts[0].lower() != "bearer":
-        raise Exception("Invalid Header",
+        raise AuthError("Invalid Header",
                         401)
     elif len(parts) == 1:
-        raise Exception("Invalid Header: Token not found",
+        raise AuthError("Invalid Header: Token not found",
                         401)
     elif len(parts) > 2:
-        raise Exception("Header must be a Bearer token", 401)
+        raise AuthError("Header must be a Bearer token", 401)
     token = parts[1]
     return token
 

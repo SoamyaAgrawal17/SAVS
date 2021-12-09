@@ -7,7 +7,7 @@ from app import app
 app.config['TESTING'] = True
 
 
-class Test_TestEventService(unittest.TestCase):
+class test_event_service(unittest.TestCase):
     def setUp(self):
         app.config['SQLALCHEMY_DATABASE_URI'] = \
             'postgresql://ganjvezplkwnyf:' \
@@ -43,8 +43,8 @@ class Test_TestEventService(unittest.TestCase):
             event1 = Event.Event(name="Event1", category="Sports",
                                  description="Desc", club_id=1,
                                  visibility="Students",
-                                 start_timestamp="2022-12-03 09:30:00",
-                                 end_timestamp="2022-12-03 09:30:00",
+                                 start_timestamp="2022-12-02 09:30:00",
+                                 end_timestamp="2022-12-03 09:31:00",
                                  location="NYC", max_registration=50,
                                  fee=5, status="Approved",
                                  registered_count=50, created_by=1)
@@ -100,13 +100,13 @@ class Test_TestEventService(unittest.TestCase):
 
         with app.app_context():
             event_obj = {
-                "name": "ICPC Practice 2021",
+                "name": "ICPC Practice",
                 "club_id": 1,
                 "start_timestamp": "2021-12-25 09:30:00",
                 "end_timestamp": "2021-12-26 09:30:00",
-                "location": "New York City",
+                "location": "New York City - Manhattan",
                 "max_registration": 250,
-                "description": "Competitive Coding Practice",
+                "description": "ACM-ICPC Practice",
                 "fee": 10,
                 "category": "Academic"
             }
@@ -121,9 +121,9 @@ class Test_TestEventService(unittest.TestCase):
             filters = {"date_range": {"start": "2021-12-22 09:30:00", "end": "2021-12-27 09:30:00"}}
             events = EventService.get_filtered_events(filters)
             self.assertEqual(len(events), 1)
-            self.assertEqual(events[0].name, "ICPC Practice 2021")
-            self.assertEqual(events[0].location, "New York City")
-            self.assertEqual(events[0].description, "Competitive Coding Practice")
+            self.assertEqual(events[0].name, "ICPC Practice")
+            self.assertEqual(events[0].location, "New York City - Manhattan")
+            self.assertEqual(events[0].description, "ACM-ICPC Practice")
 
             # Test if a list of events filtered by fees are returned
             filters = {"fees": {"min": 0, "max": 7}}
@@ -192,7 +192,7 @@ class Test_TestEventService(unittest.TestCase):
         # Test if an event can be edited by Club Member
         with app.app_context():
             event_obj = {
-                "name": "Event Title",
+                "name": "New Event Title",
                 "club_id": 1,
                 "start_timestamp": "2022-12-03 09:30:00",
                 "end_timestamp": "2022-12-05 00:00:00",
@@ -206,7 +206,7 @@ class Test_TestEventService(unittest.TestCase):
             event = EventService.get_event(1)
             self.assertEqual(msg, "OK")
             self.assertEqual(code, 200)
-            self.assertEqual(event.name, "Event Title")
+            self.assertEqual(event.name, "New Event Title")
             self.assertEqual(event.location, "NJ")
             self.assertEqual(event.description, "Tennis")
 
@@ -238,7 +238,7 @@ class Test_TestEventService(unittest.TestCase):
         '''
         with app.app_context():
             event_obj = {
-                "name": "Event Title",
+                "name": "Edit Event Title",
                 "club_id": 1,
                 "start_timestamp": "2021-12-03 09:30:00",
                 "end_timestamp": "021-12-05 00:00:00",
@@ -259,7 +259,7 @@ class Test_TestEventService(unittest.TestCase):
     def test_edit_events_forbidden_fields_approved(self):
         with app.app_context():
             event_obj = {
-                "name": "Event Title",
+                "name": "Event Title 2",
                 "club_id": 1,
                 "start_timestamp": "2021-12-03 09:30:00",
                 "end_timestamp": "021-12-05 00:00:00",
@@ -313,7 +313,7 @@ class Test_TestEventService(unittest.TestCase):
             db.session.add(event3)
             db.session.commit()
             event_obj = {
-                "name": "New Hackathon",
+                "name": "New Hackathon 2020",
                 "club_id": 1,
                 "location": "CA",
                 "max_registration": 75,
@@ -333,14 +333,14 @@ class Test_TestEventService(unittest.TestCase):
                                  description="Hackathon", club_id=1,
                                  visibility="Students",
                                  start_timestamp="2025-12-03 09:30:00",
-                                 end_timestamp="2025-12-03 09:30:00",
+                                 end_timestamp="2025-12-05 09:30:00",
                                  location="SF", max_registration=100,
                                  fee=10, status="Rejected",
                                  registered_count=100, created_by=2)
             db.session.add(event3)
             db.session.commit()
             event_obj = {
-                "name": "New Hackathon",
+                "name": "Edit Hackathon",
                 "club_id": 1,
                 "location": "CA",
                 "max_registration": 75,
@@ -359,15 +359,15 @@ class Test_TestEventService(unittest.TestCase):
             event3 = Event.Event(name="Event3", category="Academic",
                                  description="Hackathon", club_id=2,
                                  visibility="Students",
-                                 start_timestamp="2025-12-03 09:30:00",
-                                 end_timestamp="2025-12-03 09:30:00",
+                                 start_timestamp="2024-12-03 09:30:00",
+                                 end_timestamp="2025-12-06 09:30:00",
                                  location="SF", max_registration=100,
                                  fee=10, status="Proposed",
                                  registered_count=100, created_by=2)
             db.session.add(event3)
             db.session.commit()
             event_obj = {
-                "name": "New Hackathon",
+                "name": "New Hackathon 2",
                 "club_id": 1,
                 "location": "CA",
                 "max_registration": 75,
@@ -385,8 +385,8 @@ class Test_TestEventService(unittest.TestCase):
             event3 = Event.Event(name="Event3", category="Academic",
                                  description="Hackathon", club_id=1,
                                  visibility="Students",
-                                 start_timestamp="2025-12-03 09:30:00",
-                                 end_timestamp="2025-12-03 09:30:00",
+                                 start_timestamp="2025-12-03 09:15:00",
+                                 end_timestamp="2025-12-07 09:30:00",
                                  location="SF", max_registration=100,
                                  fee=10, status="Approved",
                                  registered_count=100, created_by=2)

@@ -125,7 +125,7 @@ def edit_event(event_information, event_id, student_id):
         status_code = 500
         return message, status_code
 
-    if event.created_by != student_id and role != "Club Head":
+    if event.created_by != student_id and role != CLUB_HEAD:
         message = PERMISSION_ERROR_MESSAGE
         status_code = 403
         return message, status_code
