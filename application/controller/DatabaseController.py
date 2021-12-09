@@ -19,5 +19,3 @@ def clear_database():
         print("/api/<resource>, e = ", e)
         rsp = Response(e, status=500, content_type="plain/text")
     return rsp
-
-

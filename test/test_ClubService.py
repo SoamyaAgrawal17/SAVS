@@ -10,6 +10,7 @@ app.config["TESTING"] = True
 college = "Fu Foundation"
 department = "Computer Science"
 
+
 class Test_TestClubService(unittest.TestCase):
     def setUp(self):
         app.config['SQLALCHEMY_DATABASE_URI'] = \

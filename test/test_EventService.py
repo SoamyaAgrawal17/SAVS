@@ -118,7 +118,8 @@ class test_event_service(unittest.TestCase):
             self.assertEqual(len(events), 3)
 
             # Test if a list of events filtered by dates are returned
-            filters = {"date_range": {"start": "2021-12-22 09:30:00", "end": "2021-12-27 09:30:00"}}
+            filters = {"date_range": {"start": "2021-12-22 09:30:00",
+                                      "end": "2021-12-27 09:30:00"}}
             events = EventService.get_filtered_events(filters)
             self.assertEqual(len(events), 1)
             self.assertEqual(events[0].name, "ICPC Practice")
@@ -294,7 +295,8 @@ class test_event_service(unittest.TestCase):
 
             msg, code = EventService.edit_event(event_obj, 2, 2)
             event = EventService.get_event(2)
-            self.assertEqual(msg, "You cannot edit forbidden fields: registered_count")
+            self.assertEqual(msg, "You cannot edit forbidden fields:"
+                                  " registered_count")
             self.assertEqual(code, 500)
             self.assertEqual(event.name, "Event2")
             self.assertEqual(event.location, "CA")

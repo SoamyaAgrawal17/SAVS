@@ -35,10 +35,12 @@ def auth_required(f):
         try:
             token_info = get_token_info()
             if 'error' in token_info.keys():
-                return Response("Unauthorized", status=401, content_type="application/json")
+                return Response("Unauthorized", status=401,
+                                content_type="application/json")
             return f(*args, **kwargs)
         except AuthError as e:
-            return Response(e.message, status=e.status, content_type="application/json")
+            return Response(e.message, status=e.status,
+                            content_type="application/json")
     decorated.__name__ = f.__name__
     return decorated
 

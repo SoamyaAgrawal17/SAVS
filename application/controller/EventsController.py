@@ -5,7 +5,8 @@ import json
 
 from application.auth.google_auth import auth_required, get_token_info
 from application.service import EventService, StudentService
-from application.utilities.constants import CONTENT_TYPE_JSON, CONTENT_TYPE_TEXT, API_ERROR
+from application.utilities.constants import CONTENT_TYPE_JSON,\
+    CONTENT_TYPE_TEXT, API_ERROR
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
@@ -41,7 +42,8 @@ def get_filtered_events():
 @mod.route('/events', methods=['POST'])
 @auth_required
 def propose_events():
-    rsp = Response("INTERNAL ERROR", status=500, content_type=CONTENT_TYPE_TEXT)
+    rsp = Response("INTERNAL ERROR", status=500,
+                   content_type=CONTENT_TYPE_TEXT)
     try:
         data = request.get_json()
         user_info = get_token_info()
@@ -62,7 +64,8 @@ def propose_events():
 @mod.route('/events/<event_id>', methods=['PUT'])
 @auth_required
 def edit_events(event_id):
-    rsp = Response("INTERNAL ERROR", status=500, content_type=CONTENT_TYPE_TEXT)
+    rsp = Response("INTERNAL ERROR", status=500,
+                   content_type=CONTENT_TYPE_TEXT)
     try:
         data = request.get_json()
         user_info = get_token_info()
@@ -91,7 +94,8 @@ def delete_event(event_id):
     data = request.get_json()
     email_id = data["emailId"]
     student_id = StudentService.get_id(email_id)
-    response_message, status_code = EventService.delete_event(event_id, student_id)
+    response_message, status_code = EventService.delete_event(
+        event_id, student_id)
     rsp = Response(response_message, status=status_code,
                    content_type=CONTENT_TYPE_TEXT)
     return rsp
@@ -100,7 +104,8 @@ def delete_event(event_id):
 # Get details of an event with specified id
 @mod.route('/events/<event_id>', methods=['GET'])
 def get_event_by_id(event_id):
-    rsp = Response("INTERNAL ERROR", status=500, content_type=CONTENT_TYPE_TEXT)
+    rsp = Response("INTERNAL ERROR", status=500,
+                   content_type=CONTENT_TYPE_TEXT)
     try:
         event = EventService.get_event(event_id)
         res = json.dumps(event.as_dict(), default=str)
@@ -114,7 +119,8 @@ def get_event_by_id(event_id):
 @mod.route('/test', methods=['GET'])
 @auth_required
 def get_auth_test():
-    rsp = Response("INTERNAL ERROR", status=500, content_type=CONTENT_TYPE_TEXT)
+    rsp = Response("INTERNAL ERROR", status=500,
+                   content_type=CONTENT_TYPE_TEXT)
     try:
         user_info = get_token_info()
         obj = {"key": user_info["email"]}

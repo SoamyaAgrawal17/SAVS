@@ -2,7 +2,8 @@ import datetime
 
 from application.model.Event import Event
 from application.model.Role import Role
-from application.utilities.constants import CLUB_MEMBER, CLUB_HEAD, PERMISSION_ERROR_MESSAGE
+from application.utilities.constants import CLUB_MEMBER,\
+    CLUB_HEAD, PERMISSION_ERROR_MESSAGE
 from application.utilities.database import db
 
 
@@ -31,8 +32,10 @@ def get_filtered_events(filters=None):
     if "date_range" in filters:
         for event in event_list:
             event_timestamp = event.start_timestamp
-            start_date = datetime.datetime.strptime(filters["date_range"]["start"], "%Y-%m-%d %H:%M:%S")
-            end_date = datetime.datetime.strptime(filters["date_range"]["end"], "%Y-%m-%d %H:%M:%S")
+            start_date = datetime.datetime.strptime(
+                filters["date_range"]["start"], "%Y-%m-%d %H:%M:%S")
+            end_date = datetime.datetime.strptime(
+                filters["date_range"]["end"], "%Y-%m-%d %H:%M:%S")
             if event_timestamp >= start_date and event_timestamp <= end_date:
                 date_filtered_events.append(event)
 
@@ -40,7 +43,8 @@ def get_filtered_events(filters=None):
     fee_filtered_events = []
     if "fees" in filters:
         for event in event_list:
-            if event.fee >= filters["fees"]["min"] and event.fee <= filters["fees"]["max"]:
+            if event.fee >= filters["fees"]["min"] and \
+                    event.fee <= filters["fees"]["max"]:
                 fee_filtered_events.append(event)
 
     # Filter by interests
@@ -57,8 +61,8 @@ def get_filtered_events(filters=None):
             if event.club_id == filters["clubs"]:
                 club_filtered_events.append(event)
 
-    return tuple(set(date_filtered_events + fee_filtered_events + interest_filtered_events + club_filtered_events))
-    # return list(set.union((date_filtered_events, fee_filtered_events, interest_filtered_events, club_filtered_events)))
+    return tuple(set(date_filtered_events + fee_filtered_events
+                     + interest_filtered_events + club_filtered_events))
 
 
 # Get event details of an event
@@ -132,7 +136,8 @@ def edit_event(event_information, event_id, student_id):
 
     event_status = event.status
     proposed_prohibited = ["registered_count", "created_by", "status"]
-    approved_prohibited = ["visibility", "fee", "created_by", "registered_count", "status"]
+    approved_prohibited = ["visibility", "fee", "created_by",
+                           "registered_count", "status"]
 
     if event_status == "Proposed" or event_status == "Approved":
         if event.club_id != club_id:
@@ -140,12 +145,14 @@ def edit_event(event_information, event_id, student_id):
             status_code = 500
             return message, status_code
         field_list = []
-        check_fields = proposed_prohibited if event_status == "Proposed" else approved_prohibited
+        check_fields = proposed_prohibited if event_status == "Proposed"\
+            else approved_prohibited
         for key in check_fields:
             if key in event_information:
                 field_list.append(key)
         if len(field_list) > 0:
-            message = "You cannot edit forbidden fields: " + ', '.join(field_list)
+            message = "You cannot edit forbidden fields: " \
+                      + ', '.join(field_list)
             status_code = 500
             return message, status_code
     else:
