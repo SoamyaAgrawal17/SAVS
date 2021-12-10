@@ -13,3 +13,9 @@ class AuthError(Error):
     def __init__(self, message, status):
         self.message = message
         self.status = status
+
+
+'''
+The class skeleton is adapted from
+https://docs.python.org/3/tutorial/errors.html
+'''

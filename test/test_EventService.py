@@ -258,6 +258,10 @@ class test_event_service(unittest.TestCase):
             self.assertEqual(event.location, "NYC")
 
     def test_edit_events_forbidden_fields_approved(self):
+        '''
+        Test if error is returned if a user tries to update
+        forbidden fields like fee for an approved event
+        '''
         with app.app_context():
             event_obj = {
                 "name": "Event Title 2",
@@ -279,6 +283,10 @@ class test_event_service(unittest.TestCase):
             self.assertEqual(event.location, "NYC")
 
     def test_edit_events_forbidden_fields_proposed(self):
+        '''
+        Test if error is returned if a user tries to update
+        forbidden fields like registered_count for a proposed event
+        '''
         with app.app_context():
             event_obj = {
                 "name": "Event Title",
@@ -302,6 +310,10 @@ class test_event_service(unittest.TestCase):
             self.assertEqual(event.location, "CA")
 
     def test_edit_past_events(self):
+        '''
+        Test if error is returned if a user tries to update
+        past events
+        '''
         with app.app_context():
             from application.model import Event
             event3 = Event.Event(name="Event3", category="Academic",
@@ -329,6 +341,10 @@ class test_event_service(unittest.TestCase):
             self.assertEqual(event.location, "SF")
 
     def test_edit_rejected_events(self):
+        '''
+        Test if error is returned if a user tries to update
+        rejected events
+        '''
         with app.app_context():
             from application.model import Event
             event3 = Event.Event(name="Event3", category="Academic",
@@ -356,6 +372,10 @@ class test_event_service(unittest.TestCase):
             self.assertEqual(event.location, "SF")
 
     def test_edit_club_id(self):
+        '''
+        Test if error is returned if a user tries to update
+        club_id
+        '''
         with app.app_context():
             from application.model import Event
             event3 = Event.Event(name="Event3", category="Academic",
@@ -382,6 +402,9 @@ class test_event_service(unittest.TestCase):
             self.assertEqual(event.location, "SF")
 
     def test_edit_event_club_head(self):
+        '''
+        Test club_head can edit events of club
+        '''
         with app.app_context():
             from application.model import Event
             event3 = Event.Event(name="Event3", category="Academic",

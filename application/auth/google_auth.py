@@ -6,7 +6,7 @@ from application.auth.auth_error import AuthError
 TOKEN_URL = "https://oauth2.googleapis.com/tokeninfo"
 
 '''
-Th function skeleton was adapted from
+The function skeleton is adapted from
 https://auth0.com/blog/developing-restful-apis-with-python-
 and-flask/#Securing-Python-APIs-with-Auth0
 '''
@@ -43,6 +43,12 @@ def auth_required(f):
                             content_type="application/json")
     decorated.__name__ = f.__name__
     return decorated
+
+
+'''
+The function skeleton is adapted from
+https://developers.google.com/identity/sign-in/web/backend-auth
+'''
 
 
 def get_token_info():

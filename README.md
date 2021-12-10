@@ -60,7 +60,6 @@ To build, run and test on localhost or Heroku, follow the following steps:
 - For integration testing clear the database and run the collection SAVS on Postman(The collection json is shared and IA is added to the postman workspace). <br>
 
 To build client: <br>
-  Run the file /SAVS/client/index.html in browser. <br>
   
   1. Install node: https://nodejs.org/en/download/
   2. Alternative through Homebrew: brew install node
