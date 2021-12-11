@@ -90,6 +90,7 @@ def edit_events(event_id):
 
 # Delete an event by club head
 @mod.route('/events/<event_id>', methods=['DELETE'])
+@auth_required
 def delete_event(event_id):
     data = request.get_json()
     email_id = data["emailId"]
