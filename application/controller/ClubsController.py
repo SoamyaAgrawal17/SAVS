@@ -4,6 +4,7 @@ import json
 from application.service import ClubService
 from flask import Blueprint
 from flask import request, Response
+from application.auth.google_auth import auth_required, get_token_info
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
@@ -34,9 +35,11 @@ def get_club_by_id(club_id):
 
 # Edit a club
 @mod.route('/clubs/<club_id>', methods=['PUT'])
+@auth_required
 def edit_club(club_id):
     data = request.get_json()
-    email_id = data["emailId"]
+    user_info = get_token_info()
+    email_id = user_info["email"]
     if 'new_head' in data:
         head_email_id = data["new_head"]
         res, code = ClubService.assign_successor(
@@ -50,9 +53,10 @@ def edit_club(club_id):
 
 # Delete a club
 @mod.route('/clubs/<club_id>', methods=['DELETE'])
+@auth_required
 def delete_club(club_id):
-    data = request.get_json()
-    email_id = data["emailId"]
+    user_info = get_token_info()
+    email_id = user_info["email"]
     res, code = ClubService.delete_club(email_id, club_id)
     rsp = Response(res, status=code, content_type="text/plain")
     return rsp
@@ -60,9 +64,11 @@ def delete_club(club_id):
 
 # Add a member to a club
 @mod.route('/member/<club_id>', methods=['PUT'])
+@auth_required
 def add_member(club_id=None):
     data = request.get_json()
-    email_id = data["emailId"]
+    user_info = get_token_info()
+    email_id = user_info["email"]
     student_email_id = data["student_email_id"]
     res, code = ClubService.add_member(email_id, club_id, student_email_id)
     rsp = Response(res, status=code, content_type=application_json)
@@ -71,9 +77,11 @@ def add_member(club_id=None):
 
 # Remove a member from a club
 @mod.route('/member/<club_id>', methods=['DELETE'])
+@auth_required
 def remove_member(club_id=None):
     data = request.get_json()
-    email_id = data["emailId"]
+    user_info = get_token_info()
+    email_id = user_info["email"]
     student_email_id = data["student_email_id"]
     res, code = ClubService.remove_member(email_id, club_id, student_email_id)
     rsp = Response(res, status=code, content_type=application_json)
