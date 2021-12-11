@@ -137,6 +137,7 @@ def create_club():
         data = request.get_json()
         user_info = get_token_info()
         email_id = user_info["email"]
+        print(email_id)
         student_id = StudentService.get_id(email_id)
         have_permission, rsp = validate_permission(student_id)
         if not have_permission:
