@@ -8,6 +8,9 @@ from flask import request, Response
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
+# Variable declaration
+application_json = "application/JSON"
+
 mod = Blueprint('club_control', __name__)
 
 
@@ -16,7 +19,7 @@ mod = Blueprint('club_control', __name__)
 def get_clubs():
     clubs = ClubService.get_clubs()
     res = json.dumps(clubs, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
+    rsp = Response(res, status=200, content_type=application_json)
     return rsp
 
 
@@ -25,7 +28,7 @@ def get_clubs():
 def get_club_by_id(club_id):
     event = ClubService.get_club(club_id)
     res = json.dumps(event, default=str)
-    rsp = Response(res, status=200, content_type="application/JSON")
+    rsp = Response(res, status=200, content_type=application_json)
     return rsp
 
 
@@ -62,7 +65,7 @@ def add_member(club_id=None):
     email_id = data["emailId"]
     student_email_id = data["student_email_id"]
     res, code = ClubService.add_member(email_id, club_id, student_email_id)
-    rsp = Response(res, status=code, content_type="application/JSON")
+    rsp = Response(res, status=code, content_type=application_json)
     return rsp
 
 
@@ -73,5 +76,5 @@ def remove_member(club_id=None):
     email_id = data["emailId"]
     student_email_id = data["student_email_id"]
     res, code = ClubService.remove_member(email_id, club_id, student_email_id)
-    rsp = Response(res, status=code, content_type="application/JSON")
+    rsp = Response(res, status=code, content_type=application_json)
     return rsp

@@ -9,9 +9,14 @@ from app import app
 app.config["TESTING"] = True
 college = "Fu Foundation"
 department = "Computer Science"
+email_id = "test_student@columbia.edu"
+email_id_2 = "test_student_2@columbia.edu"
+invalid_request = "Invalid Request"
+email_member = "test_member@columbia.edu"
+member_added_result = "Club member added"
+error_result = "error: student isn't registered"
 
-
-class Test_TestClubService(unittest.TestCase):
+class test_club_service(unittest.TestCase):
     def setUp(self):
         app.config['SQLALCHEMY_DATABASE_URI'] = \
             'postgresql://ganjvezplkwnyf:'\
@@ -27,20 +32,20 @@ class Test_TestClubService(unittest.TestCase):
             # setup a demo student as club head
             student_information = {
                 "name": "TestStudent",
-                "email_id": "test_student@columbia.edu",
+                "email_id": email_id,
                 "college": college,
                 "department": department
             }
             # setup a demo club
             club_information = {
                 "name": "TestClub",
-                "head": "test_student@columbia.edu",
+                "head": email_id,
                 "category": "TestCategory",
                 "description": "TestDescription"
             }
             student_information_2 = {
                 "name": "TestStudent2",
-                "email_id": "test_student_2@columbia.edu",
+                "email_id": email_id_2,
                 "college": college,
                 "department": department
             }
@@ -61,7 +66,7 @@ class Test_TestClubService(unittest.TestCase):
             }
             club_id = 1
             result, code = ClubService.edit_club(
-                "test_student@columbia.edu", club_id, new_club_information)
+                email_id, club_id, new_club_information)
             club = ClubService.get_club(club_id)
             for key, value in new_club_information.items():
                 self.assertEqual(club[key], value)
@@ -82,11 +87,11 @@ class Test_TestClubService(unittest.TestCase):
             }
             club_id = 1
             result, code = ClubService.edit_club(
-                "test_student_2@columbia.edu", club_id, new_club_information)
+                email_id_2, club_id, new_club_information)
             club = ClubService.get_club(club_id)
             for key, value in old_club_information.items():
                 self.assertEqual(club[key], value)
-            self.assertEqual(result, "Invalid Request")
+            self.assertEqual(result, invalid_request)
 
     def test_invalid_editClub_2(self):
         # Test if name of club is given empty
@@ -98,7 +103,7 @@ class Test_TestClubService(unittest.TestCase):
             }
             club_id = 1
             result, code = ClubService.edit_club(
-                "test_student@columbia.edu", club_id, new_club_information)
+                email_id, club_id, new_club_information)
             self.assertEqual(result, "club cannot have empty name")
 
     def test_invalid_editClub_3(self):
@@ -110,7 +115,7 @@ class Test_TestClubService(unittest.TestCase):
             }
             club_id = 1
             result, code = ClubService.edit_club(
-                "test_student@columbia.edu", club_id, new_club_information)
+                email_id, club_id, new_club_information)
             club = ClubService.get_club(club_id)
             for key, value in new_club_information.items():
                 self.assertEqual(club[key], value)
@@ -121,7 +126,7 @@ class Test_TestClubService(unittest.TestCase):
         with app.app_context():
             club_id = 1
             result, code = ClubService.delete_club(
-                "test_student@columbia.edu", club_id)
+                email_id, club_id)
             self.assertEqual(result, "club deleted")
             club = ClubService.get_club(club_id)
             self.assertIsNone(club)
@@ -131,8 +136,8 @@ class Test_TestClubService(unittest.TestCase):
         with app.app_context():
             club_id = 1
             result, code = ClubService.delete_club(
-                "test_student_2@columbia.edu", club_id)
-            self.assertEqual(result, "Invalid Request")
+                email_id_2, club_id)
+            self.assertEqual(result, invalid_request)
             club = ClubService.get_club(club_id)
             self.assertIsNotNone(club)
 
@@ -142,7 +147,7 @@ class Test_TestClubService(unittest.TestCase):
             club_id = 1
             member_information = {
                 "name": "TestMember",
-                "email_id": "test_member@columbia.edu",
+                "email_id": email_member,
                 "college": college,
                 "department": department
             }
@@ -150,8 +155,8 @@ class Test_TestClubService(unittest.TestCase):
             student_email = member_information["email_id"]
             student_id = StudentService.get_id(student_email)
             result, code = ClubService.add_member(
-                "test_student@columbia.edu", club_id, student_email)
-            self.assertEqual(result, "Club member added")
+                email_id, club_id, student_email)
+            self.assertEqual(result, member_added_result)
             role = Role.query.filter_by(student_id=student_id, club_id=club_id)
             self.assertEqual(role.first().role, "Club Member")
 
@@ -161,7 +166,7 @@ class Test_TestClubService(unittest.TestCase):
             club_id = 1
             member_information = {
                 "name": "TestMember",
-                "email_id": "test_member@columbia.edu",
+                "email_id": email_member,
                 "college": college,
                 "department": department
             }
@@ -169,16 +174,16 @@ class Test_TestClubService(unittest.TestCase):
             StudentService.create_student(member_information)
             result, code = ClubService.add_member(
                 "test_student_3@columbia.edu", club_id, student_email)
-            self.assertEqual(result, "Invalid Request")
+            self.assertEqual(result, invalid_request)
 
     def test_invalid_addClubMember_3(self):
         # Test if a club member who is not a student can be added
         with app.app_context():
             club_id = 1
             result, code = ClubService.add_member(
-                "test_student@columbia.edu", club_id,
-                "test_member@columbia.edu")
-            self.assertEqual(result, "error: student isn't registered")
+                email_id, club_id,
+                email_member)
+            self.assertEqual(result, error_result)
 
     def test_removeClubMember(self):
         # Test if a club member can be removed
@@ -186,17 +191,17 @@ class Test_TestClubService(unittest.TestCase):
             club_id = 1
             member_information = {
                 "name": "TestMember",
-                "email_id": "test_member@columbia.edu",
+                "email_id": email_member,
                 "college": college,
                 "department": department
             }
             StudentService.create_student(member_information)
             student_email = member_information["email_id"]
             result, code = ClubService.add_member(
-                "test_student@columbia.edu", club_id, student_email)
-            self.assertEqual(result, "Club member added")
+                email_id, club_id, student_email)
+            self.assertEqual(result, member_added_result)
             result, code = ClubService.remove_member(
-                "test_student@columbia.edu", club_id, student_email)
+                email_id, club_id, student_email)
             self.assertEqual(result, "Club member has been removed")
 
     def test_invalid_removeClubMember(self):
@@ -205,18 +210,18 @@ class Test_TestClubService(unittest.TestCase):
             club_id = 1
             member_information = {
                 "name": "TestMember",
-                "email_id": "test_member@columbia.edu",
+                "email_id": email_member,
                 "college": college,
                 "department": department
             }
             StudentService.create_student(member_information)
             student_email = member_information["email_id"]
             result, code = ClubService.add_member(
-                "test_student@columbia.edu", club_id, student_email)
-            self.assertEqual(result, "Club member added")
+                email_id, club_id, student_email)
+            self.assertEqual(result, member_added_result)
             result, code = ClubService.remove_member(
                 None, club_id, student_email)
-            self.assertEqual(result, "Invalid Request")
+            self.assertEqual(result, invalid_request)
 
     def test_invalid_removeClubMember_2(self):
         # Test what happens if person who is not a member
@@ -225,19 +230,19 @@ class Test_TestClubService(unittest.TestCase):
             club_id = 1
             member_information = {
                 "name": "TestMember",
-                "email_id": "test_member@columbia.edu",
+                "email_id": email_member,
                 "college": college,
                 "department": department
             }
             StudentService.create_student(member_information)
             student_email = member_information["email_id"]
             result, code = ClubService.add_member(
-                "test_student@columbia.edu", club_id, student_email)
-            self.assertEqual(result, "Club member added")
+                email_id, club_id, student_email)
+            self.assertEqual(result, member_added_result)
             result, code = ClubService.remove_member(
-                "test_student@columbia.edu", club_id,
+                email_id, club_id,
                 "test_member_2@columbia.edu")
-            self.assertEqual(result, "error: student isn't registered")
+            self.assertEqual(result, error_result)
 
     def test_invalid_removeClubMember_3(self):
         # Test what happens if a club member is being removed
@@ -246,18 +251,18 @@ class Test_TestClubService(unittest.TestCase):
             club_id = 1
             member_information = {
                 "name": "TestMember",
-                "email_id": "test_member@columbia.edu",
+                "email_id": email_member,
                 "college": college,
                 "department": department
             }
             StudentService.create_student(member_information)
             student_email = member_information["email_id"]
             result, code = ClubService.add_member(
-                "test_student@columbia.edu", club_id, student_email)
-            self.assertEqual(result, "Club member added")
+                email_id, club_id, student_email)
+            self.assertEqual(result, member_added_result)
             club_id = 2
             result, code = ClubService.remove_member(
-                "test_student@columbia.edu", club_id, student_email)
+                email_id, club_id, student_email)
             self.assertEqual(result, "club does not exist")
 
     def test_getClubs(self):
@@ -271,7 +276,7 @@ class Test_TestClubService(unittest.TestCase):
             }
             club_information = {
                 "name": "TestClub2",
-                "head": "test_student@columbia.edu",
+                "head": email_id,
                 "category": "TestCategory2",
                 "description": "TestDescription2"
             }
@@ -293,7 +298,7 @@ class Test_TestClubService(unittest.TestCase):
             StudentService.create_student(new_head_information)
             new_head_email_id = new_head_information["email_id"]
             result, code = ClubService.assign_successor(
-                "test_student@columbia.edu", club_id, new_head_email_id)
+                email_id, club_id, new_head_email_id)
             self.assertEqual(result, "replaced successor")
 
     def test_invalid_assignSuccessor(self):
@@ -303,8 +308,8 @@ class Test_TestClubService(unittest.TestCase):
             club_id = 1
             new_head_email_id = "test_head_3@columbia.edu",
             result, code = ClubService.assign_successor(
-                "test_student@columbia.edu", club_id, new_head_email_id)
-            self.assertEqual(result, "error: student isn't registered")
+                email_id, club_id, new_head_email_id)
+            self.assertEqual(result, error_result)
 
     def test_invalid_assignSuccessor_2(self):
         # Test if a another than club head can
@@ -321,7 +326,7 @@ class Test_TestClubService(unittest.TestCase):
             new_head_email_id = new_head_information["email_id"]
             result, code = ClubService.assign_successor(
                 "test_student_3@columbia.edu", club_id, new_head_email_id)
-            self.assertEqual(result, "Invalid Request")
+            self.assertEqual(result, invalid_request)
 
     def tearDown(self):
         with app.app_context():
