@@ -92,7 +92,6 @@ def edit_events(event_id):
 @mod.route('/events/<event_id>', methods=['DELETE'])
 @auth_required
 def delete_event(event_id):
-    data = request.get_json()
     user_info = get_token_info()
     email_id = user_info["email"]
     student_id = StudentService.get_id(email_id)

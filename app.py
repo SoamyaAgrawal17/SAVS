@@ -7,7 +7,9 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*", "send_wildcard": "False"}})
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://xbasblmhnpkibi:8a1264b9c4b71b4c8abac23f12fc7a991e3fe81671b1169a0d09c6692f7606f4@ec2-18-207-72-235.compute-1.amazonaws.com:5432/d1qeu6i6agoejb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://xbasblmhnpkibi' \
+                                        ':8a1264b9c4b71b4c8abac23f12fc7a991e3fe81671b1169a0d09c6692f7606f4@ec2-18-207' \
+                                        '-72-235.compute-1.amazonaws.com:5432/d1qeu6i6agoejb '
 
 blueprints = [
     ClubsController.mod,

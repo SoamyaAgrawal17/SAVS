@@ -69,7 +69,6 @@ def add_member(club_id=None):
     data = request.get_json()
     user_info = get_token_info()
     email_id = user_info["email"]
-    print(email_id)
     student_email_id = data["student_email_id"]
     res, code = ClubService.add_member(email_id, club_id, student_email_id)
     rsp = Response(res, status=code, content_type=application_json)

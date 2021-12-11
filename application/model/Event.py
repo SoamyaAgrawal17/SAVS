@@ -1,5 +1,5 @@
 from application.utilities.database import db
-from datetime import *
+from datetime import datetime
 
 
 class Event(db.Model):
