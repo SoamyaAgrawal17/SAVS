@@ -160,7 +160,7 @@ def edit_event(event_information, event_id, student_id):
         status_code = 500
         return message, status_code
 
-    event_edit = db.session.query(Event).filter(Event._id.in_(
+    db.session.query(Event).filter(Event._id.in_(
         [event_id])).update(event_information)
     db.session.commit()
     message = "OK"
