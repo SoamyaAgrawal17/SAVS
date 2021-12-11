@@ -16,6 +16,7 @@ email_member = "test_member@columbia.edu"
 member_added_result = "Club member added"
 error_result = "error: student isn't registered"
 
+
 class test_club_service(unittest.TestCase):
     def setUp(self):
         app.config['SQLALCHEMY_DATABASE_URI'] = \
