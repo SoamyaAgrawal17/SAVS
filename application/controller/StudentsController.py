@@ -139,6 +139,7 @@ def create_club():
         email_id = user_info["email"]
         print(email_id)
         student_id = StudentService.get_id(email_id)
+        print(student_id)
         have_permission, rsp = validate_permission(student_id)
         if not have_permission:
             return rsp

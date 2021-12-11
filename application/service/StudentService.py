@@ -167,6 +167,9 @@ def create_club(club_information):
     category = club_information['category']
     description = club_information['description']
 
+    if get_student(head) == student_does_not_exist:
+        return 200, "Club head not registered as student"
+
     if club_exist(name):
         return 200, "Club with same name already exist"
 
