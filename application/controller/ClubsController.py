@@ -11,6 +11,8 @@ log.setLevel(logging.ERROR)
 
 # Variable declaration
 application_json = "application/JSON"
+api_resource = "/api/<resource>, e = "
+plain_text = "plain/text"
 
 mod = Blueprint('club_control', __name__)
 
@@ -18,18 +20,26 @@ mod = Blueprint('club_control', __name__)
 # Get a list of details of all clubs
 @mod.route('/clubs', methods=['GET'])
 def get_clubs():
-    clubs = ClubService.get_clubs()
-    res = json.dumps(clubs, default=str)
-    rsp = Response(res, status=200, content_type=application_json)
+    try:
+        clubs = ClubService.get_clubs()
+        res = json.dumps(clubs, default=str)
+        rsp = Response(res, status=200, content_type=application_json)
+    except Exception as e:
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
 # Get details of a club specified by id
 @mod.route('/clubs/<club_id>', methods=['GET'])
 def get_club_by_id(club_id):
-    event = ClubService.get_club(club_id)
-    res = json.dumps(event, default=str)
-    rsp = Response(res, status=200, content_type=application_json)
+    try:
+        event = ClubService.get_club(club_id)
+        res = json.dumps(event, default=str)
+        rsp = Response(res, status=200, content_type=application_json)
+    except Exception as e:
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -37,17 +47,22 @@ def get_club_by_id(club_id):
 @mod.route('/clubs/<club_id>', methods=['PUT'])
 @auth_required
 def edit_club(club_id):
-    data = request.get_json()
-    user_info = get_token_info()
-    email_id = user_info["email"]
-    if 'new_head' in data:
-        head_email_id = data["new_head"]
-        res, code = ClubService.assign_successor(
-            email_id, club_id, head_email_id)
-    else:
-        club_information = data["club"]
-        res, code = ClubService.edit_club(email_id, club_id, club_information)
-    rsp = Response(res, status=code, content_type="text/plain")
+    try:
+        data = request.get_json()
+        user_info = get_token_info()
+        email_id = user_info["email"]
+        if 'new_head' in data:
+            head_email_id = data["new_head"]
+            res, code = ClubService.assign_successor(
+                email_id, club_id, head_email_id)
+        else:
+            club_information = data["club"]
+            res, code = ClubService.edit_club(email_id, club_id,
+                                              club_information)
+        rsp = Response(res, status=code, content_type="text/plain")
+    except Exception as e:
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -55,10 +70,14 @@ def edit_club(club_id):
 @mod.route('/clubs/<club_id>', methods=['DELETE'])
 @auth_required
 def delete_club(club_id):
-    user_info = get_token_info()
-    email_id = user_info["email"]
-    res, code = ClubService.delete_club(email_id, club_id)
-    rsp = Response(res, status=code, content_type="text/plain")
+    try:
+        user_info = get_token_info()
+        email_id = user_info["email"]
+        res, code = ClubService.delete_club(email_id, club_id)
+        rsp = Response(res, status=code, content_type="text/plain")
+    except Exception as e:
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -66,12 +85,16 @@ def delete_club(club_id):
 @mod.route('/member/<club_id>', methods=['PUT'])
 @auth_required
 def add_member(club_id=None):
-    data = request.get_json()
-    user_info = get_token_info()
-    email_id = user_info["email"]
-    student_email_id = data["student_email_id"]
-    res, code = ClubService.add_member(email_id, club_id, student_email_id)
-    rsp = Response(res, status=code, content_type=application_json)
+    try:
+        data = request.get_json()
+        user_info = get_token_info()
+        email_id = user_info["email"]
+        student_email_id = data["student_email_id"]
+        res, code = ClubService.add_member(email_id, club_id, student_email_id)
+        rsp = Response(res, status=code, content_type=application_json)
+    except Exception as e:
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
 
 
@@ -79,10 +102,15 @@ def add_member(club_id=None):
 @mod.route('/member/<club_id>', methods=['DELETE'])
 @auth_required
 def remove_member(club_id=None):
-    data = request.get_json()
-    user_info = get_token_info()
-    email_id = user_info["email"]
-    student_email_id = data["student_email_id"]
-    res, code = ClubService.remove_member(email_id, club_id, student_email_id)
-    rsp = Response(res, status=code, content_type=application_json)
+    try:
+        data = request.get_json()
+        user_info = get_token_info()
+        email_id = user_info["email"]
+        student_email_id = data["student_email_id"]
+        res, code = ClubService.remove_member(email_id, club_id,
+                                              student_email_id)
+        rsp = Response(res, status=code, content_type=application_json)
+    except Exception as e:
+        print(api_resource, e)
+        rsp = Response(e, status=500, content_type=plain_text)
     return rsp
