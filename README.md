@@ -69,6 +69,7 @@ To build client: <br>
   6. Open Chrome in Guest mode or any other browser after logging out from google accounts and go to http://localhost:8080
   
 CI/CD reports: <br>
+  ![alt text](https://github.com/SoamyaAgrawal17/SAVS/blob/main/CircleCI_reports_instructions.png?raw=true)
   Unit Test Cases and Coverage: [ENTER THE LINK AFTER THE LAST COMMIT] <br>
   Integration Test Cases: [ENTER THE LINK HERE AFTER THE LAST COMMIT] <br>
   Bug Finder using SonarCloud: [ENTER THE LINK HERE AFTER THE LAST COMMIT] <br>
