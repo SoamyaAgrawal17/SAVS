@@ -1,7 +1,0 @@
-test/test_ClubService.py:13:1: E302 expected 2 blank lines, found 1
-test/test_EventService.py:1:1: F401 'datetime' imported but unused
-test/test_EventService.py:6:1: F403 'from datetime import *' used; unable to detect undefined names
-test/test_EventService.py:6:1: F401 'datetime.*' imported but unused
-test/test_EventService.py:121:80: E501 line too long (100 > 79 characters)
-test/test_EventService.py:126:80: E501 line too long (82 > 79 characters)
-test/test_EventService.py:301:80: E501 line too long (89 > 79 characters)
