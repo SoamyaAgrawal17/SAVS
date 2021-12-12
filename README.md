@@ -75,6 +75,9 @@ To build client: <br>
   4. Add your Google Client ID in index2.html
   5. Go to SAVS/client and run: node app.js
   6. Open Chrome in Guest mode or any other browser after logging out from google accounts and go to http://localhost:8080
+  <br>
+  The skeleton code for google button has been updated by https://developers.google.com/identity/sign-in/web/build-button
+  <br>
   
 CI/CD reports: <br>
   ![alt text](https://github.com/SoamyaAgrawal17/SAVS/blob/main/CircleCI_reports_instructions.png?raw=true)
