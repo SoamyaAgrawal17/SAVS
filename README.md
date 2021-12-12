@@ -15,7 +15,7 @@ First Iteration Report: <br>
   Link: https://github.com/SoamyaAgrawal17/SAVS/blob/main/documentation/Assignment%20T3_First%20Iteration.pdf <br>
   
 Second Iteration Report: <br>
-  Link: https://docs.google.com/document/d/1BTBdACvA5GKgEZiXol5g-6VtmcsekXndxYVzewYmy0E/edit?usp=sharing <br>
+  Link: https://github.com/SoamyaAgrawal17/SAVS/blob/main/documentation/Assignment%20T5_Second%20Iteration.pdf <br>
 
 
 Documented API: <br>
