@@ -20,20 +20,20 @@ Second Iteration Report: <br>
 
 Documented API: <br>
   First Iteration Link: https://app.swaggerhub.com/apis/savs2/SAVS/1.0.0 <br>
-  Second Iteration Link: https://app.swaggerhub.com/apis-docs/ShikhaAsrani/SAVS/2#/
+  Second Iteration Link: https://app.swaggerhub.com/apis-docs/ShikhaAsrani/SAVS/2#/ <br>
 
 System Tests Corresponding to API: <br>
-Iteration 1:
+Iteration 1: <br>
   Link: https://documenter.getpostman.com/view/14290543/UVC9gkKY <br>
   We used Postman test suite to run the integration tests. The API entry points are implemented in ClubsController, EventsController, StudentsController. <br>
   Postman collection json: https://github.com/SoamyaAgrawal17/SAVS/blob/main/SAVS.postman_collection.json <br>
   Postman run result : https://github.com/SoamyaAgrawal17/SAVS/blob/main/SAVS.postman_test_run.json <br>
  
-Iteration 2:
-  Authentication Suite Doc Link: https://documenter.getpostman.com/view/14290543/UVR5po3o
-  Test Suite Doc Link: https://documenter.getpostman.com/view/14290543/UVR4PqZQ
-  We used Postman suite to run the complete integration tests. Before running the test suite, we run authentication suite. This includes all entry points that are implemented.Postman authentication and test suites are located in the shared Postman workspace.
-  Postman run result: https://github.com/SoamyaAgrawal17/SAVS/blob/main/SAVS%20Final%20Integration%20Test%20suite.postman_test_run.json
+Iteration 2: <br>
+  Authentication Suite Doc Link: https://documenter.getpostman.com/view/14290543/UVR5po3o <br>
+  Test Suite Doc Link: https://documenter.getpostman.com/view/14290543/UVR4PqZQ <br>
+  We used Postman suite to run the complete integration tests. Before running the test suite, we run authentication suite. This includes all entry points that are implemented.Postman authentication and test suites are located in the shared Postman workspace. <br>
+  Postman run result: https://github.com/SoamyaAgrawal17/SAVS/blob/main/SAVS%20Final%20Integration%20Test%20suite.postman_test_run.json <br>
 
 Unit Tests: <br>
 Command to run unit test: coverage run -m unittest discover test <br>
