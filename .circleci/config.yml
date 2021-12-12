@@ -67,13 +67,6 @@ jobs:
             path: style-checker-reports
             destination: style-checker-reports
 
-#   system-test:
-#     executor: newman/postman-newman-docker
-#     steps:
-#       - checkout
-#       - newman/newman-run:
-#           collection: ./SAVS.student_postman_collection.json
-
   bug-finder-sonarcloud:
     docker:
       - image: cimg/python:3.8
@@ -89,7 +82,6 @@ workflows:
     jobs:
       - build-and-unit-test-and-coverage
       - style-checker
-#       - system-test
       - bug-finder-sonarcloud:
             context: sonarcloud
    
