@@ -14,18 +14,26 @@ Vani Jain (vj2245)
 First Iteration Report: <br>
   Link: https://github.com/SoamyaAgrawal17/SAVS/blob/main/documentation/Assignment%20T3_First%20Iteration.pdf <br>
   
-Seond Iteration Report: <br>
+Second Iteration Report: <br>
   Link: https://docs.google.com/document/d/1BTBdACvA5GKgEZiXol5g-6VtmcsekXndxYVzewYmy0E/edit?usp=sharing <br>
 
 
 Documented API: <br>
-  Link: https://app.swaggerhub.com/apis/savs2/SAVS/1.0.0 <br>
+  First Iteration Link: https://app.swaggerhub.com/apis/savs2/SAVS/1.0.0 <br>
+  Second Iteration Link: https://app.swaggerhub.com/apis-docs/ShikhaAsrani/SAVS/2#/
 
 System Tests Corresponding to API: <br>
+Iteration 1:
   Link: https://documenter.getpostman.com/view/14290543/UVC9gkKY <br>
   We used Postman test suite to run the integration tests. The API entry points are implemented in ClubsController, EventsController, StudentsController. <br>
   Postman collection json: https://github.com/SoamyaAgrawal17/SAVS/blob/main/SAVS.postman_collection.json <br>
   Postman run result : https://github.com/SoamyaAgrawal17/SAVS/blob/main/SAVS.postman_test_run.json <br>
+ 
+Iteration 2:
+  Authentication Suite Doc Link: https://documenter.getpostman.com/view/14290543/UVR5po3o
+  Test Suite Doc Link: https://documenter.getpostman.com/view/14290543/UVR4PqZQ
+  We used Postman suite to run the complete integration tests. Before running the test suite, we run authentication suite. This includes all entry points that are implemented.Postman authentication and test suites are located in the shared Postman workspace.
+  Postman run result: https://github.com/SoamyaAgrawal17/SAVS/blob/main/SAVS%20Final%20Integration%20Test%20suite.postman_test_run.json
 
 Unit Tests: <br>
 Command to run unit test: coverage run -m unittest discover test <br>
@@ -34,7 +42,7 @@ For Controller methods, we have used the above System Tests. Unit tests for Cont
 
 Style-compliant: <br>
 We used the command flake8 application>bugs.txt and flake8 test>bugs1.txt. We have fixed all the major bugs as part of this iteration. <br>
-
+This is also added to CI pipeline.
 
 Build, run, test instructions: <br>
 We have deployed the code on Heroku. And below are the configurations for the same.  <br>
@@ -57,7 +65,7 @@ To build, run and test on localhost or Heroku, follow the following steps:
 
 - Manual Testing can be done by using the above Endpoint. <br>
 - Unit Testing could be done by running the command coverage run -m unittest discover test or using push button to run all the unit tests. <br>
-- For integration testing clear the database and run the collection SAVS on Postman(The collection json is shared and IA is added to the postman workspace). <br>
+- For integration testing run the collection SAVS on Postman(The collection json is shared in the Postman workspace). <br>
 
 To build client: <br>
   
