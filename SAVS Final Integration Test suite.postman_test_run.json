@@ -1,0 +1,2737 @@
+{
+	"id": "c653d501-2ec2-497e-b6a5-20be4cd16960",
+	"name": "SAVS Final Integration Test suite",
+	"timestamp": "2021-12-12T01:57:03.551Z",
+	"collection_id": "14290543-d531e2c1-60d2-47a3-9f44-54b0a4b174f8",
+	"folder_id": 0,
+	"environment_id": "7ab3d140-a468-4613-9664-9bc42e393f54",
+	"totalPass": 187,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "c188f4d2-0027-471c-8548-1dbc55971dc0",
+			"name": "Clear database",
+			"url": "https://savs-project-final.herokuapp.com/database/clear_database",
+			"time": 44,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				44
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "51a2f521-3cba-4920-8fc7-6b8f9bb23872",
+			"name": "Signup a student",
+			"url": "https://savs-project-final.herokuapp.com/student",
+			"time": 75,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				75
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "e680635e-af1c-4c89-bdae-bdfcd9595421",
+			"name": "Signup a student | Missing Information",
+			"url": "https://savs-project-final.herokuapp.com/student",
+			"time": 50,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				50
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "9d9d9f07-a4d3-4f02-ba2d-37ec2db3b672",
+			"name": "Signup a student | Student already exists",
+			"url": "https://savs-project-final.herokuapp.com/student",
+			"time": 58,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				58
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "266e5c00-8795-42dd-aca9-49ad1b3d04a8",
+			"name": "Get Student Information | Unregistered student",
+			"url": "https://savs-project-final.herokuapp.com/student/test_unregistered_student@columbia.edu",
+			"time": 57,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				57
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "9b8803cc-938b-4c15-8c7f-81a4f5ec9f9e",
+			"name": "Get Student Information",
+			"url": "https://savs-project-final.herokuapp.com/student/teststudentsavs@gmail.com",
+			"time": 73,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				73
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "8edf615c-c4b6-4405-8d76-f16129535c9b",
+			"name": "Signup a student for club member",
+			"url": "https://savs-project-final.herokuapp.com/student",
+			"time": 62,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				62
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "e679ecfb-cd31-4956-ae79-af2d9066cf0f",
+			"name": "Signup a student for club member 2",
+			"url": "https://savs-project-final.herokuapp.com/student",
+			"time": 62,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				62
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "b2893613-4b3d-49d5-8c75-b4a82beff47f",
+			"name": "Signup a student for club head",
+			"url": "https://savs-project-final.herokuapp.com/student",
+			"time": 57,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				57
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "5d0dce23-c19f-4a4b-b060-a5af2c19ceac",
+			"name": "Signup a student for club head 2",
+			"url": "https://savs-project-final.herokuapp.com/student",
+			"time": 74,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				74
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "a291f0ea-058c-4116-9f18-414376cd139c",
+			"name": "Create a new club | Unauthorized",
+			"url": "https://savs-project-final.herokuapp.com/student/club",
+			"time": 100,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				100
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "e966fdc1-4f00-4750-b284-560359758865",
+			"name": "Create a new club | Missing Information",
+			"url": "https://savs-project-final.herokuapp.com/student/club",
+			"time": 105,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				105
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "91cf56e2-6fe5-410f-a97d-fb1bf560084c",
+			"name": "Create a new club",
+			"url": "https://savs-project-final.herokuapp.com/student/club",
+			"time": 135,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				135
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "ca02f672-cdbe-44c2-82b9-39173e79cfc8",
+			"name": "Create a new club | Duplicate Club Name",
+			"url": "https://savs-project-final.herokuapp.com/student/club",
+			"time": 103,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				103
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "45cb7396-7916-48e2-ba67-643c70f4bee5",
+			"name": "Create a new club 2",
+			"url": "https://savs-project-final.herokuapp.com/student/club",
+			"time": 115,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				115
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "1cdd8c76-501b-4b57-86f5-7b2a751eaf5b",
+			"name": "Add a member to club 1",
+			"url": "https://savs-project-final.herokuapp.com/member/1",
+			"time": 113,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				113
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "3a0027b7-05e3-45b6-bf8f-b8667d868b65",
+			"name": "Add a member to club 2",
+			"url": "https://savs-project-final.herokuapp.com/member/2",
+			"time": 100,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				100
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "af011145-0319-495c-aca9-416e97f47406",
+			"name": "Add a member 2 to club 2",
+			"url": "https://savs-project-final.herokuapp.com/member/2",
+			"time": 130,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				130
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "52848d6e-b746-4ae9-bc84-597ed52c78ef",
+			"name": "Remove a member form club 1",
+			"url": "https://savs-project-final.herokuapp.com/member/1",
+			"time": 141,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				141
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "25a5c471-9f83-4bf5-8320-a5873f7d4d2f",
+			"name": "Add a member back to club",
+			"url": "https://savs-project-final.herokuapp.com/member/1",
+			"time": 138,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				138
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "3177d5d8-0d33-4ca3-9985-a6de3dea6a9c",
+			"name": "Propose Event Wrong Club ID",
+			"url": "https://savs-project-final.herokuapp.com/events",
+			"time": 105,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				105
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "1374238f-cf73-489e-8f5e-45e0fc9f5b8c",
+			"name": "Propose Event 1",
+			"url": "https://savs-project-final.herokuapp.com/events",
+			"time": 108,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				108
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "1205677b-c20d-432e-aa45-d99b14d6c391",
+			"name": "Propose Event 2",
+			"url": "https://savs-project-final.herokuapp.com/events",
+			"time": 103,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				103
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "e3486eef-ad00-4da0-a5c5-c9b728c9b7e7",
+			"name": "Propose Event 3 by student",
+			"url": "https://savs-project-final.herokuapp.com/events",
+			"time": 99,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"status test": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				99
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "a9334331-ba9a-4bb7-a4a7-d8b83f674445",
+			"name": "Propose Event 3 | Low capacity",
+			"url": "https://savs-project-final.herokuapp.com/events",
+			"time": 109,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				109
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "ab1db075-e10b-415e-9eee-ce0461c1ecb9",
+			"name": "Propose Event 4",
+			"url": "https://savs-project-final.herokuapp.com/events",
+			"time": 109,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				109
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "285588b5-ffe1-4241-93e7-e725a788cad3",
+			"name": "Delete Event 4 unsuccesful",
+			"url": "https://savs-project-final.herokuapp.com/events/4",
+			"time": 92,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				92
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "64995d91-9c26-42cb-8b10-807babb8deaa",
+			"name": "Delete Event 4",
+			"url": "https://savs-project-final.herokuapp.com/events/4",
+			"time": 107,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				107
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true
+				}
+			]
+		},
+		{
+			"id": "d1a21aae-5622-48e0-9e16-98a9a4066e41",
+			"name": "View proposed events",
+			"url": "https://savs-project-final.herokuapp.com/events?created_by=2",
+			"time": 21,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				21
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "e80f69a5-3447-4efa-85e2-1d40680e0d46",
+			"name": "Register for event1",
+			"url": "https://savs-project-final.herokuapp.com/student/register_event/1",
+			"time": 115,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				115
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "9125057d-8d63-4a85-a4b5-f753af5fad5e",
+			"name": "Register for event1 | Club Member",
+			"url": "https://savs-project-final.herokuapp.com/student/register_event/1",
+			"time": 116,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				116
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "efa527ee-2909-4d18-9786-a68a6d580688",
+			"name": "Register for event3 | Student cannot register",
+			"url": "https://savs-project-final.herokuapp.com/student/register_event/3",
+			"time": 98,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				98
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "0a88c390-3c1c-40bb-85c2-a9aecfe404ab",
+			"name": "Register for event3 | Club Member success",
+			"url": "https://savs-project-final.herokuapp.com/student/register_event/3",
+			"time": 109,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				109
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "b5089936-1dde-4abc-9a5c-e08442a887ad",
+			"name": "Register for event3 | Already exists",
+			"url": "https://savs-project-final.herokuapp.com/student/register_event/3",
+			"time": 138,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				138
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "7d084f2a-37c9-4e2a-b6d4-9597eb36f014",
+			"name": "Register for event3 | Max registration",
+			"url": "https://savs-project-final.herokuapp.com/student/register_event/3",
+			"time": 133,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				133
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "e923c217-3ecf-4a30-b72f-e3f5d2506ee8",
+			"name": "Register for event2| cannot register for event in past",
+			"url": "https://savs-project-final.herokuapp.com/student/register_event/2",
+			"time": 115,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				115
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "a7074f07-cf67-485e-8768-f3b86827429e",
+			"name": "View all upcoming events",
+			"url": "https://savs-project-final.herokuapp.com/student/get_upcoming_events",
+			"time": 97,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				97
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "e7e2ae8e-a4e9-4076-a3c6-c3bbfb4c550d",
+			"name": "View all upcoming events | No permission",
+			"url": "https://savs-project-final.herokuapp.com/student/get_upcoming_events",
+			"time": 95,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				95
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "df0bb5f1-f93a-426b-a73a-c1b0fdbea0e8",
+			"name": "View registered events",
+			"url": "https://savs-project-final.herokuapp.com/student/get_registered_events",
+			"time": 101,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				101
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "9e6a6296-c3b4-42ed-bf0c-0d278e93bf2a",
+			"name": "View registered events | Unauthorized person",
+			"url": "https://savs-project-final.herokuapp.com/student/get_registered_events",
+			"time": 113,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				113
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "9d0c34fd-c152-472a-ad65-66846acc7bd5",
+			"name": "Withdraw event | Unauthorized person",
+			"url": "https://savs-project-final.herokuapp.com/student/withdraw_event",
+			"time": 118,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				118
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "2aca58b5-4f3f-4fd9-800a-eab7b5e95114",
+			"name": "Withdraw event | Student not registered in the event",
+			"url": "https://savs-project-final.herokuapp.com/student/withdraw_event",
+			"time": 99,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				99
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "7085ef40-f927-41fc-84d2-c3c472f96d63",
+			"name": "Withdraw event | Valid Case",
+			"url": "https://savs-project-final.herokuapp.com/student/withdraw_event",
+			"time": 108,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				108
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "f683ddad-5e93-4e19-bd41-4df84af0cc74",
+			"name": "View withdrew events",
+			"url": "https://savs-project-final.herokuapp.com/student/get_registered_events",
+			"time": 95,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				95
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "87d13ef0-f3ea-43f5-85d5-c68e3ddfe5bd",
+			"name": "See all the clubs and role in the club for club member | Unauthorized",
+			"url": "https://savs-project-final.herokuapp.com/student/get_roles",
+			"time": 119,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				119
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "9e2155b0-4b40-486a-9b1f-777a86460756",
+			"name": "See all the clubs and role in the club for club member",
+			"url": "https://savs-project-final.herokuapp.com/student/get_roles",
+			"time": 97,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				97
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "ff4d1b90-6fc3-4f3e-bcad-759d595a496b",
+			"name": "See all the clubs and role in the club for club head",
+			"url": "https://savs-project-final.herokuapp.com/student/get_roles",
+			"time": 89,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				89
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "66dac6e0-9863-4a85-9de6-7262372a9e2d",
+			"name": "Replace the head",
+			"url": "https://savs-project-final.herokuapp.com/clubs/2",
+			"time": 113,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				113
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "5d77e67a-518c-4364-8144-735be0dd29f5",
+			"name": "Get all clubs",
+			"url": "https://savs-project-final.herokuapp.com/clubs",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "704d2c81-d8e1-41ed-80d2-874708a9fd0e",
+			"name": "Edit club happy case",
+			"url": "https://savs-project-final.herokuapp.com/clubs/2",
+			"time": 117,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				117
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "7043ccb9-24a8-4fa4-914c-1d3b7cf78bd2",
+			"name": "Get Club by id",
+			"url": "https://savs-project-final.herokuapp.com/clubs/2",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "6d3e8bcc-b4a3-4e81-b415-8a1174cff0ad",
+			"name": "Delete club happy case",
+			"url": "https://savs-project-final.herokuapp.com/clubs/2",
+			"time": 120,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				120
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "79f30e5f-2466-4086-a198-553c08836d8a",
+			"name": "Edit Event past event",
+			"url": "https://savs-project-final.herokuapp.com/events/2",
+			"time": 109,
+			"responseCode": {
+				"code": 500,
+				"name": "INTERNAL SERVER ERROR"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				109
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "c3bc2a47-4730-4f14-a2d8-9652ffba018a",
+			"name": "Edit Event 2",
+			"url": "https://savs-project-final.herokuapp.com/events/1",
+			"time": 116,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				116
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "403bbb67-0da0-43a6-94e5-eee95008b7a0",
+			"name": "Edit Event Missing Authorization",
+			"url": "https://savs-project-final.herokuapp.com/events/4",
+			"time": 17,
+			"responseCode": {
+				"code": 401,
+				"name": "UNAUTHORIZED"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "ac69a730-ed09-42f1-be0b-24311d40d62a",
+			"name": "Edit Event Permission Error",
+			"url": "https://savs-project-final.herokuapp.com/events/3",
+			"time": 129,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				129
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "408dda32-36f2-4d34-8b5f-625bf5c0b07e",
+			"name": "View event",
+			"url": "https://savs-project-final.herokuapp.com/events/1",
+			"time": 20,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "6bf7443b-0b6c-475e-8c39-4e71872bf60a",
+			"name": "Edit club Invalid request",
+			"url": "https://savs-project-final.herokuapp.com/clubs/1",
+			"time": 125,
+			"responseCode": {
+				"code": 400,
+				"name": "BAD REQUEST"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				125
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "8333ef9d-62bb-4c77-ad54-644e64165d12",
+			"name": "Delete club Invalid Request",
+			"url": "https://savs-project-final.herokuapp.com/clubs/1",
+			"time": 98,
+			"responseCode": {
+				"code": 400,
+				"name": "BAD REQUEST"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				98
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "b879aadf-9e13-4e92-9317-227e86333e03",
+			"name": "Add a member bad request",
+			"url": "https://savs-project-final.herokuapp.com/member/1",
+			"time": 112,
+			"responseCode": {
+				"code": 400,
+				"name": "BAD REQUEST"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				112
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "40b7d3bd-b05a-4d3b-b398-e19cdc20e5a5",
+			"name": "Event Approve attempt by club member",
+			"url": "https://savs-project-final.herokuapp.com/events/1",
+			"time": 109,
+			"responseCode": {
+				"code": 403,
+				"name": "FORBIDDEN"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				109
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "329956d6-b36e-438c-8e0b-8d7524a2da5c",
+			"name": "Event Approve by club head",
+			"url": "https://savs-project-final.herokuapp.com/events/1",
+			"time": 113,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				113
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "0b1494b4-c06a-4397-9752-30370ad7c4dd",
+			"name": "View event after approving",
+			"url": "https://savs-project-final.herokuapp.com/events/1",
+			"time": 25,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				25
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		},
+		{
+			"id": "7abcbb11-4f3f-42c9-9b77-6ea25e3f2ec8",
+			"name": "Event Rejected by club head",
+			"url": "https://savs-project-final.herokuapp.com/events/3",
+			"time": 110,
+			"responseCode": {
+				"code": 201,
+				"name": "CREATED"
+			},
+			"tests": {
+				"status test": true,
+				"response must be valid and have a body": true,
+				"response is correct": true
+			},
+			"testPassFailCounts": {
+				"status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response must be valid and have a body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"response is correct": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				110
+			],
+			"allTests": [
+				{
+					"status test": true,
+					"response must be valid and have a body": true,
+					"response is correct": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 6073,
+	"collection": {
+		"requests": [
+			{
+				"id": "c188f4d2-0027-471c-8548-1dbc55971dc0",
+				"method": "GET"
+			},
+			{
+				"id": "51a2f521-3cba-4920-8fc7-6b8f9bb23872",
+				"method": "POST"
+			},
+			{
+				"id": "e680635e-af1c-4c89-bdae-bdfcd9595421",
+				"method": "POST"
+			},
+			{
+				"id": "9d9d9f07-a4d3-4f02-ba2d-37ec2db3b672",
+				"method": "POST"
+			},
+			{
+				"id": "266e5c00-8795-42dd-aca9-49ad1b3d04a8",
+				"method": "GET"
+			},
+			{
+				"id": "9b8803cc-938b-4c15-8c7f-81a4f5ec9f9e",
+				"method": "GET"
+			},
+			{
+				"id": "8edf615c-c4b6-4405-8d76-f16129535c9b",
+				"method": "POST"
+			},
+			{
+				"id": "e679ecfb-cd31-4956-ae79-af2d9066cf0f",
+				"method": "POST"
+			},
+			{
+				"id": "b2893613-4b3d-49d5-8c75-b4a82beff47f",
+				"method": "POST"
+			},
+			{
+				"id": "5d0dce23-c19f-4a4b-b060-a5af2c19ceac",
+				"method": "POST"
+			},
+			{
+				"id": "a291f0ea-058c-4116-9f18-414376cd139c",
+				"method": "POST"
+			},
+			{
+				"id": "e966fdc1-4f00-4750-b284-560359758865",
+				"method": "POST"
+			},
+			{
+				"id": "91cf56e2-6fe5-410f-a97d-fb1bf560084c",
+				"method": "POST"
+			},
+			{
+				"id": "ca02f672-cdbe-44c2-82b9-39173e79cfc8",
+				"method": "POST"
+			},
+			{
+				"id": "45cb7396-7916-48e2-ba67-643c70f4bee5",
+				"method": "POST"
+			},
+			{
+				"id": "1cdd8c76-501b-4b57-86f5-7b2a751eaf5b",
+				"method": "PUT"
+			},
+			{
+				"id": "3a0027b7-05e3-45b6-bf8f-b8667d868b65",
+				"method": "PUT"
+			},
+			{
+				"id": "af011145-0319-495c-aca9-416e97f47406",
+				"method": "PUT"
+			},
+			{
+				"id": "52848d6e-b746-4ae9-bc84-597ed52c78ef",
+				"method": "DELETE"
+			},
+			{
+				"id": "25a5c471-9f83-4bf5-8320-a5873f7d4d2f",
+				"method": "PUT"
+			},
+			{
+				"id": "3177d5d8-0d33-4ca3-9985-a6de3dea6a9c",
+				"method": "POST"
+			},
+			{
+				"id": "1374238f-cf73-489e-8f5e-45e0fc9f5b8c",
+				"method": "POST"
+			},
+			{
+				"id": "1205677b-c20d-432e-aa45-d99b14d6c391",
+				"method": "POST"
+			},
+			{
+				"id": "e3486eef-ad00-4da0-a5c5-c9b728c9b7e7",
+				"method": "POST"
+			},
+			{
+				"id": "a9334331-ba9a-4bb7-a4a7-d8b83f674445",
+				"method": "POST"
+			},
+			{
+				"id": "ab1db075-e10b-415e-9eee-ce0461c1ecb9",
+				"method": "POST"
+			},
+			{
+				"id": "285588b5-ffe1-4241-93e7-e725a788cad3",
+				"method": "DELETE"
+			},
+			{
+				"id": "64995d91-9c26-42cb-8b10-807babb8deaa",
+				"method": "DELETE"
+			},
+			{
+				"id": "d1a21aae-5622-48e0-9e16-98a9a4066e41",
+				"method": "GET"
+			},
+			{
+				"id": "e80f69a5-3447-4efa-85e2-1d40680e0d46",
+				"method": "POST"
+			},
+			{
+				"id": "9125057d-8d63-4a85-a4b5-f753af5fad5e",
+				"method": "POST"
+			},
+			{
+				"id": "efa527ee-2909-4d18-9786-a68a6d580688",
+				"method": "POST"
+			},
+			{
+				"id": "0a88c390-3c1c-40bb-85c2-a9aecfe404ab",
+				"method": "POST"
+			},
+			{
+				"id": "b5089936-1dde-4abc-9a5c-e08442a887ad",
+				"method": "POST"
+			},
+			{
+				"id": "7d084f2a-37c9-4e2a-b6d4-9597eb36f014",
+				"method": "POST"
+			},
+			{
+				"id": "e923c217-3ecf-4a30-b72f-e3f5d2506ee8",
+				"method": "POST"
+			},
+			{
+				"id": "a7074f07-cf67-485e-8768-f3b86827429e",
+				"method": "GET"
+			},
+			{
+				"id": "e7e2ae8e-a4e9-4076-a3c6-c3bbfb4c550d",
+				"method": "GET"
+			},
+			{
+				"id": "df0bb5f1-f93a-426b-a73a-c1b0fdbea0e8",
+				"method": "GET"
+			},
+			{
+				"id": "9e6a6296-c3b4-42ed-bf0c-0d278e93bf2a",
+				"method": "GET"
+			},
+			{
+				"id": "9d0c34fd-c152-472a-ad65-66846acc7bd5",
+				"method": "POST"
+			},
+			{
+				"id": "2aca58b5-4f3f-4fd9-800a-eab7b5e95114",
+				"method": "POST"
+			},
+			{
+				"id": "7085ef40-f927-41fc-84d2-c3c472f96d63",
+				"method": "POST"
+			},
+			{
+				"id": "f683ddad-5e93-4e19-bd41-4df84af0cc74",
+				"method": "GET"
+			},
+			{
+				"id": "87d13ef0-f3ea-43f5-85d5-c68e3ddfe5bd",
+				"method": "GET"
+			},
+			{
+				"id": "9e2155b0-4b40-486a-9b1f-777a86460756",
+				"method": "GET"
+			},
+			{
+				"id": "ff4d1b90-6fc3-4f3e-bcad-759d595a496b",
+				"method": "GET"
+			},
+			{
+				"id": "66dac6e0-9863-4a85-9de6-7262372a9e2d",
+				"method": "PUT"
+			},
+			{
+				"id": "5d77e67a-518c-4364-8144-735be0dd29f5",
+				"method": "GET"
+			},
+			{
+				"id": "704d2c81-d8e1-41ed-80d2-874708a9fd0e",
+				"method": "PUT"
+			},
+			{
+				"id": "7043ccb9-24a8-4fa4-914c-1d3b7cf78bd2",
+				"method": "GET"
+			},
+			{
+				"id": "6d3e8bcc-b4a3-4e81-b415-8a1174cff0ad",
+				"method": "DELETE"
+			},
+			{
+				"id": "79f30e5f-2466-4086-a198-553c08836d8a",
+				"method": "PUT"
+			},
+			{
+				"id": "c3bc2a47-4730-4f14-a2d8-9652ffba018a",
+				"method": "PUT"
+			},
+			{
+				"id": "403bbb67-0da0-43a6-94e5-eee95008b7a0",
+				"method": "PUT"
+			},
+			{
+				"id": "ac69a730-ed09-42f1-be0b-24311d40d62a",
+				"method": "PUT"
+			},
+			{
+				"id": "408dda32-36f2-4d34-8b5f-625bf5c0b07e",
+				"method": "GET"
+			},
+			{
+				"id": "6bf7443b-0b6c-475e-8c39-4e71872bf60a",
+				"method": "PUT"
+			},
+			{
+				"id": "8333ef9d-62bb-4c77-ad54-644e64165d12",
+				"method": "DELETE"
+			},
+			{
+				"id": "b879aadf-9e13-4e92-9317-227e86333e03",
+				"method": "PUT"
+			},
+			{
+				"id": "40b7d3bd-b05a-4d3b-b398-e19cdc20e5a5",
+				"method": "PUT"
+			},
+			{
+				"id": "329956d6-b36e-438c-8e0b-8d7524a2da5c",
+				"method": "PUT"
+			},
+			{
+				"id": "0b1494b4-c06a-4397-9752-30370ad7c4dd",
+				"method": "GET"
+			},
+			{
+				"id": "7abcbb11-4f3f-42c9-9b77-6ea25e3f2ec8",
+				"method": "PUT"
+			}
+		]
+	}
+}
